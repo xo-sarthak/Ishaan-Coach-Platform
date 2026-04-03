@@ -1,0 +1,1 @@
+export const PAYMENT_LINK = "https://payu.in/pay/abc123";
