@@ -69,7 +69,7 @@ export default function Home() {
       <section className="w-full max-w-5xl mx-auto px-6 pt-32 pb-24 text-center">
         <motion.h1
           initial="hidden" animate="visible" variants={fadeUp}
-          className="text-5xl md:text-7xl font-bold tracking-tight text-foreground"
+          className="text-5xl md:text-7xl font-bold font-serif tracking-tight text-foreground"
         >
           Master your <span className="text-primary pr-1">life</span> & <br className="hidden md:block" /> your <span className="text-primary pr-1">relationships</span>.
         </motion.h1>
@@ -91,7 +91,7 @@ export default function Home() {
           {/* Row 1 */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">About the Creator</h2>
+              <h2 className="text-3xl md:text-4xl font-bold font-serif tracking-tight mb-6">About the Creator</h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 I'm a dedicated life and relationship coach helping young adults navigate dating, breakups, career clarity, and long-term improvement.
               </p>
@@ -121,7 +121,7 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl font-bold tracking-tight mb-6">My Philosophy</h2>
+              <h2 className="text-3xl font-bold font-serif tracking-tight mb-6">My Philosophy</h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 Awareness is the foundation of growth. I believe that every choice we make should come from a profound place of intention, rather than default patterns.
               </p>
@@ -154,7 +154,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6">
                 <Calendar className="w-4 h-4" /> Waitlist Open
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6 leading-tight">
                 The Life Mastery <br className="hidden md:block"/> Live Cohort
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
@@ -200,7 +200,7 @@ export default function Home() {
       <section className="w-full bg-primary py-16 md:py-24 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-primary-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold font-serif tracking-tight text-primary-foreground mb-6">
             Talk with me directly
           </h2>
           <p className="text-xl text-primary-foreground/90 mb-10 leading-relaxed font-medium">

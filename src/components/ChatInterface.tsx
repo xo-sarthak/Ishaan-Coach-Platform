@@ -68,7 +68,7 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
   return (
     <div className="flex flex-col h-[70vh] min-h-[500px] max-w-3xl mx-auto w-full bg-card border border-border rounded-2xl shadow-sm overflow-hidden">
       <div className="p-6 border-b border-border bg-muted/30">
-        <h2 className="text-xl font-semibold">{title}</h2>
+        <h2 className="text-2xl font-serif text-foreground">{title}</h2>
         <p className="text-sm text-muted-foreground mt-1">{description}</p>
       </div>
 
@@ -77,8 +77,8 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
           <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <div
               className={`max-w-[85%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed shadow-sm ${msg.role === "user"
-                ? "bg-[#0d241b] text-white rounded-tr-sm border border-[#0d241b]"
-                : "bg-emerald-50/80 text-black rounded-tl-sm border border-emerald-200/60 dark:bg-zinc-800/80 dark:text-white dark:border-zinc-700/50"
+                ? "bg-primary text-primary-foreground rounded-tr-sm border border-primary"
+                : "bg-background text-foreground rounded-tl-sm border border-border"
                 }`}
             >
               {msg.content}
@@ -87,22 +87,22 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-5 py-4 bg-emerald-50 border border-emerald-200/60 dark:bg-emerald-950/20 dark:border-emerald-800/40 flex items-center gap-1.5 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-600/40 animate-bounce" />
-              <span className="w-2 h-2 rounded-full bg-emerald-600/40 animate-bounce" style={{ animationDelay: "0.2s" }} />
-              <span className="w-2 h-2 rounded-full bg-emerald-600/40 animate-bounce" style={{ animationDelay: "0.4s" }} />
+            <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-5 py-4 bg-background border border-border flex items-center gap-1.5 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-secondary/40 animate-bounce" />
+              <span className="w-2 h-2 rounded-full bg-secondary/40 animate-bounce" style={{ animationDelay: "0.2s" }} />
+              <span className="w-2 h-2 rounded-full bg-secondary/40 animate-bounce" style={{ animationDelay: "0.4s" }} />
             </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t border-border bg-white flex gap-3 items-end">
+      <form onSubmit={handleSubmit} className="p-4 border-t border-border bg-card flex gap-3 items-end">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 min-h-[44px] max-h-32 resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0d241b] disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex-1 min-h-[44px] max-h-32 resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -113,7 +113,7 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-xl bg-[#0d241b] text-white transition-colors hover:bg-[#0d241b]/90 disabled:opacity-50 disabled:hover:bg-[#0d241b]"
+          className="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50 disabled:hover:bg-primary"
         >
           <Send className="w-4 h-4" />
         </button>

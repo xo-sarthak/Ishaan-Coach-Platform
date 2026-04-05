@@ -29,7 +29,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
       
       {/* 1. HERO SECTION */}
       <section className="w-full relative py-20 md:py-32 overflow-hidden bg-card border-b border-border">
-        <div className="absolute inset-0 opacity-5 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply" />
+        <div className="absolute inset-0 opacity-15 dark:opacity-10 blur-xl bg-cover bg-center mix-blend-multiply" style={{ backgroundImage: `url('${course.image}')` }} />
         <div className="max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase mb-8">
              <Star className="w-4 h-4 fill-primary" /> {course.tag}
@@ -172,7 +172,11 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
             <p className="text-lg text-muted-foreground">Get lifetime access on a one-time payment. Cancel anytime within 14 days and get a full refund, no questions asked.</p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 items-start">
+          <div className={`grid gap-8 items-start mx-auto ${
+            course.pricing.length === 1 ? 'lg:grid-cols-1 max-w-md' :
+            course.pricing.length === 2 ? 'lg:grid-cols-2 max-w-4xl' :
+            'lg:grid-cols-3'
+          }`}>
             {course.pricing.map((plan) => (
               <div 
                 key={plan.id} 

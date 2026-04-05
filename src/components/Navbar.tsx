@@ -52,8 +52,8 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-card/80 border-b border-border/40">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="font-semibold text-lg tracking-tight hover:opacity-80 transition-opacity">
-          Coach<span className="text-muted-foreground">Platform</span>
+        <Link href="/" className="font-serif font-bold text-2xl tracking-tight text-foreground hover:opacity-80 transition-opacity">
+          Coach<span className="text-primary italic">.</span>
         </Link>
         
         {/* Desktop Navigation */}
