@@ -17,6 +17,7 @@ export interface CohortData {
   testimonials: { name: string; text: string }[];
   curriculum: { module: string; description: string }[];
   faqs: { question: string; answer: string }[];
+  videoUrl?: string;
 }
 
 export const COHORTS: CohortData[] = [
@@ -59,7 +60,8 @@ export const COHORTS: CohortData[] = [
       { question: "Will the sessions be recorded?", answer: "Yes. All live Zoom sessions are recorded and made available in the student portal within 24 hours." },
       { question: "How much time is required outside of the live calls?", answer: "Expect to spend about 2 hours per week on the required readings and accountability homework." },
       { question: "Is there a refund policy?", answer: "Yes, we offer a 100% money-back guarantee if you attend the first two weeks and decide the program isn't for you." }
-    ]
+    ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
   },
   {
     id: "h2",
@@ -93,6 +95,7 @@ export const COHORTS: CohortData[] = [
     ],
     faqs: [
       { question: "Is this only for single people?", answer: "No, this is highly beneficial for people currently in relationships looking to improve their communication." }
-    ]
+    ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
   }
 ];

@@ -26,8 +26,15 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
+
   useEffect(() => {
-    scrollToBottom();
+    // Only scroll if there is more than the initial AI message
+    if (messages.length > 1) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,16 +71,15 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
         <h2 className="text-xl font-semibold">{title}</h2>
         <p className="text-sm text-muted-foreground mt-1">{description}</p>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div 
-              className={`max-w-[85%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed ${
-                msg.role === "user" 
-                  ? "bg-primary text-primary-foreground rounded-tr-sm" 
-                  : "bg-muted text-foreground rounded-tl-sm border border-border/50"
-              }`}
+            <div
+              className={`max-w-[85%] rounded-2xl px-5 py-3.5 text-sm leading-relaxed shadow-sm ${msg.role === "user"
+                ? "bg-[#0d241b] text-white rounded-tr-sm border border-[#0d241b]"
+                : "bg-emerald-50/80 text-black rounded-tl-sm border border-emerald-200/60 dark:bg-zinc-800/80 dark:text-white dark:border-zinc-700/50"
+                }`}
             >
               {msg.content}
             </div>
@@ -81,10 +87,10 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
         ))}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-5 py-4 bg-muted border border-border/50 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" />
-              <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "0.2s" }} />
-              <span className="w-2 h-2 rounded-full bg-muted-foreground/40 animate-bounce" style={{ animationDelay: "0.4s" }} />
+            <div className="max-w-[85%] rounded-2xl rounded-tl-sm px-5 py-4 bg-emerald-50 border border-emerald-200/60 dark:bg-emerald-950/20 dark:border-emerald-800/40 flex items-center gap-1.5 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-600/40 animate-bounce" />
+              <span className="w-2 h-2 rounded-full bg-emerald-600/40 animate-bounce" style={{ animationDelay: "0.2s" }} />
+              <span className="w-2 h-2 rounded-full bg-emerald-600/40 animate-bounce" style={{ animationDelay: "0.4s" }} />
             </div>
           </div>
         )}
@@ -96,7 +102,7 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 min-h-[44px] max-h-32 resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex-1 min-h-[44px] max-h-32 resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#0d241b] disabled:cursor-not-allowed disabled:opacity-50"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -104,10 +110,10 @@ export default function ChatInterface({ type, title, description }: ChatInterfac
             }
           }}
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={isLoading || !input.trim()}
-          className="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50 disabled:hover:bg-primary"
+          className="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-xl bg-[#0d241b] text-white transition-colors hover:bg-[#0d241b]/90 disabled:opacity-50 disabled:hover:bg-[#0d241b]"
         >
           <Send className="w-4 h-4" />
         </button>

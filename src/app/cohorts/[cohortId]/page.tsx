@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { COHORTS } from "@/data/cohorts";
 import { Accordion } from "@/components/Accordion";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import { PAYMENT_LINK } from "@/lib/payment";
 import { CheckCircle2, Calendar, Star, AlertTriangle, ArrowRight, Quote, Clock, Zap, Users } from "lucide-react";
 
@@ -48,9 +49,19 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
              <div className="flex items-center gap-2 pl-2"><Users className="w-5 h-5 text-primary"/> <span className="text-base">{cohort.seatsTotal} Seats Total</span></div>
           </div>
 
-          <div className="w-full max-w-5xl aspect-video rounded-[2rem] border border-border shadow-2xl overflow-hidden relative mb-12">
-            <img src={cohort.image} alt={cohort.title} className="w-full h-full object-cover" />
-          </div>
+          {cohort.videoUrl ? (
+            <div className="w-full max-w-5xl mb-12">
+              <VideoPlayer 
+                videoUrl={cohort.videoUrl} 
+                thumbnail={cohort.image} 
+                title={cohort.title} 
+              />
+            </div>
+          ) : (
+            <div className="w-full max-w-5xl aspect-video rounded-[2rem] border border-border shadow-2xl overflow-hidden relative mb-12">
+              <img src={cohort.image} alt={cohort.title} className="w-full h-full object-cover" />
+            </div>
+          )}
 
         </div>
       </section>
