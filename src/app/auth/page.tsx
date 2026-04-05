@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { motion } from "framer-motion";
 import { Loader2, ArrowRight } from "lucide-react";
@@ -15,6 +15,16 @@ export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.replace("/");
+      }
+    };
+    checkSession();
+  }, [router]);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
@@ -49,16 +59,20 @@ export default function AuthPage() {
         router.push("/");
       }
     } else {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: window.location.origin + "/",
+          emailRedirectTo: typeof window !== "undefined" ? window.location.origin + "/" : "/",
         },
       });
       if (error) {
         setErrorMsg(error.message);
+      } else if (data.session) {
+        // If email confirmation is off, Supabase logs them in immediately.
+        router.push("/");
       } else {
+        // If confirmation is on, session will be null here.
         setSuccessMsg("Check your email for the confirmation link!");
       }
     }
