@@ -31,21 +31,21 @@ export interface CourseData {
 }
 
 const DEFAULT_PRICING: PricingPlan[] = [
-  {
-    id: "basic",
-    name: "Basic Video Plan",
-    subtitle: "Essential Access",
-    price: "₹899",
-    features: [
-      { name: "Pre-recorded Video Lectures", included: true },
-      { name: "Downloadable PDF Course Notes", included: true },
-      { name: "Certificate of Completion", included: true },
-      { name: "Refund Guarantee", included: true },
-      { name: "Monthly Live Group Q&A Sessions", included: false },
-      { name: "Assignment & Evaluation Guide", included: false },
-      { name: "Course Virtual Community", included: false },
-    ],
-  },
+  // {
+  //   id: "basic",
+  //   name: "Basic Video Plan",
+  //   subtitle: "Essential Access",
+  //   price: "₹899",
+  //   features: [
+  //     { name: "Pre-recorded Video Lectures", included: true },
+  //     { name: "Downloadable PDF Course Notes", included: true },
+  //     { name: "Certificate of Completion", included: true },
+  //     { name: "Refund Guarantee", included: true },
+  //     { name: "Monthly Live Group Q&A Sessions", included: false },
+  //     { name: "Assignment & Evaluation Guide", included: false },
+  //     { name: "Course Virtual Community", included: false },
+  //   ],
+  // },
   {
     id: "standard",
     name: "Standard Learning Plan",
@@ -62,21 +62,21 @@ const DEFAULT_PRICING: PricingPlan[] = [
       { name: "Course Virtual Community", included: false },
     ],
   },
-  {
-    id: "premium",
-    name: "Premium Advantage Plan",
-    subtitle: "Community & Mentorship",
-    price: "₹1,499",
-    features: [
-      { name: "Pre-recorded Video Lectures", included: true },
-      { name: "Downloadable PDF Course Notes", included: true },
-      { name: "Certificate of Completion", included: true },
-      { name: "Refund Guarantee", included: true },
-      { name: "Monthly Live Group Q&A Sessions", included: true },
-      { name: "Assignment & Evaluation Guide", included: true },
-      { name: "Course Virtual Community", included: true },
-    ],
-  },
+  // {
+  //   id: "premium",
+  //   name: "Premium Advantage Plan",
+  //   subtitle: "Community & Mentorship",
+  //   price: "₹1,499",
+  //   features: [
+  //     { name: "Pre-recorded Video Lectures", included: true },
+  //     { name: "Downloadable PDF Course Notes", included: true },
+  //     { name: "Certificate of Completion", included: true },
+  //     { name: "Refund Guarantee", included: true },
+  //     { name: "Monthly Live Group Q&A Sessions", included: true },
+  //     { name: "Assignment & Evaluation Guide", included: true },
+  //     { name: "Course Virtual Community", included: true },
+  //   ],
+  // },
 ];
 
 const DEFAULT_FAQS = [
