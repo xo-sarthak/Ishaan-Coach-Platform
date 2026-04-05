@@ -1,1 +1,1 @@
-export const PAYMENT_LINK = "https://payu.in/pay/abc123";
+export const PAYMENT_LINK = "https://rzp.io/rzp/84IW3j2O";
