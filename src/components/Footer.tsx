@@ -57,7 +57,8 @@ const FOOTER_COLUMNS = [
     links: [
       { name: "Home", href: "/" },
       { name: "About", href: "#" },
-      { name: "Contact", href: "/talk-with-me" },
+      { name: "Contact Us", href: "/contact" },
+      { name: "Support Hub", href: "/talk-with-me" },
       { name: "My Account", href: "/auth" },
     ],
   },
@@ -67,6 +68,15 @@ const FOOTER_COLUMNS = [
       { name: "Free Resources", href: "/resources" },
       { name: "Book Recommends", href: "/book-recommendations" },
       { name: "Gift Recommends", href: "/gift-recommendations" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { name: "Terms and Conditions", href: "/terms" },
+      { name: "Privacy Policy", href: "/privacy" },
+      { name: "Refund Policy", href: "/refund-policy" },
+      { name: "Cancellation Policy", href: "/cancellation-policy" },
     ],
   },
   {
