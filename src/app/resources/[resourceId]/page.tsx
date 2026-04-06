@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { RESOURCES } from "@/data/resources";
-import { EmailCaptureForm } from "@/components/EmailCaptureForm";
+import { ResourceDownload } from "@/components/ResourceDownload";
 import { CheckCircle2, ChevronRight, FileText, Download, Sparkles, BookOpen } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ resourceId: string }> }) {
@@ -50,9 +50,9 @@ export default async function ResourceLandingPage({ params }: { params: Promise<
             <div className="hidden md:block w-full max-w-md bg-background border border-border p-6 rounded-[2rem] shadow-2xl shadow-primary/5">
                <div className="flex items-center gap-2 mb-4">
                   <Download className="w-5 h-5 text-primary" />
-                  <span className="font-bold text-sm tracking-wide uppercase text-foreground">Where should we send it?</span>
+                  <span className="font-bold text-sm tracking-wide uppercase text-foreground">Get your free copy</span>
                </div>
-               <EmailCaptureForm resourceId={resource.id} resourceSlug={resource.slug} />
+               <ResourceDownload downloadUrl={resource.downloadUrl} />
             </div>
           </div>
 
@@ -71,9 +71,9 @@ export default async function ResourceLandingPage({ params }: { params: Promise<
          <div className="w-full bg-card border border-border p-6 rounded-3xl shadow-xl">
             <div className="flex items-center justify-center gap-2 mb-6">
                <Download className="w-5 h-5 text-primary" />
-               <span className="font-bold text-sm tracking-wide uppercase text-foreground">Where should we send it?</span>
+               <span className="font-bold text-sm tracking-wide uppercase text-foreground">Get your free copy</span>
             </div>
-            <EmailCaptureForm resourceId={resource.id} resourceSlug={resource.slug} />
+            <ResourceDownload downloadUrl={resource.downloadUrl} />
          </div>
       </section>
 
