@@ -96,7 +96,7 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-border/40 mt-12 mb-12 bg-white/50 dark:bg-card/50">
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-6">
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-6">
             <Link 
