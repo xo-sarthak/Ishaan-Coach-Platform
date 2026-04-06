@@ -28,6 +28,7 @@ export interface CourseData {
   testimonials: Review[];
   pricing: PricingPlan[];
   faqs: { question: string; answer: string }[];
+  vimeoId?: string;
 }
 
 const DEFAULT_PRICING: PricingPlan[] = [
@@ -99,6 +100,7 @@ export const COURSES: CourseData[] = [
     enrollmentCount: "1,200+",
     duration: "90 Minutes",
     description: "Jab sirf tum dete ho… aur partner lena bhool jaata hai. 90 minutes that can change everything. In Hindi.",
+    vimeoId: "76979871",
     problems: [
       "Jab sirf tum dete ho… aur partner lena bhool jaata hai.",
       "Mujhe lagta tha ki main hi zyada sochti hoon, zyada feel karti hoon.",

@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
+import { resend } from '@/lib/resend';
+import { COHORTS } from '@/data/cohorts';
+import { CohortWelcomeEmailTemplate } from '@/components/EmailTemplates';
 
 // Setup Supabase Client
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -57,7 +60,27 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3. Success!
+    // 3. Trigger Automated Onboarding Email for Cohorts
+    if (resend && (courseId.startsWith('h') || courseId.includes('cohort'))) {
+      const cohort = COHORTS.find(c => c.id === courseId || c.slug === courseId);
+      if (cohort) {
+        try {
+          await resend.emails.send({
+            from: 'Ishaan Singh <hello@ishaanlive.in>',
+            to: email,
+            subject: `Welcome to the ${cohort.title}!`,
+            react: <CohortWelcomeEmailTemplate 
+              cohortTitle={cohort.title} 
+              startDate={cohort.startDate} 
+            />,
+          });
+        } catch (emailError) {
+          console.error('Failed to send cohort welcome email:', emailError);
+        }
+      }
+    }
+
+    // 4. Success!
     return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (error: any) {

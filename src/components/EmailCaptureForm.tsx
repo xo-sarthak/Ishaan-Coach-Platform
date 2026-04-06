@@ -5,12 +5,14 @@ import { ArrowRight, CheckCircle2, Lock } from "lucide-react";
 
 interface EmailCaptureFormProps {
   resourceId: string;
+  resourceSlug: string;
 }
 
-export function EmailCaptureForm({ resourceId }: EmailCaptureFormProps) {
+export function EmailCaptureForm({ resourceId, resourceSlug }: EmailCaptureFormProps) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,14 +20,27 @@ export function EmailCaptureForm({ resourceId }: EmailCaptureFormProps) {
 
     setIsSubmitting(true);
 
-    // Simulate API delay for Supabase insertion or email trigger
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    try {
+      const response = await fetch('/api/resource-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, resourceSlug }),
+      });
 
-    // IN THE FUTURE: Hook this up to Supabase:
-    // await supabase.from('leads').insert({ email, source: 'free_resource', resource_id: resourceId });
+      const data = await response.json();
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      if (response.ok) {
+        setDownloadUrl(data.downloadUrl);
+        setIsSuccess(true);
+      } else {
+        alert(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Lead submission error:", error);
+      alert("Network error. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSuccess) {
@@ -35,9 +50,17 @@ export function EmailCaptureForm({ resourceId }: EmailCaptureFormProps) {
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <h3 className="text-2xl font-bold mb-2">Success! Check your inbox.</h3>
-        <p className="text-muted-foreground font-medium">
-          We've sent the secure access link to <span className="text-foreground font-bold">{email}</span>. It should arrive in the next 2 minutes.
+        <p className="text-muted-foreground font-medium mb-6">
+          We've sent the secure access link to <span className="text-foreground font-bold">{email}</span>. You can also download it directly below:
         </p>
+        <a 
+          href={downloadUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground font-bold rounded-xl hover:scale-105 transition-transform"
+        >
+          <ArrowRight className="w-4 h-4 rotate-90" /> Download Now
+        </a>
       </div>
     );
   }

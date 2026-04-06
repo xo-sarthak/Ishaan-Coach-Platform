@@ -8,6 +8,7 @@ export interface ResourceData {
   description: string;
   benefits: string[];
   howToUse: string;
+  downloadUrl: string;
 }
 
 export const RESOURCES: ResourceData[] = [
@@ -25,7 +26,8 @@ export const RESOURCES: ResourceData[] = [
       "Helps you confidently answer the 'biggest failure' interview question.",
       "Shifts your mindset from victim to active learner."
     ],
-    howToUse: "Print this single-page PDF and keep it in your journal. Whenever you face a major rejection or failure, fill out a row. Over time, you'll see how these 'failures' were actually prerequisites for your biggest wins."
+    howToUse: "Print this single-page PDF and keep it in your journal. Whenever you face a major rejection or failure, fill out a row. Over time, you'll see how these 'failures' were actually prerequisites for your biggest wins.",
+    downloadUrl: "https://ishaanlive.in/resources/failure-resume.pdf"
   },
   {
     id: "r2",
@@ -41,7 +43,8 @@ export const RESOURCES: ResourceData[] = [
       "Creates a clear boundary between work and weekend recovery.",
       "Helps track macro-goals across the year."
     ],
-    howToUse: "Block out 30 minutes every Sunday afternoon. Use this PDF guide alongside a warm beverage to brain-dump your tasks, review the past week's performance, and prioritize the Big 3 items for the vital days ahead."
+    howToUse: "Block out 30 minutes every Sunday afternoon. Use this PDF guide alongside a warm beverage to brain-dump your tasks, review the past week's performance, and prioritize the Big 3 items for the vital days ahead.",
+    downloadUrl: "https://ishaanlive.in/resources/weekly-planner.pdf"
   },
   {
     id: "r3",
@@ -57,7 +60,8 @@ export const RESOURCES: ResourceData[] = [
       "Accelerates emotional intimacy in a safe, structured way.",
       "Acts as a fantastic ice-breaker for awkward first dates."
     ],
-    howToUse: "Read through the specific categories. Keep 3-4 questions in your mental back pocket for dinner dates, or literally pull out the PDF and make a fun game out of it with your partner."
+    howToUse: "Read through the specific categories. Keep 3-4 questions in your mental back pocket for dinner dates, or literally pull out the PDF and make a fun game out of it with your partner.",
+    downloadUrl: "#"
   },
   {
     id: "r4",
@@ -73,7 +77,8 @@ export const RESOURCES: ResourceData[] = [
       "Simple design doesn't require complex app navigation.",
       "Easily customizable for workouts, reading, or diet."
     ],
-    howToUse: "Print it out and tape it to your bathroom mirror or fridge. Pick a maximum of 3 habits. Put an 'X' in the box every single day you complete the task. Don't break the chain."
+    howToUse: "Print it out and tape it to your bathroom mirror or fridge. Pick a maximum of 3 habits. Put an 'X' in the box every single day you complete the task. Don't break the chain.",
+    downloadUrl: "#"
   },
   {
     id: "r5",
@@ -89,7 +94,8 @@ export const RESOURCES: ResourceData[] = [
       "Forces you to break down massive ambitions into daily levers.",
       "Makes tracking progress highly mathematical and objective."
     ],
-    howToUse: "Download the framework and set up your next 12-week sprint. Define your primary goal, the specific daily actions required, and use the weekly scorecard to hold yourself ruthlessly accountable."
+    howToUse: "Download the framework and set up your next 12-week sprint. Define your primary goal, the specific daily actions required, and use the weekly scorecard to hold yourself ruthlessly accountable.",
+    downloadUrl: "#"
   },
   {
     id: "r6",
@@ -105,7 +111,8 @@ export const RESOURCES: ResourceData[] = [
       "Enhances deep focus when working on complex problems.",
       "Helps you fall asleep faster without a racing mind."
     ],
-    howToUse: "Read the short booklet over a weekend. Follow the specific 5-minute breathing exercise detailed in Chapter 2 every morning for the next seven days to see immediate physiological results."
+    howToUse: "Read the short booklet over a weekend. Follow the specific 5-minute breathing exercise detailed in Chapter 2 every morning for the next seven days to see immediate physiological results.",
+    downloadUrl: "#"
   },
   {
     id: "r7",
@@ -121,7 +128,8 @@ export const RESOURCES: ResourceData[] = [
       "Removes the guilt from spending money on things you love.",
       "Takes less than 15 minutes a month to maintain."
     ],
-    howToUse: "Download the template, plug in your monthly take-home pay, list your fixed utility/rent costs, and the spreadsheet will automatically calculate your exact fun-money allowance."
+    howToUse: "Download the template, plug in your monthly take-home pay, list your fixed utility/rent costs, and the spreadsheet will automatically calculate your exact fun-money allowance.",
+    downloadUrl: "#"
   },
   {
     id: "r8",
@@ -137,7 +145,8 @@ export const RESOURCES: ResourceData[] = [
       "Easily adaptable to 10-minute or 60-minute time frames.",
       "Reduces decision fatigue early in the day."
     ],
-    howToUse: "Review the checklist. Decide if you are running the 'short' routine (15 mins) or the 'long' routine (45 mins) based on your schedule, and check off the items. Keep it by your bedside."
+    howToUse: "Review the checklist. Decide if you are running the 'short' routine (15 mins) or the 'long' routine (45 mins) based on your schedule, and check off the items. Keep it by your bedside.",
+    downloadUrl: "#"
   },
   {
     id: "r9",
@@ -153,7 +162,8 @@ export const RESOURCES: ResourceData[] = [
       "Helps you forgive yourself for past bouts of unproductivity.",
       "Defines exactly how to handle massive, overwhelming projects."
     ],
-    howToUse: "Read this short guide whenever you feel hopelessly stuck on a major project. Apply the '2-minute rule' highlighted in the guide immediately upon reaching the final page to break the inertia."
+    howToUse: "Read this short guide whenever you feel hopelessly stuck on a major project. Apply the '2-minute rule' highlighted in the guide immediately upon reaching the final page to break the inertia.",
+    downloadUrl: "#"
   },
   {
     id: "r10",
@@ -169,6 +179,7 @@ export const RESOURCES: ResourceData[] = [
       "Provides phenomenal clarity on what you actually want out of life.",
       "Acts as cheaper, rapid-fire self-administered therapy."
     ],
-    howToUse: "Sit down in a quiet room with a physical notebook. Do not use a laptop. Pick one prompt at random, set a timer for 10 minutes, and do not stop writing until the timer sounds."
+    howToUse: "Sit down in a quiet room with a physical notebook. Do not use a laptop. Pick one prompt at random, set a timer for 10 minutes, and do not stop writing until the timer sounds.",
+    downloadUrl: "#"
   }
 ];

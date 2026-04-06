@@ -74,14 +74,27 @@ export default function ProtectedCoursePage({ params }: { params: Promise<{ id: 
         <h1 className="text-3xl md:text-5xl font-black text-foreground mb-4">{course.title}</h1>
         <p className="text-xl text-muted-foreground mb-12">{course.subtitle}</p>
 
-        {/* Video Player Placeholder */}
-        <div className="aspect-video w-full bg-card rounded-[2rem] border border-border shadow-2xl flex items-center justify-center overflow-hidden relative mb-12 relative group cursor-pointer">
-          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center text-white p-6 transition-all group-hover:bg-black/40">
-            <PlayCircle className="w-20 h-20 mb-6 opacity-90 transition-transform group-hover:scale-110" />
-            <h2 className="text-2xl font-bold mb-2">Private Video Player</h2>
-            <p className="text-white/80 text-center max-w-md">Your secure video stream will begin playing here. Video host integration pending.</p>
-          </div>
-          <img src={course.image} alt={course.title} className="w-full h-full object-cover blur-sm opacity-60 transition-transform group-hover:scale-105 duration-700" />
+        {/* Video Player */}
+        <div className="aspect-video w-full bg-card rounded-[2rem] border border-border shadow-2xl flex items-center justify-center overflow-hidden relative mb-12 shadow-primary/10">
+          {course.vimeoId ? (
+            <div className="w-full h-full relative">
+              <iframe
+                src={`https://player.vimeo.com/video/${course.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                title={course.title}
+                className="w-full h-full"
+              ></iframe>
+            </div>
+          ) : (
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center">
+              <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                <PlayCircle className="w-10 h-10 text-primary" />
+              </div>
+              <h2 className="text-2xl font-extrabold mb-2 text-foreground">Video Processing...</h2>
+              <p className="text-muted-foreground max-w-md">Your secure video stream is currently being prepared. Please check back in a few minutes.</p>
+            </div>
+          )}
         </div>
         
         {/* Resources Placeholder */}

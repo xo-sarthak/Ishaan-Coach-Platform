@@ -18,6 +18,7 @@ export interface CohortData {
   curriculum: { module: string; description: string }[];
   faqs: { question: string; answer: string }[];
   videoUrl?: string;
+  liveLink: string;
 }
 
 export const COHORTS: CohortData[] = [
@@ -36,6 +37,7 @@ export const COHORTS: CohortData[] = [
     originalPrice: "₹24,999",
     seatsTotal: 50,
     seatsRemaining: 12,
+    liveLink: "https://zoom.us/j/ishaan-resilience-live",
     benefits: [
       "6 Weekly Live Q&A and Lecture Sessions",
       "Private WhatsApp community of ambitious peers",
@@ -78,6 +80,7 @@ export const COHORTS: CohortData[] = [
     originalPrice: "₹15,999",
     seatsTotal: 30,
     seatsRemaining: 0,
+    liveLink: "https://zoom.us/j/ishaan-relationship-deepdive",
     benefits: [
       "4 Live Lecture & Teardown Sessions",
       "Roleplaying communication exercises",

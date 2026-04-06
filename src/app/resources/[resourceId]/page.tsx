@@ -52,7 +52,7 @@ export default async function ResourceLandingPage({ params }: { params: Promise<
                   <Download className="w-5 h-5 text-primary" />
                   <span className="font-bold text-sm tracking-wide uppercase text-foreground">Where should we send it?</span>
                </div>
-               <EmailCaptureForm resourceId={resource.id} />
+               <EmailCaptureForm resourceId={resource.id} resourceSlug={resource.slug} />
             </div>
           </div>
 
@@ -73,7 +73,7 @@ export default async function ResourceLandingPage({ params }: { params: Promise<
                <Download className="w-5 h-5 text-primary" />
                <span className="font-bold text-sm tracking-wide uppercase text-foreground">Where should we send it?</span>
             </div>
-            <EmailCaptureForm resourceId={resource.id} />
+            <EmailCaptureForm resourceId={resource.id} resourceSlug={resource.slug} />
          </div>
       </section>
 

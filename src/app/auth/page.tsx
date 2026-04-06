@@ -149,7 +149,17 @@ export default function AuthPage() {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-sm font-semibold leading-none text-foreground/80">Password</label>
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-semibold leading-none text-foreground/80">Password</label>
+                {isLogin && (
+                  <Link 
+                    href="/auth/forgot-password" 
+                    className="text-xs font-semibold text-primary hover:underline transition-all"
+                  >
+                    Forgot password?
+                  </Link>
+                )}
+              </div>
               <input
                 type="password"
                 value={password}
