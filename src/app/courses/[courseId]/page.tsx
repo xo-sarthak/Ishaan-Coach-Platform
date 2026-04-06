@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { COURSES } from "@/data/courses";
 import { Accordion } from "@/components/Accordion";
 import { PAYMENT_LINK } from "@/lib/payment";
+import CoursePaymentButton from "@/components/CoursePaymentButton";
 import Link from "next/link";
 import { CheckCircle2, PlayCircle, Star, XCircle, Clock, ShieldCheck, Globe2, AlertTriangle, ArrowRight, Quote } from "lucide-react";
 
@@ -207,12 +208,11 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
                     ))}
                   </div>
 
-                  <a 
-                    href={PAYMENT_LINK} 
-                    className={`w-full py-4 rounded-xl font-bold text-center transition-all hover:scale-[1.02] ${plan.isPopular ? 'bg-primary text-primary-foreground shadow-lg hover:shadow-primary/50' : 'bg-muted text-foreground hover:bg-muted/80'}`}
-                  >
-                    Enroll Now
-                  </a>
+                  <CoursePaymentButton 
+                    courseId={course.id}
+                    priceStr={plan.price}
+                    className={plan.isPopular ? 'bg-primary text-primary-foreground shadow-lg hover:shadow-primary/50' : 'bg-muted text-foreground hover:bg-muted/80 border border-border'}
+                  />
                 </div>
               </div>
             ))}

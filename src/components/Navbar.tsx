@@ -63,6 +63,11 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
+          {mounted && user && (
+            <Link href="/my-purchases" className="hover:text-primary transition-colors whitespace-nowrap font-bold text-foreground">
+              My Purchases
+            </Link>
+          )}
         </div>
         
         <div className="flex items-center gap-3">
@@ -109,6 +114,14 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            {mounted && user && (
+              <Link 
+                href="/my-purchases" 
+                className="py-4 text-base font-bold text-primary hover:text-primary/80 transition-colors"
+              >
+                My Purchases
+              </Link>
+            )}
             
             {/* Mobile Auth Button */}
             <div className="py-4 sm:hidden">
