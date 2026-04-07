@@ -3,7 +3,6 @@ import { COURSES } from "@/data/courses";
 import { Accordion } from "@/components/Accordion";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { MeetYourCoach } from "@/components/MeetYourCoach";
-import { PAYMENT_LINK } from "@/lib/payment";
 import CoursePaymentButton from "@/components/CoursePaymentButton";
 import Link from "next/link";
 import { CheckCircle2, PlayCircle, Star, XCircle, Clock, ShieldCheck, Globe2, AlertTriangle, ArrowRight, Quote } from "lucide-react";

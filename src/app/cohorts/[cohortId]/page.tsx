@@ -6,6 +6,7 @@ import { MeetYourCoach } from "@/components/MeetYourCoach";
 import { PAYMENT_LINK } from "@/lib/payment";
 import { CheckCircle2, Calendar, Star, AlertTriangle, ArrowRight, Quote, Clock, Zap } from "lucide-react";
 import { CohortWaitlistForm } from "@/components/CohortWaitlistForm";
+import Link from "next/link";
 
 export async function generateMetadata({ params }: { params: Promise<{ cohortId: string }> }) {
   const resolvedParams = await params;
@@ -165,13 +166,13 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
                     <div className="text-5xl font-black mb-2 flex items-baseline gap-3">
                       {cohort.price} <span className="text-xl text-muted-foreground line-through font-normal">{cohort.originalPrice}</span>
                     </div>
-                    <a 
-                      href={PAYMENT_LINK} 
+                    <Link 
+                      href={`/checkout/${cohort.id}`} 
                       className="w-full mt-6 bg-primary text-primary-foreground font-bold text-lg rounded-xl px-12 py-4 flex items-center justify-center gap-2 transition-all hover:bg-primary/90 hover:scale-105 shadow-xl shadow-primary/20"
                     >
                       Enroll Now <ArrowRight className="w-5 h-5"/>
-                    </a>
-                    <p className="text-xs text-muted-foreground mt-4 italic">Secure checkout via PayU</p>
+                    </Link>
+                    <p className="text-xs text-muted-foreground mt-4 italic">Secure checkout via Razorpay</p>
                   </>
                 )}
               </div>
@@ -196,14 +197,14 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
 
       {/* 7. HIGHLY VISIBLE FLOATING CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-background via-background/90 to-transparent z-50 flex justify-center pointer-events-none">
-        <a 
-          href={isWaitlist ? "#waitlist" : "#pricing"}
+        <Link 
+          href={isWaitlist ? "#waitlist" : `/checkout/${cohort.id}`}
           className="pointer-events-auto group relative flex w-full max-w-[17rem] items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-center text-base font-bold tracking-wide text-primary-foreground shadow-[0_15px_40px_-10px_rgba(var(--primary),0.8)] transition-all hover:scale-105 hover:bg-primary/95 ring-4 ring-primary/20 hover:ring-primary/40 animate-bounce"
           style={{ animationDuration: '2.5s' }}
         >
           <span className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:animate-pulse group-hover:opacity-100" />
           {isWaitlist ? "JOIN THE WAITLIST" : "ENROLL NOW"} <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-        </a>
+        </Link>
       </div>
 
     </div>
