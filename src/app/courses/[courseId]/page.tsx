@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { COURSES } from "@/data/courses";
 import { Accordion } from "@/components/Accordion";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { MeetYourCoach } from "@/components/MeetYourCoach";
 import { PAYMENT_LINK } from "@/lib/payment";
 import CoursePaymentButton from "@/components/CoursePaymentButton";
 import Link from "next/link";
@@ -122,34 +123,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
       </section>
 
       {/* 4. INSTRUCTOR BIO */}
-      <section className="w-full bg-card py-20 border-y border-border">
-        <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-5 gap-12 items-center">
-          <div className="md:col-span-2">
-            <div className="aspect-square bg-muted rounded-full overflow-hidden border-4 border-background shadow-xl">
-               <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop" alt="Instructor" className="w-full h-full object-cover" />
-            </div>
-          </div>
-          <div className="md:col-span-3">
-             <h2 className="text-4xl font-bold mb-4">Meet Your Coach</h2>
-             <p className="text-xl text-muted-foreground leading-relaxed mb-6">
-                My aim is to ensure all the choices you make in life come from a point of profound awareness, not default programming or ignorance.
-             </p>
-             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                I've broken down years of research, coaching, and real-world failure into scalable frameworks that you can apply immediately to see tangible results.
-             </p>
-             <div className="grid grid-cols-2 gap-6">
-               <div className="bg-background p-4 rounded-xl border border-border text-center">
-                 <div className="text-3xl font-black text-primary mb-1">100k+</div>
-                 <div className="text-sm font-semibold text-muted-foreground">Students Taught</div>
-               </div>
-               <div className="bg-background p-4 rounded-xl border border-border text-center">
-                 <div className="text-3xl font-black text-primary mb-1">4.9/5</div>
-                 <div className="text-sm font-semibold text-muted-foreground">Average Rating</div>
-               </div>
-             </div>
-          </div>
-        </div>
-      </section>
+      <MeetYourCoach />
 
       {/* 5. TESTIMONIALS */}
       <section className="w-full py-24 bg-muted/10">

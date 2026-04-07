@@ -3,6 +3,7 @@
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { VideoCarousel } from "@/components/VideoCarousel";
 import { ResourceCarousel, CarouselItem } from "@/components/ResourceCarousel";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import Link from "next/link";
 import { MessageCircle, ArrowRight, PlayCircle, Star, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
@@ -50,12 +51,12 @@ const BOOKS: CarouselItem[] = [
 ];
 
 const GIFTS: CarouselItem[] = [
-  { id: "g1", title: "Premium Mechanical Keyboard", subtitle: "$150+", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Tech" },
-  { id: "g2", title: "Noise Cancelling Headphones", subtitle: "$299", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Audio" },
-  { id: "g3", title: "The Five Minute Journal", subtitle: "$29", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Mindfulness" },
-  { id: "g4", title: "Kindle Paperwhite", subtitle: "$139", image: "https://images.unsplash.com/photo-1620935541604-9844dfbe18e1?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Reading" },
-  { id: "g5", title: "Ergonomic Desk Chair", subtitle: "$199", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Workspace" },
-  { id: "g6", title: "Aeropress Coffee Maker", subtitle: "$39", image: "https://images.unsplash.com/photo-1589395914619-fa80d7cc5587?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Kitchen" },
+  { id: "g1", title: "Premium Mechanical Keyboard", subtitle: "₹12,499+", image: "https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Tech" },
+  { id: "g2", title: "Noise Cancelling Headphones", subtitle: "₹24,990", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Audio" },
+  { id: "g3", title: "The Five Minute Journal", subtitle: "₹2,499", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Mindfulness" },
+  { id: "g4", title: "Kindle Paperwhite", subtitle: "₹11,490", image: "https://images.unsplash.com/photo-1620935541604-9844dfbe18e1?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Reading" },
+  { id: "g5", title: "Ergonomic Desk Chair", subtitle: "₹16,499", image: "https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Workspace" },
+  { id: "g6", title: "Aeropress Coffee Maker", subtitle: "₹3,299", image: "https://images.unsplash.com/photo-1589395914619-fa80d7cc5587?q=80&w=600&auto=format&fit=crop", link: "/gift-recommendations", tag: "Kitchen" },
 ];
 
 export default function Home() {
@@ -141,6 +142,9 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* Sunday Insights Newsletter */}
+      <NewsletterForm />
 
       {/* Dedicated Courses Section */}
       <ResourceCarousel

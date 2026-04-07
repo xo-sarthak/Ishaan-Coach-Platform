@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { COHORTS } from "@/data/cohorts";
 import { Accordion } from "@/components/Accordion";
 import { VideoPlayer } from "@/components/VideoPlayer";
+import { MeetYourCoach } from "@/components/MeetYourCoach";
 import { PAYMENT_LINK } from "@/lib/payment";
 import { CheckCircle2, Calendar, Star, AlertTriangle, ArrowRight, Quote, Clock, Zap } from "lucide-react";
 import { CohortWaitlistForm } from "@/components/CohortWaitlistForm";
@@ -104,7 +105,10 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
         </div>
       </section>
 
-      {/* 4. TESTIMONIALS */}
+      {/* 4. MEET YOUR COACH */}
+      <MeetYourCoach />
+
+      {/* 5. TESTIMONIALS */}
       {cohort.testimonials.length > 0 && (
         <section className="w-full py-24 bg-background">
           <div className="max-w-6xl mx-auto px-6 text-center">
@@ -127,7 +131,7 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
         </section>
       )}
 
-      {/* 5. PRICING & CHECKOUT BLOCK */}
+      {/* 6. PRICING & CHECKOUT BLOCK */}
       <section id="pricing" className="w-full py-24 bg-card border-t border-border">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-background rounded-[3rem] border border-primary/20 shadow-2xl p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">

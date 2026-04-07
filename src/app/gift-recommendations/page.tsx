@@ -9,7 +9,7 @@ const GIFTS = [
     description: "The perfect gift for anyone who spends hours typing. Enhances productivity and makes working a joy.",
     image: "https://images.unsplash.com/photo-1595225476474-87563907a212?q=80&w=600&auto=format&fit=crop",
     link: "#",
-    price: "$150+",
+    price: "₹12,499+",
   },
   {
     id: "2",
@@ -18,7 +18,7 @@ const GIFTS = [
     description: "Give the gift of focus. Nothing beats putting on headphones and entering a state of deep work.",
     image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=600&auto=format&fit=crop",
     link: "#",
-    price: "$299",
+    price: "₹24,990",
   },
   {
     id: "3",
@@ -27,7 +27,7 @@ const GIFTS = [
     description: "A simple yet powerful tool for building a gratitude habit and starting the day with a positive mindset.",
     image: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop",
     link: "#",
-    price: "$29",
+    price: "₹2,499",
   },
   {
     id: "4",
@@ -36,7 +36,7 @@ const GIFTS = [
     description: "Investing in back health is investing in one's career. A solid chair is the most overlooked essential.",
     image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=600&auto=format&fit=crop",
     link: "#",
-    price: "$350+",
+    price: "₹28,990+",
   },
 ];
 
