@@ -92,7 +92,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
           if (verifyRes.ok) {
             router.push(`/payment-success?email=${encodeURIComponent(email)}&course=${encodeURIComponent(item.title)}`);
           } else {
-            router.push("/payment-failed");
+            router.push(`/payment-failed?id=${item.id}`);
           }
         },
         theme: { color: "#000000" },

@@ -18,19 +18,32 @@ export async function POST(req: Request) {
     } = body;
 
     // 1. Verify Razorpay Signature
-    const secret = process.env.RAZORPAY_SECRET!;
+    const secret = process.env.RAZORPAY_SECRET;
+    
+    if (!secret) {
+      console.error('RAZORPAY_SECRET is missing from environment variables!');
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
+
     const bodyString = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac('sha256', secret)
-      .update(bodyString.toString())
+      .update(bodyString)
       .digest('hex');
 
     const isValid = expectedSignature === razorpay_signature;
 
     if (!isValid) {
-      console.error('Invalid payment signature', { expectedSignature, razorpay_signature });
+      console.error('Signature Mismatch!', { 
+        expected: expectedSignature, 
+        received: razorpay_signature,
+        orderId: razorpay_order_id,
+        paymentId: razorpay_payment_id 
+      });
       return NextResponse.json({ error: 'Invalid payment signature' }, { status: 400 });
     }
+
+    console.log('✅ Signature verified for:', email);
 
     // 2. Update Database (Atomic-ish flow)
     
@@ -40,20 +53,33 @@ export async function POST(req: Request) {
       .update({ status: 'paid', updated_at: new Date().toISOString() })
       .eq('razorpay_order_id', razorpay_order_id);
 
-    // b. Record Purchase
-    const { data: purchase, error: insertError } = await supabase
+    // b. Record Purchase (with duplication check)
+    // Check if this specific payment was already processed
+    const { data: existingPurchase } = await supabase
       .from('purchases')
-      .insert([{
-        email,
-        course_id: courseId,
-        razorpay_payment_id: razorpay_payment_id
-      }])
-      .select()
-      .single();
+      .select('id')
+      .eq('razorpay_payment_id', razorpay_payment_id)
+      .maybeSingle();
 
-    if (insertError) {
-      console.error('Error inserting purchase:', insertError);
-      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 });
+    if (existingPurchase) {
+      console.log('Payment already recorded, skipping insert.');
+    } else {
+      const { error: insertError } = await supabase
+        .from('purchases')
+        .insert([{
+          email: email.toLowerCase(),
+          course_id: courseId,
+          razorpay_payment_id: razorpay_payment_id
+        }]);
+
+      if (insertError) {
+        console.error('Error inserting purchase:', insertError);
+        // We continue if it's just a duplicate email/course combo but different payment ID 
+        // (though likely it's a constraint error)
+        if (insertError.code !== '23505') { // Unique violation
+          return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 });
+        }
+      }
     }
 
     // 3. Generate Magic Token for Onboarding
