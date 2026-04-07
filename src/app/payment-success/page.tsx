@@ -1,32 +1,104 @@
 "use client";
 
-import Link from "next/link";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+import { CheckCircle2, Mail, ArrowRight, HelpCircle, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function PaymentSuccessPage() {
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  const course = searchParams.get("course");
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] px-6 text-center">
-      <motion.div initial="hidden" animate="visible" variants={fadeUp} className="max-w-md w-full">
-        <div className="mb-6 flex justify-center text-green-500">
-          <CheckCircle2 className="w-20 h-20" />
-        </div>
-        <h1 className="text-4xl md:text-4xl font-bold tracking-tight mb-4">Payment Successful 🎉</h1>
-        <p className="text-lg text-muted-foreground mb-10">
-          Your payment has been received. Continue to complete your registration.
-        </p>
-        <Link
-          href="/cohort-form"
-          className="w-full inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3 text-base font-medium text-primary-foreground transition-all hover:bg-primary/90"
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-12">
+      <div className="max-w-xl w-full text-center">
+        {/* Success Icon Animation */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8"
         >
-          Continue to Form <ArrowRight className="w-4 h-4" />
-        </Link>
-      </motion.div>
+          <CheckCircle2 className="w-12 h-12" />
+        </motion.div>
+
+        <motion.h1 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-4xl md:text-5xl font-black mb-4 tracking-tight"
+        >
+          Payment Successful! 🚀
+        </motion.h1>
+
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="text-xl text-slate-500 mb-12 font-medium leading-relaxed"
+        >
+          You've just invested in yourself. We're getting your access to <span className="text-foreground font-black">"{course || "the course"}"</span> ready.
+        </motion.p>
+
+        {/* Action Card */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+          className="bg-slate-50 border border-slate-200 rounded-[2.5rem] p-8 md:p-12 mb-12 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="relative z-10">
+            <div className="w-16 h-16 bg-white shadow-md rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <Mail className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-2xl font-black mb-4">Check your Email</h3>
+            <p className="text-slate-600 mb-8 font-medium">
+              We've sent a magic link to <span className="text-primary font-bold">{email || "your email"}</span>. 
+              Click the link inside to set your password and access your course.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link 
+                href="/my-purchases" 
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
+              >
+                Go to Dashboard <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Support Section */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="space-y-6 pt-6 border-t border-slate-100"
+        >
+          <div className="flex items-start gap-4 text-left p-6 bg-slate-50 rounded-2xl border border-slate-200/50">
+            <HelpCircle className="w-6 h-6 text-slate-400 mt-1 flex-shrink-0" />
+            <div>
+              <h4 className="text-lg font-bold">Entered the wrong email?</h4>
+              <p className="text-slate-500 text-sm font-medium mb-3">
+                Don't worry, we'll fix it. Take a screenshot of your payment ID and reach out.
+              </p>
+              <a 
+                href="mailto:hello@ishaanlive.in" 
+                className="text-primary font-bold text-sm hover:underline flex items-center gap-2"
+              >
+                Contact Support via Email <Mail className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          <Link href="/" className="inline-flex items-center gap-2 text-slate-400 font-bold hover:text-foreground transition-colors group">
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Home
+          </Link>
+        </motion.div>
+      </div>
     </div>
   );
 }

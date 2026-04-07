@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabaseClient';
 import { resend } from '@/lib/resend';
+import { COURSES } from '@/data/courses';
 import { COHORTS } from '@/data/cohorts';
 import { CohortWelcomeEmailTemplate } from '@/components/EmailTemplates';
-
-// Setup Supabase Client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!; 
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: Request) {
   try {
@@ -17,7 +13,6 @@ export async function POST(req: Request) {
       razorpay_order_id, 
       razorpay_payment_id, 
       razorpay_signature,
-      userId,
       email,
       courseId
     } = body;
@@ -34,60 +29,88 @@ export async function POST(req: Request) {
 
     if (!isValid) {
       console.error('Invalid payment signature', { expectedSignature, razorpay_signature });
-      return NextResponse.json(
-        { error: 'Invalid payment signature' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid payment signature' }, { status: 400 });
     }
 
-    // 2. Insert secure record into Supabase
-    const { error: insertError } = await supabase
+    // 2. Update Database (Atomic-ish flow)
+    
+    // a. Mark Pending Order as Paid
+    await supabase
+      .from('pending_orders')
+      .update({ status: 'paid', updated_at: new Date().toISOString() })
+      .eq('razorpay_order_id', razorpay_order_id);
+
+    // b. Record Purchase
+    const { data: purchase, error: insertError } = await supabase
       .from('purchases')
-      .insert([
-        {
-          user_id: userId,
-          email: email,
-          course_id: courseId,
-          razorpay_payment_id: razorpay_payment_id
-        }
-      ]);
+      .insert([{
+        email,
+        course_id: courseId,
+        razorpay_payment_id: razorpay_payment_id
+      }])
+      .select()
+      .single();
 
     if (insertError) {
       console.error('Error inserting purchase:', insertError);
-      return NextResponse.json(
-        { error: 'Failed to record purchase in database', details: insertError },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: 'Failed to record purchase' }, { status: 500 });
     }
 
-    // 3. Trigger Automated Onboarding Email for Cohorts
-    if (resend && (courseId.startsWith('h') || courseId.includes('cohort'))) {
-      const cohort = COHORTS.find(c => c.id === courseId || c.slug === courseId);
-      if (cohort) {
-        try {
-          await resend.emails.send({
-            from: 'Ishaan Singh <hello@ishaanlive.in>',
-            to: email,
-            subject: `Welcome to the ${cohort.title}!`,
-            react: <CohortWelcomeEmailTemplate 
-              cohortTitle={cohort.title} 
-              startDate={cohort.startDate} 
-            />,
-          });
-        } catch (emailError) {
-          console.error('Failed to send cohort welcome email:', emailError);
-        }
+    // 3. Generate Magic Token for Onboarding
+    const magicToken = crypto.randomBytes(32).toString('hex');
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 24); // 24 hour expiry
+
+    await supabase
+      .from('onboarding_tokens')
+      .insert([{
+        token: magicToken,
+        email,
+        course_id: courseId,
+        expires_at: expiresAt.toISOString()
+      }]);
+
+    // 4. Send Onboarding / Welcome Email
+    const item = COURSES.find(c => c.id === courseId || c.slug === courseId) 
+               || COHORTS.find(c => c.id === courseId || c.slug === courseId);
+    
+    const onboardingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/onboarding?token=${magicToken}`;
+
+    if (resend && item) {
+      try {
+        await resend.emails.send({
+          from: 'Ishaan Singh <hello@ishaanlive.in>',
+          to: email,
+          subject: `Access Granted: ${item.title}`,
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+              <h2 style="color: #333;">Welcome to the inner circle! 🚀</h2>
+              <p style="font-size: 16px; color: #555;">
+                Your purchase was successful. You now have access to <strong>${item.title}</strong>.
+              </p>
+              <p style="font-size: 16px; color: #555;">
+                Click the button below to set up your account and start learning immediately.
+              </p>
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="${onboardingUrl}" style="background-color: #000; color: #fff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                  Claim Your Access
+                </a>
+              </div>
+              <p style="font-size: 14px; color: #888;">
+                This link will expire in 24 hours. If you have any trouble, just reply to this email!
+              </p>
+            </div>
+          `
+        });
+      } catch (emailError) {
+        console.error('Failed to send onboarding email:', emailError);
       }
     }
 
-    // 4. Success!
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json({ success: true, token: magicToken }, { status: 200 });
 
   } catch (error: any) {
     console.error('Error in verify-payment:', error);
-    return NextResponse.json(
-      { error: 'Internal server error', message: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error', message: error.message }, { status: 500 });
   }
 }

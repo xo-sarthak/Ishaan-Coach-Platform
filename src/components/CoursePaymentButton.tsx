@@ -73,102 +73,11 @@ export default function CoursePaymentButton({ courseId, priceStr, className }: C
     });
   };
 
-  const handlePayment = async () => {
-    // A: Auth check
-    if (!user) {
-      router.push("/auth");
-      return;
-    }
-
-    setIsPaying(true);
-
-    try {
-      // 1. Load Script
-      const isLoaded = await loadRazorpay();
-      if (!isLoaded) {
-        alert("Failed to load payment gateway. Check your connection.");
-        setIsPaying(false);
-        return;
-      }
-
-      // Convert "₹1,299" to integer "1299"
-      const rawPrice = priceStr.replace(/[^0-9]/g, '');
-
-      // 2. Create the backend order
-      const orderRes = await fetch("/api/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: rawPrice,
-          courseId: courseId,
-          userId: user.id,
-          email: user.email,
-        }),
-      });
-
-      const orderData = await orderRes.json();
-      if (!orderRes.ok) {
-        throw new Error(orderData.error || "Failed to create order");
-      }
-
-      // 3. Configure Razorpay modal
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: orderData.order.amount,
-        currency: orderData.order.currency,
-        name: "Coach Platform",
-        description: `Enrollment for ${courseId}`,
-        order_id: orderData.order.id,
-        handler: async function (response: any) {
-          // 4. Verify payment with our server
-          const verifyRes = await fetch("/api/verify-payment", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              userId: user.id,
-              email: user.email,
-              courseId: courseId,
-            }),
-          });
-
-          const verifyData = await verifyRes.json();
-          if (verifyRes.ok) {
-            setHasPurchased(true); // Update UI
-            alert("Payment successful! Welcome to the course.");
-            router.push(`/course/${courseId}`); // Go straight to the content
-          } else {
-            alert("Payment verification failed! Please contact support.");
-          }
-        },
-        prefill: {
-          email: user.email,
-        },
-        theme: {
-          color: "#B05C46", // Terracotta Primary color
-        },
-        modal: {
-            ondismiss: function() {
-                setIsPaying(false); // Reset button if user closes modal
-            }
-        }
-      };
-
-      // 5. Open Razorpay
-      const rzp = new (window as any).Razorpay(options);
-      rzp.on("payment.failed", function (response: any) {
-        alert(`Payment failed: ${response.error.description}`);
-        setIsPaying(false);
-      });
-      rzp.open();
-
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong initializing the checkout.");
-      setIsPaying(false);
-    }
+  const handlePayment = () => {
+    // Redirect to the new low-friction checkout flow
+    // We pass the email as a query param if the user is already logged in to pre-fill it
+    const emailParam = user?.email ? `?email=${encodeURIComponent(user.email)}` : "";
+    router.push(`/checkout/${courseId}${emailParam}`);
   };
 
   const handleAccess = () => {
@@ -197,23 +106,13 @@ export default function CoursePaymentButton({ courseId, priceStr, className }: C
     );
   }
 
-  // Otherwise, show the default checkout button
+  // Otherwise, redirect to the new checkout flow
   return (
     <button 
       onClick={handlePayment} 
-      disabled={isPaying}
-      className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 font-bold transition-all hover:scale-[1.02] ${className}`}
+      className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 font-bold transition-all hover:scale-[1.02] shadow-sm ${className}`}
     >
-      {isPaying ? (
-        <>
-          <Loader2 className="w-5 h-5 animate-spin" />
-          Processing Securely...
-        </>
-      ) : (
-        <>
-          Secure Checkout <ArrowRight className="w-4 h-4 ml-1" />
-        </>
-      )}
+      Enroll Now <ArrowRight className="w-4 h-4 ml-1" />
     </button>
   );
 }

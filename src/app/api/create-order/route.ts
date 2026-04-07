@@ -1,39 +1,67 @@
 import { NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
+import { supabase } from '@/lib/supabaseClient';
+import { COURSES } from '@/data/courses';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { amount, courseId, userId, email } = body;
+    const { courseId, email } = body;
 
-    // Validate inputs
-    if (!amount || !courseId || !userId || !email) {
+    // 1. Validate inputs
+    if (!courseId || !email) {
       return NextResponse.json(
         { error: 'Missing required parameters' },
         { status: 400 }
       );
     }
 
-    // Initialize Razorpay SDK
+    // 2. Find course and get price
+    const course = COURSES.find(c => c.id === courseId || c.slug === courseId);
+    if (!course) {
+      return NextResponse.json({ error: 'Course not found' }, { status: 404 });
+    }
+
+    // Capture price from the first pricing plan (Standard/Masterclass)
+    const rawPrice = course.pricing[0].price.replace(/[^0-9]/g, '');
+    const amount = parseInt(rawPrice);
+
+    // 3. Initialize Razorpay SDK
     const razorpay = new Razorpay({
       key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
       key_secret: process.env.RAZORPAY_SECRET!,
     });
 
-    // Create the order
-    // Razorpay expects amount in paise (e.g., multiply by 100)
+    // 4. Create Razorpay Order
     const orderOptions = {
-      amount: parseInt(amount) * 100, // Convert to integer paise
+      amount: amount * 100, // Paise
       currency: "INR",
-      receipt: `rcpt_${userId.substring(0, 5)}_${courseId}_${Date.now()}`,
+      receipt: `pending_${Date.now()}`,
       notes: {
-        userId,
         courseId,
         email,
       },
     };
 
     const order = await razorpay.orders.create(orderOptions);
+
+    // 5. Store intent in Supabase (Pending Orders)
+    const { error: dbError } = await supabase
+      .from('pending_orders')
+      .insert([
+        {
+          email,
+          course_id: courseId,
+          razorpay_order_id: order.id,
+          amount: amount,
+          status: 'pending'
+        }
+      ]);
+
+    if (dbError) {
+      console.error('Database logging error:', dbError);
+      // We don't block the user if logging fails, but we log it
+    }
 
     return NextResponse.json({ order }, { status: 200 });
 
