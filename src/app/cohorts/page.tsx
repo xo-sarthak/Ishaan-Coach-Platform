@@ -40,11 +40,9 @@ export default function CohortsPage() {
             <div className="p-8 md:p-10 flex flex-col flex-grow">
               <div className="flex items-center justify-between mb-4">
                  <span className="text-primary text-sm font-bold tracking-wider uppercase">{cohort.subtitle}</span>
-                 {cohort.status === "Open" && (
-                    <span className="text-xs font-bold text-muted-foreground bg-muted px-3 py-1 rounded-full flex items-center gap-1.5">
-                      <Users className="w-3 h-3" /> {cohort.seatsRemaining} Seats Left
-                    </span>
-                 )}
+                 <span className="text-xs font-bold text-muted-foreground bg-muted px-3 py-1 rounded-full flex items-center gap-1.5">
+                   <Calendar className="w-3 h-3" /> Starts {cohort.startDate}
+                 </span>
               </div>
               <h3 className="text-3xl font-black mb-4 group-hover:text-primary transition-colors">{cohort.title}</h3>
               <p className="text-muted-foreground leading-relaxed mb-8 line-clamp-2">{cohort.description}</p>
@@ -54,8 +52,8 @@ export default function CohortsPage() {
                     <span className="text-2xl font-bold">{cohort.price}</span> 
                     <span className="text-sm text-muted-foreground line-through ml-2">{cohort.originalPrice}</span>
                  </div>
-                 <div className="flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors bg-muted px-4 py-2 rounded-full group-hover:bg-primary/10">
-                   View Program <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
+                  <div className="flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors bg-muted px-4 py-2 rounded-full group-hover:bg-primary/10">
+                   {cohort.status === "Waitlist" ? "Join Waitlist" : "Enroll Now"} <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
                  </div>
               </div>
             </div>

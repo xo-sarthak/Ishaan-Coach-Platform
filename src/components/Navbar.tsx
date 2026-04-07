@@ -53,9 +53,9 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-card/80 border-b border-border/40">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="font-serif font-bold text-2xl tracking-tight text-foreground hover:opacity-80 transition-opacity">
-          Coach<span className="text-primary italic">.</span>
+          IshaanLive<span className="text-primary italic">.</span>
         </Link>
-        
+
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
           {NAV_LINKS.map((link) => (
@@ -69,7 +69,7 @@ export default function Navbar() {
             </Link>
           )}
         </div>
-        
+
         <div className="flex items-center gap-3">
           {mounted ? (
             user ? (
@@ -90,9 +90,9 @@ export default function Navbar() {
           ) : (
             <div className="hidden sm:flex w-[72px] h-9 bg-muted animate-pulse rounded-md items-center justify-center" />
           )}
-          
+
           {/* Mobile Menu Toggle Button */}
-          <button 
+          <button
             className="lg:hidden p-2 text-foreground -mr-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -106,23 +106,23 @@ export default function Navbar() {
         <div className="lg:hidden w-full bg-card border-b border-border/40 pb-4 shadow-lg animate-in slide-in-from-top-2">
           <div className="flex flex-col px-6 divide-y divide-border/40">
             {NAV_LINKS.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.href} 
+              <Link
+                key={link.name}
+                href={link.href}
                 className="py-4 text-base font-medium text-foreground hover:text-primary transition-colors"
               >
                 {link.name}
               </Link>
             ))}
             {mounted && user && (
-              <Link 
-                href="/my-purchases" 
+              <Link
+                href="/my-purchases"
                 className="py-4 text-base font-bold text-primary hover:text-primary/80 transition-colors"
               >
                 My Purchases
               </Link>
             )}
-            
+
             {/* Mobile Auth Button */}
             <div className="py-4 sm:hidden">
               {mounted && (

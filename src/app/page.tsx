@@ -6,6 +6,7 @@ import { ResourceCarousel, CarouselItem } from "@/components/ResourceCarousel";
 import Link from "next/link";
 import { MessageCircle, ArrowRight, PlayCircle, Star, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 import { COURSES as GLOBAL_COURSES } from "@/data/courses";
 import { RESOURCES as GLOBAL_RESOURCES } from "@/data/resources";
@@ -87,7 +88,7 @@ export default function Home() {
       {/* About Section */}
       <section className="w-full bg-card dark:bg-background py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6 flex flex-col gap-24">
-          
+
           {/* Row 1 */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -102,23 +103,30 @@ export default function Home() {
                 Explore my courses <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-            <div className="aspect-square bg-muted rounded-3xl border border-border flex items-center justify-center overflow-hidden relative shadow-lg">
-              <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply flex items-center justify-center" />
-              <div className="text-muted-foreground text-sm font-medium relative z-10 flex flex-col items-center text-center px-4">
-                <span className="mb-2 text-base font-semibold">Image Placeholder 1</span>
-                <span className="text-xs max-w-[200px]">Replace with your professional photo in a relaxed setting</span>
-              </div>
+            <div className="aspect-square bg-muted rounded-[2.5rem] border border-border overflow-hidden relative shadow-2xl group">
+              <Image
+                src="/images/about-creator.png"
+                alt="Ishaan Singh - Creator"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </div>
 
           {/* Row 2 */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="aspect-square bg-muted rounded-3xl border border-border flex items-center justify-center overflow-hidden relative shadow-lg order-2 md:order-1">
-              <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply flex items-center justify-center" />
-              <div className="text-muted-foreground text-sm font-medium relative z-10 flex flex-col items-center text-center px-4">
-                <span className="mb-2 text-base font-semibold">Image Placeholder 2</span>
-                <span className="text-xs max-w-[200px]">Replace with an action shot of you speaking or working</span>
-              </div>
+            <div className="aspect-square bg-muted rounded-[2.5rem] border border-border overflow-hidden relative shadow-2xl group order-2 md:order-1">
+              <Image
+                src="/images/philosophy.png"
+                alt="My Philosophy"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
             <div className="order-1 md:order-2">
               <h2 className="text-3xl font-bold font-serif tracking-tight mb-6">My Philosophy</h2>
@@ -135,11 +143,11 @@ export default function Home() {
       </section>
 
       {/* Dedicated Courses Section */}
-      <ResourceCarousel 
-        title="Premium Courses" 
+      <ResourceCarousel
+        title="Premium Courses"
         description="Self-paced learning to give you extreme clarity on exactly what to do next."
-        items={COURSES} 
-        viewAllLink="/courses" 
+        items={COURSES}
+        viewAllLink="/courses"
         viewAllText="Explore all courses"
         bgWhite={false}
       />
@@ -149,13 +157,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="bg-primary/5 border border-primary/20 rounded-[2.5rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply" />
-            
+
             <div className="lg:w-1/2 relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6">
                 <Calendar className="w-4 h-4" /> Waitlist Open
               </div>
               <h2 className="text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6 leading-tight">
-                The Life Mastery <br className="hidden md:block"/> Live Cohort
+                The Life Mastery <br className="hidden md:block" /> Live Cohort
               </h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
                 Join a highly vetted group of peers for a multi-week intensive program. Together, we'll build discipline, find career clarity, and forge deep connections.
@@ -176,21 +184,21 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
+
             <div className="lg:w-1/2 relative z-10 hidden lg:block">
-               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-border">
-                 <img src={COHORTS[0].image} alt="Cohort" className="w-full h-full object-cover" />
-               </div>
-               {/* Floating aesthetic card */}
-               <div className="absolute -bottom-6 -left-6 bg-background rounded-2xl p-6 shadow-xl border border-border flex items-center gap-4 animate-in fade-in slide-in-from-bottom duration-1000">
-                 <div className="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
-                    <Star className="w-6 h-6 fill-current" />
-                 </div>
-                 <div>
-                   <p className="font-bold text-lg">4.9/5 Rating</p>
-                   <p className="text-sm text-muted-foreground">From 500+ past students</p>
-                 </div>
-               </div>
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-border">
+                <img src={COHORTS[0].image} alt="Cohort" className="w-full h-full object-cover" />
+              </div>
+              {/* Floating aesthetic card */}
+              <div className="absolute -bottom-6 -left-6 bg-background rounded-2xl p-6 shadow-xl border border-border flex items-center gap-4 animate-in fade-in slide-in-from-bottom duration-1000">
+                <div className="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
+                  <Star className="w-6 h-6 fill-current" />
+                </div>
+                <div>
+                  <p className="font-bold text-lg">4.9/5 Rating</p>
+                  <p className="text-sm text-muted-foreground">From 500+ past students</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -206,8 +214,8 @@ export default function Home() {
           <p className="text-xl text-primary-foreground/90 mb-10 leading-relaxed font-medium">
             Get personalized advice via WhatsApp or use my AI Coach for instant replies. We're here to help you navigate your biggest challenges.
           </p>
-          <Link 
-            href="/talk-with-me" 
+          <Link
+            href="/talk-with-me"
             className="inline-flex items-center justify-center gap-3 rounded-full bg-white text-primary px-8 py-4 text-lg font-bold shadow-xl transition-all hover:bg-white/90 hover:scale-105"
           >
             Start Talking <MessageCircle className="w-5 h-5" />
@@ -215,28 +223,28 @@ export default function Home() {
         </div>
       </section>
 
-      <ResourceCarousel 
-        title="Free Resources" 
+      <ResourceCarousel
+        title="Free Resources"
         description="Templates, guides, and ebooks to kickstart your journey."
-        items={RESOURCES} 
-        viewAllLink="/resources" 
+        items={RESOURCES}
+        viewAllLink="/resources"
         bgWhite={true}
       />
 
-      <ResourceCarousel 
-        title="Books I Swear By" 
+      <ResourceCarousel
+        title="Books I Swear By"
         description="Books that have fundamentally changed the way I look at the world."
-        items={BOOKS} 
-        viewAllLink="/book-recommendations" 
+        items={BOOKS}
+        viewAllLink="/book-recommendations"
         viewAllText="View all books"
         bgWhite={false}
       />
 
-      <ResourceCarousel 
-        title="Top Gifts" 
+      <ResourceCarousel
+        title="Top Gifts"
         description="Practical, high-quality items that make for the perfect gift."
-        items={GIFTS} 
-        viewAllLink="/gift-recommendations" 
+        items={GIFTS}
+        viewAllLink="/gift-recommendations"
         viewAllText="View all gifts"
         bgWhite={true}
       />
