@@ -51,14 +51,14 @@ export function CohortWaitlistForm({ cohortId, cohortTitle }: CohortWaitlistForm
           <CheckCircle2 className="w-10 h-10" />
         </div>
         <h3 className="text-3xl font-black mb-4 tracking-tight">
-          {isAlreadyRegistered ? "Already Registered!" : "You're on the list!"}
+          {isAlreadyRegistered ? "You're already on the list!" : "You're on the list!"}
         </h3>
         <p className="text-lg text-muted-foreground font-medium leading-relaxed">
           {isAlreadyRegistered ? (
             <>
               We've already got your details for <br />
               <span className="text-primary font-bold italic">{cohortTitle}</span>. <br />
-              <span className="text-foreground font-bold block mt-3">We're looking forward to having you!</span>
+              <span className="text-foreground font-bold block mt-3">We’ll notify you as soon as we go live. <br /> Looking forward to having you!</span>
             </>
           ) : (
             <>

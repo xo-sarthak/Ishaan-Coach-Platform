@@ -150,9 +150,9 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
                 </p>
               </div>
 
-              <div className="w-full md:w-auto relative z-10 bg-card border border-border p-8 rounded-3xl shadow-xl text-center flex flex-col items-center shrink-0 min-w-[320px]">
+              <div id="waitlist" className="w-full md:w-auto relative z-10 bg-card border border-border p-8 rounded-3xl shadow-xl text-center flex flex-col items-center shrink-0 min-w-[320px] scroll-mt-32">
                 {isWaitlist ? (
-                  <div id="waitlist" className="w-full">
+                  <div className="w-full">
                     <CohortWaitlistForm cohortId={cohort.id} cohortTitle={cohort.title} />
                   </div>
                 ) : (

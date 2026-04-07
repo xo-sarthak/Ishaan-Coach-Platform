@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       .select('id')
       .eq('email', email)
       .eq('cohort_id', cohortId)
-      .single();
+      .maybeSingle(); // maybeSingle() returns null instead of an error if not found
 
     if (existingEntry) {
       return NextResponse.json({ 
@@ -25,8 +25,8 @@ export async function POST(req: Request) {
       });
     }
 
-    // 2. Insert into Supabase table if not already there
-    const { error } = await supabase
+    // 2. Insert into Supabase table
+    const { error: insertError } = await supabase
       .from('cohort_waitlist')
       .insert([
         { 
@@ -36,8 +36,17 @@ export async function POST(req: Request) {
         }
       ]);
 
-    if (error) {
-      console.error('Supabase Error:', error);
+    if (insertError) {
+      // Check for Postgres Unique Constraint Violation code (23505)
+      if (insertError.code === '23505') {
+        return NextResponse.json({ 
+          success: true, 
+          alreadyRegistered: true,
+          message: 'User already on the waitlist' 
+        });
+      }
+      
+      console.error('Supabase Insert Error:', insertError);
       return NextResponse.json({ error: 'Failed to join waitlist. Please try again.' }, { status: 500 });
     }
 
