@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabaseClient';
-import { supabaseAdmin } from '@/lib/supabaseAdmin';
+import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 export async function POST(req: Request) {
   try {
@@ -9,6 +9,8 @@ export async function POST(req: Request) {
     if (!token) {
       return NextResponse.json({ error: 'Token is required' }, { status: 400 });
     }
+
+    const supabaseAdmin = getSupabaseAdmin();
 
     // 1. Find the token in the database
     const { data: onboardingData, error: tokenError } = await supabase
