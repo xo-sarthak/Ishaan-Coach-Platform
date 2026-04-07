@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { COURSES } from "@/data/courses";
 import { Accordion } from "@/components/Accordion";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import { PAYMENT_LINK } from "@/lib/payment";
 import CoursePaymentButton from "@/components/CoursePaymentButton";
 import Link from "next/link";
@@ -49,15 +50,24 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
              <div className="flex items-center gap-2"><span className="text-lg font-bold">{course.enrollmentCount}</span> Students</div>
           </div>
 
-          {/* Video Placeholder / Asset */}
-          <div className="w-full max-w-4xl aspect-video bg-muted rounded-[2rem] border border-border shadow-2xl overflow-hidden relative group cursor-pointer mb-12">
-            <img src={course.image} alt={course.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-colors group-hover:bg-black/20">
-              <div className="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                <PlayCircle className="w-10 h-10 ml-1" />
+          {course.videoUrl ? (
+            <div className="w-full max-w-4xl mb-12">
+              <VideoPlayer 
+                videoUrl={course.videoUrl} 
+                thumbnail={course.image} 
+                title={course.title} 
+              />
+            </div>
+          ) : (
+            <div className="w-full max-w-4xl aspect-video bg-muted rounded-[2rem] border border-border shadow-2xl overflow-hidden relative group cursor-pointer mb-12">
+              <img src={course.image} alt={course.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-colors group-hover:bg-black/20">
+                <div className="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                  <PlayCircle className="w-10 h-10 ml-1" />
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-muted-foreground text-sm font-medium">
              <div className="flex items-center gap-2"><Clock className="w-4 h-4"/> <span>{course.duration}</span></div>

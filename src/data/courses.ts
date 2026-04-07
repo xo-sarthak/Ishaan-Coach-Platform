@@ -29,6 +29,7 @@ export interface CourseData {
   pricing: PricingPlan[];
   faqs: { question: string; answer: string }[];
   vimeoId?: string;
+  videoUrl?: string;
 }
 
 const DEFAULT_PRICING: PricingPlan[] = [
@@ -101,6 +102,7 @@ export const COURSES: CourseData[] = [
     duration: "90 Minutes",
     description: "Jab sirf tum dete ho… aur partner lena bhool jaata hai. 90 minutes that can change everything. In Hindi.",
     vimeoId: "76979871",
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     problems: [
       "Jab sirf tum dete ho… aur partner lena bhool jaata hai.",
       "Mujhe lagta tha ki main hi zyada sochti hoon, zyada feel karti hoon.",
@@ -173,6 +175,7 @@ export const COURSES: CourseData[] = [
       { name: "Mayank K.", text: "Everyone talks about clarity, but no one gives you a framework. This course gave me a framework to measure my exact progress." },
       { name: "Sneha A.", text: "Highly recommend this course. I was feeling stuck in my 30s and this gave me an entirely new perspective on my life's direction." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -204,6 +207,7 @@ export const COURSES: CourseData[] = [
       { name: "David M.", text: "This course stopped me from repeating the same relationship mistakes I've made for the last 5 years." },
       { name: "Sarah J.", text: "An absolute game-changer. The communication module alone was worth 10x the price of the basic plan." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -235,6 +239,7 @@ export const COURSES: CourseData[] = [
       { name: "John D.", text: "I've read Atomic Habits, but this course actually forced me to implement the systems. The difference is night and day." },
       { name: "Emily Chen", text: "Productivity used to mean stress to me. Now it just feels like flowing through my daily checklist. Thank you!" }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -264,6 +269,7 @@ export const COURSES: CourseData[] = [
     testimonials: [
       { name: "Mark S.", text: "As a chronic introvert, this was exactly what I needed. Practical tools without trying to change who I am." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -293,6 +299,7 @@ export const COURSES: CourseData[] = [
     testimonials: [
       { name: "Samantha P.", text: "I finally asked for that promotion and got it. This course paid for itself 100x over." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -322,6 +329,7 @@ export const COURSES: CourseData[] = [
     testimonials: [
       { name: "Brian L.", text: "My relationship with my spouse has completely changed. I listen better and react calmly. Incredible." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -353,6 +361,7 @@ export const COURSES: CourseData[] = [
       { name: "Abhishek K.", text: "This course has empowered me to make informed decisions with confidence regarding my financial future." },
       { name: "Joshua B.", text: "The course simplified complex concepts into actionable steps. I now feel in control of my finances." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -382,6 +391,7 @@ export const COURSES: CourseData[] = [
     testimonials: [
       { name: "Claire F.", text: "This literally pulled me out of the darkest months of my life. Thank you for this guidance." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -411,6 +421,7 @@ export const COURSES: CourseData[] = [
     testimonials: [
       { name: "Marcus T.", text: "A fresh perspective. I feel untouchable by office politics now." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   },
@@ -440,6 +451,7 @@ export const COURSES: CourseData[] = [
     testimonials: [
       { name: "Chloe M.", text: "Transitioned from Marketing to Tech Sales in 3 months using these exact frameworks." }
     ],
+    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     pricing: DEFAULT_PRICING,
     faqs: DEFAULT_FAQS
   }
