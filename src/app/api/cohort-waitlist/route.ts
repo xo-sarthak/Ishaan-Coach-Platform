@@ -9,7 +9,23 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Email and Cohort ID are required' }, { status: 400 });
     }
 
-    // Insert into Supabase table
+    // 1. Check if user is already on the list for this specific cohort
+    const { data: existingEntry, error: checkError } = await supabase
+      .from('cohort_waitlist')
+      .select('id')
+      .eq('email', email)
+      .eq('cohort_id', cohortId)
+      .single();
+
+    if (existingEntry) {
+      return NextResponse.json({ 
+        success: true, 
+        alreadyRegistered: true,
+        message: 'User already on the waitlist' 
+      });
+    }
+
+    // 2. Insert into Supabase table if not already there
     const { error } = await supabase
       .from('cohort_waitlist')
       .insert([

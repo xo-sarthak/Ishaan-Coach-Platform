@@ -12,6 +12,7 @@ export function CohortWaitlistForm({ cohortId, cohortTitle }: CohortWaitlistForm
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isAlreadyRegistered, setIsAlreadyRegistered] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,10 +27,13 @@ export function CohortWaitlistForm({ cohortId, cohortTitle }: CohortWaitlistForm
         body: JSON.stringify({ email, cohortId, cohortTitle }),
       });
 
+      const data = await response.json();
       if (response.ok) {
+        if (data.alreadyRegistered) {
+          setIsAlreadyRegistered(true);
+        }
         setIsSuccess(true);
       } else {
-        const data = await response.json();
         alert(data.error || "Something went wrong. Please try again.");
       }
     } catch (error) {
@@ -46,12 +50,24 @@ export function CohortWaitlistForm({ cohortId, cohortTitle }: CohortWaitlistForm
         <div className="w-20 h-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
           <CheckCircle2 className="w-10 h-10" />
         </div>
-        <h3 className="text-3xl font-black mb-4 tracking-tight">You're on the list!</h3>
+        <h3 className="text-3xl font-black mb-4 tracking-tight">
+          {isAlreadyRegistered ? "Already Registered!" : "You're on the list!"}
+        </h3>
         <p className="text-lg text-muted-foreground font-medium leading-relaxed">
-          We'll notify you at <br />
-          <span className="text-foreground font-bold block my-2">{email}</span> 
-          as soon as enrollment opens for <br />
-          <span className="text-primary font-bold italic">{cohortTitle}</span>.
+          {isAlreadyRegistered ? (
+            <>
+              We've already got your details for <br />
+              <span className="text-primary font-bold italic">{cohortTitle}</span>. <br />
+              <span className="text-foreground font-bold block mt-3">We're looking forward to having you!</span>
+            </>
+          ) : (
+            <>
+              We'll notify you at <br />
+              <span className="text-foreground font-bold block my-2">{email}</span> 
+              as soon as enrollment opens for <br />
+              <span className="text-primary font-bold italic">{cohortTitle}</span>.
+            </>
+          )}
         </p>
       </div>
     );
