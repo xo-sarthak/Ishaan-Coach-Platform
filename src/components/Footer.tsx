@@ -98,16 +98,33 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-6">
           {/* Brand Section */}
-          <div className="lg:col-span-2 space-y-6">
-            <Link 
-              href="/" 
-              className="text-2xl font-serif tracking-tight text-foreground hover:opacity-80 transition-opacity"
-            >
-              Ishaan Singh
-            </Link>
-            <p className="text-sm text-muted-foreground/80 max-w-xs leading-relaxed">
-              &copy; {currentYear} Ishaan Singh. All rights reserved.
-            </p>
+          <div className="lg:col-span-2 space-y-8">
+            <div className="space-y-4">
+              <Link 
+                href="/" 
+                className="text-2xl font-serif tracking-tight text-foreground hover:opacity-80 transition-opacity"
+              >
+                Ishaan Singh
+              </Link>
+              <p className="text-sm text-muted-foreground/80 max-w-xs leading-relaxed">
+                &copy; {currentYear} Ishaan Singh. All rights reserved.
+              </p>
+            </div>
+
+            {/* Support / Help Section */}
+            <div className="space-y-2">
+               <p className="text-sm text-foreground/80 font-medium leading-relaxed">
+                  For any queries or collaborations, reach out to:
+                  <br />
+                  <a 
+                    href="mailto:hello@ishaanlive.in" 
+                    className="text-lg font-bold text-primary hover:text-foreground transition-colors underline decoration-primary/20 underline-offset-8"
+                  >
+                    hello@ishaanlive.in
+                  </a>
+               </p>
+            </div>
+
             <div className="flex flex-wrap gap-3 pt-2">
               {SOCIAL_LINKS.map((social) => (
                 <a
