@@ -3,7 +3,8 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, ShieldCheck, Lock, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { Loader2, ShieldCheck, Lock, ArrowRight, CheckCircle2, Sparkles, UserPlus, LogIn } from "lucide-react";
+import { supabase } from "@/lib/supabaseClient";
 
 function OnboardingContent() {
   const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ function OnboardingContent() {
   const [onboardingData, setOnboardingData] = useState<{ email: string; userExists: boolean } | null>(null);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [errorDetails, setErrorDetails] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
@@ -66,12 +68,27 @@ function OnboardingContent() {
       const data = await res.json();
 
       if (res.ok) {
+        // After server-side work is done, we MUST sign in on the client-side
+        // to establish the persistent browser session (cookies/localStorage)
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: data.email || onboardingData?.email || "",
+          password: password,
+        });
+
+        if (signInError) {
+          console.error("Client-side login failed:", signInError);
+          setError("Purchase linked, but we couldn't log you in automatically. Please try the standard login page.");
+          setIsSubmitting(false);
+          return;
+        }
+
         setIsSuccess(true);
         setTimeout(() => {
           router.push("/my-purchases");
         }, 1500);
       } else {
         setError(data.error || "Failed to complete onboarding.");
+        setErrorDetails(data.details || "");
       }
     } catch (err) {
       setError("Connection error. Please try again.");
@@ -96,7 +113,14 @@ function OnboardingContent() {
           <Lock className="w-10 h-10" />
         </div>
         <h1 className="text-3xl font-black mb-4 tracking-tight">Access Restricted</h1>
-        <p className="text-slate-500 max-w-sm mb-8 font-medium">{error}</p>
+        <p className="text-slate-500 max-w-sm mb-4 font-medium">{error}</p>
+        
+        {errorDetails && (
+          <div className="mb-8 p-4 bg-slate-100 rounded-xl text-left border border-slate-200 w-full max-w-md">
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Error Details</p>
+            <code className="text-xs text-slate-600 break-all">{errorDetails}</code>
+          </div>
+        )}
         <button 
           onClick={() => router.push("/auth")}
           className="px-8 py-3 bg-primary text-primary-foreground rounded-2xl font-bold transition-all hover:scale-105"

@@ -7,8 +7,12 @@ import { Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function AuthPage() {
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+
+function AuthContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,15 +20,17 @@ export default function AuthPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
+  const destination = searchParams.get("redirectTo") || "/my-purchases";
+
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        router.replace("/");
+        router.replace(destination);
       }
     };
     checkSession();
-  }, [router]);
+  }, [router, destination]);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
@@ -32,7 +38,7 @@ export default function AuthPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin + "/",
+        redirectTo: window.location.origin + destination,
       },
     });
 
@@ -56,23 +62,21 @@ export default function AuthPage() {
       if (error) {
         setErrorMsg(error.message);
       } else {
-        router.push("/");
+        router.push(destination);
       }
     } else {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: typeof window !== "undefined" ? window.location.origin + "/" : "/",
+          emailRedirectTo: typeof window !== "undefined" ? window.location.origin + destination : destination,
         },
       });
       if (error) {
         setErrorMsg(error.message);
       } else if (data.session) {
-        // If email confirmation is off, Supabase logs them in immediately.
-        router.push("/");
+        router.push(destination);
       } else {
-        // If confirmation is on, session will be null here.
         setSuccessMsg("Check your email for the confirmation link!");
       }
     }
@@ -203,5 +207,17 @@ export default function AuthPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[80vh]">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+      </div>
+    }>
+      <AuthContent />
+    </Suspense>
   );
 }

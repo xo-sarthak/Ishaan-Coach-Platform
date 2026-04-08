@@ -59,8 +59,9 @@ export async function POST(req: Request) {
     }
 
     // 3. Link purchase to this user ID
-    // We get the courseId from onboardingData
     const course_id = onboardingData.course_id;
+    const razorpay_payment_id = onboardingData.razorpay_payment_id;
+    const razorpay_order_id = onboardingData.razorpay_order_id;
 
     const { error: purchaseError } = await supabaseAdmin
       .from('purchases')
@@ -69,14 +70,17 @@ export async function POST(req: Request) {
           user_id: userId, 
           email: email.toLowerCase(), 
           course_id: course_id,
-          // We don't have the razorpay_payment_id here, but we have the link to the user
+          razorpay_payment_id,
+          razorpay_order_id
         }
       ], { onConflict: 'user_id,course_id' });
 
     if (purchaseError) {
       console.error('Error recording purchase:', purchaseError);
-      // We don't necessarily block onboarding completion if this logging fails, 
-      // but the user might not see the course in their dashboard immediately.
+      return NextResponse.json({ 
+        error: 'Failed to record your purchase in our database. Please contact support.', 
+        details: purchaseError.message 
+      }, { status: 500 });
     }
 
     // 4. Mark token as used
@@ -87,6 +91,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ 
       success: true, 
+      email: email,
       message: isExistingUser ? 'Welcome back! Redirecting to your dashboard...' : 'Account created! Redirecting to your dashboard...' 
     }, { status: 200 });
 

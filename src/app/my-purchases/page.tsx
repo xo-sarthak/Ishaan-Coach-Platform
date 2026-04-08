@@ -11,6 +11,8 @@ export default function MyPurchases() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [purchasedCourses, setPurchasedCourses] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [unmatchedCount, setUnmatchedCount] = useState(0);
 
   useEffect(() => {
     const fetchPurchases = async () => {
@@ -20,22 +22,33 @@ export default function MyPurchases() {
           return;
       }
 
-      const { data, error } = await supabase
+      const { data, error: fetchError } = await supabase
         .from("purchases")
         .select("course_id, created_at")
         .eq("user_id", session.user.id);
         
-      if (data) {
+      if (fetchError) {
+        console.error("Error fetching purchases:", fetchError);
+        setError(fetchError.message);
+      } else if (data) {
         // Hydrate data from the COURSES constant using the stored ID
-        const matched = data.map(purchase => {
+        const matched: any[] = [];
+        let unmatched = 0;
+
+        data.forEach(purchase => {
            const courseInfo = COURSES.find(c => c.id === purchase.course_id || c.slug === purchase.course_id);
-           return {
-               ...courseInfo,
-               purchaseDate: new Date(purchase.created_at).toLocaleDateString()
+           if (courseInfo) {
+               matched.push({
+                   ...courseInfo,
+                   purchaseDate: new Date(purchase.created_at).toLocaleDateString()
+               });
+           } else {
+               unmatched++;
            }
-        }).filter(c => c.id); // removes undefined matches
+        });
         
         setPurchasedCourses(matched);
+        setUnmatchedCount(unmatched);
       }
       setLoading(false);
     };
@@ -48,6 +61,21 @@ export default function MyPurchases() {
       <div className="max-w-6xl mx-auto px-6">
         <h1 className="text-4xl md:text-5xl font-black mb-4">My Purchases</h1>
         <p className="text-xl text-muted-foreground mb-12">Resume your masterclasses and access your private materials.</p>
+
+        {error && (
+            <div className="mb-8 p-6 bg-red-50 border border-red-200 rounded-2xl text-red-700">
+                <h3 className="font-bold text-lg mb-2">Database Error</h3>
+                <p className="opacity-80 mb-4">{error}</p>
+                <p className="text-sm font-medium">This usually means your account lacks permissions (RLS) to view the purchases table. Please run the SQL policy provided by the developer.</p>
+            </div>
+        )}
+
+        {unmatchedCount > 0 && (
+             <div className="mb-8 p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 text-sm flex items-center gap-3">
+                <span className="text-lg">⚠️</span>
+                <p>Found <strong>{unmatchedCount}</strong> purchase(s) in your account that don't match any current course IDs. This might be due to a recent ID change.</p>
+             </div>
+        )}
 
         {loading ? (
             <div className="py-20 flex justify-center">

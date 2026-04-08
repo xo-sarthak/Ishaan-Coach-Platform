@@ -60,30 +60,24 @@ const GIFTS: CarouselItem[] = [
 ];
 
 export default function Home() {
-  const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
 
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section */}
-      <section className="w-full max-w-5xl mx-auto px-6 pt-32 pb-24 text-center">
-        <motion.h1
-          initial="hidden" animate="visible" variants={fadeUp}
-          className="text-5xl md:text-7xl font-bold font-serif tracking-tight text-foreground"
-        >
-          Master your <span className="text-primary pr-1">life</span> & <br className="hidden md:block" /> your <span className="text-primary pr-1">relationships</span>.
-        </motion.h1>
-
-        <motion.p
+      {/* Hero Section */}
+      <section className="w-full bg-[#000000] flex flex-col items-center justify-center overflow-hidden">
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="mt-6 text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+          transition={{ duration: 1 }}
+          className="w-full max-w-[1920px] flex justify-center"
         >
-          Practical advice, intensive cohorts, and personalized coaching to help you build the clarity and discipline you need to thrive.
-        </motion.p>
+          <img
+            src="/images/hero-trial3.png"
+            alt="Ishaan Singh"
+            className="w-full h-auto"
+          />
+        </motion.div>
       </section>
 
       {/* About Section */}

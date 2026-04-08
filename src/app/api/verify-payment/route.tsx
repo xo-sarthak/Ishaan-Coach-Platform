@@ -63,6 +63,8 @@ export async function POST(req: Request) {
         token: magicToken,
         email,
         course_id: courseId,
+        razorpay_payment_id,
+        razorpay_order_id,
         expires_at: expiresAt.toISOString()
       }]);
 
