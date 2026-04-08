@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
-import { supabase } from '@/lib/supabaseClient';
+import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 import { COURSES } from '@/data/courses';
 
 export async function POST(req: Request) {
+  const supabaseAdmin = getSupabaseAdmin();
   try {
     const body = await req.json();
     const { courseId, email } = body;
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
     const order = await razorpay.orders.create(orderOptions);
 
     // 5. Store intent in Supabase (Pending Orders)
-    const { error: dbError } = await supabase
+    const { error: dbError } = await supabaseAdmin
       .from('pending_orders')
       .insert([
         {

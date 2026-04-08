@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabaseClient';
+import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 export async function POST(req: Request) {
+  const supabaseAdmin = getSupabaseAdmin();
   try {
     const { email, courseId } = await req.json();
 
@@ -10,7 +11,7 @@ export async function POST(req: Request) {
     }
 
     // Check if the user already has a purchase record for this course
-    const { data: purchase, error } = await supabase
+    const { data: purchase, error } = await supabaseAdmin
       .from('purchases')
       .select('*')
       .eq('email', email.toLowerCase())

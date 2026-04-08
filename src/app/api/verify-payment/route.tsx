@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import { supabase } from '@/lib/supabaseClient';
+import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 import { resend } from '@/lib/resend';
 import { COURSES } from '@/data/courses';
 import { COHORTS } from '@/data/cohorts';
 import { CohortWelcomeEmailTemplate } from '@/components/EmailTemplates';
 
 export async function POST(req: Request) {
+  const supabaseAdmin = getSupabaseAdmin();
   try {
     const body = await req.json();
     const {
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
     console.log('✅ Signature verified for:', email);
 
     // 2. Update Database: Mark Pending Order as Paid
-    await supabase
+    await supabaseAdmin
       .from('pending_orders')
       .update({ status: 'paid', updated_at: new Date().toISOString() })
       .eq('razorpay_order_id', razorpay_order_id);
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
     const expiresAt = new Date();
     expiresAt.setHours(expiresAt.getHours() + 24); // 24 hour expiry
 
-    await supabase
+    await supabaseAdmin
       .from('onboarding_tokens')
       .insert([{
         token: magicToken,

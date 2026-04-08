@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const supabaseAdmin = getSupabaseAdmin();
 
     // 1. Find the token in the database
-    const { data: onboardingData, error: tokenError } = await supabase
+    const { data: onboardingData, error: tokenError } = await supabaseAdmin
       .from('onboarding_tokens')
       .select('*')
       .eq('token', token)
