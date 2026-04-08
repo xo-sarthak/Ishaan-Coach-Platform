@@ -129,14 +129,14 @@ function OnboardingContent() {
               <p className="text-slate-500 mb-10 font-medium">
                 We've linked your purchase to <span className="text-foreground font-bold">{onboardingData?.email}</span>. 
                 {onboardingData?.userExists 
-                  ? " Please enter your password to unlock your course." 
-                  : " Please set a password to create your account and start learning."}
+                  ? " Please enter your password to unlock your course and access your dashboard." 
+                  : " Please set a password below to create your account and start learning immediately."}
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">
-                    {onboardingData?.userExists ? "Your Password" : "Set Password"}
+                    {onboardingData?.userExists ? "Confirm Password" : "Set Password"}
                   </label>
                   <div className="relative group">
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
@@ -150,6 +150,15 @@ function OnboardingContent() {
                       className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl pl-12 pr-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
                     />
                   </div>
+                  {onboardingData?.userExists && (
+                    <button 
+                      type="button"
+                      onClick={() => router.push(`/auth?email=${encodeURIComponent(onboardingData.email)}`)}
+                      className="text-xs font-bold text-primary hover:underline ml-1"
+                    >
+                      Forgot password? Login via standard page
+                    </button>
+                  )}
                 </div>
 
                 {error && (
@@ -166,7 +175,7 @@ function OnboardingContent() {
                   {isSubmitting ? (
                     <Loader2 className="w-6 h-6 animate-spin" />
                   ) : (
-                    <>{onboardingData?.userExists ? "Login & Unlock" : "Set Password & Start"} <ArrowRight className="w-5 h-5" /></>
+                    <>{onboardingData?.userExists ? "Login & Unlock Course" : "Create Account & Start Learning"} <ArrowRight className="w-5 h-5" /></>
                   )}
                 </button>
               </form>

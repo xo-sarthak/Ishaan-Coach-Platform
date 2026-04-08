@@ -22,6 +22,29 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isOwned, setIsOwned] = useState(false);
+
+  // Check if user already owns the course
+  useEffect(() => {
+    const checkOwnership = async () => {
+      if (email && email.includes('@') && email.includes('.')) {
+        try {
+          const res = await fetch("/api/check-purchase", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, courseId }),
+          });
+          const data = await res.json();
+          setIsOwned(!!data.owned);
+        } catch (err) {
+          console.error("Error checking ownership:", err);
+        }
+      }
+    };
+
+    const timeoutId = setTimeout(checkOwnership, 500);
+    return () => clearTimeout(timeoutId);
+  }, [email, courseId]);
 
   const item = COURSES.find(c => c.id === courseId || c.slug === courseId) 
              || COHORTS.find(c => c.id === courseId || c.slug === courseId);
@@ -149,19 +172,41 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
                 </div>
               </div>
 
+              {isOwned && (
+                <div className="p-6 bg-emerald-50 border-2 border-emerald-100 rounded-2xl space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white shrink-0">
+                      <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="font-black text-emerald-900 leading-none mb-1">Already Owned!</p>
+                      <p className="text-emerald-700 text-sm font-medium">You've already purchased this course.</p>
+                    </div>
+                  </div>
+                  <Link 
+                    href="/my-purchases" 
+                    className="w-full h-12 bg-emerald-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all shadow-md shadow-emerald-200"
+                  >
+                    Go to My Purchases <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              )}
+
               {error && (
                 <p className="text-red-500 text-sm font-bold bg-red-50 p-4 rounded-xl border border-red-100 italic">
                   {error}
                 </p>
               )}
 
-              <button 
-                type="submit"
-                disabled={isLoading}
-                className="w-full h-16 bg-primary text-primary-foreground rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 shadow-lg shadow-primary/20"
-              >
-                {isLoading ? <Loader2 className="w-6 h-6 animate-spin" /> : <>Continue to Payment <ArrowRight className="w-5 h-5" /></>}
-              </button>
+              {!isOwned && (
+                <button 
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full h-16 bg-primary text-primary-foreground rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 shadow-lg shadow-primary/20"
+                >
+                  {isLoading ? <Loader2 className="w-6 h-6 animate-spin" /> : <>Continue to Payment <ArrowRight className="w-5 h-5" /></>}
+                </button>
+              )}
             </form>
 
             <div className="mt-12 flex items-center justify-center gap-8 border-t border-slate-100 pt-8 text-slate-400">
