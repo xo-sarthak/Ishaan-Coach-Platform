@@ -121,7 +121,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="aspect-square bg-muted rounded-[2.5rem] border border-border overflow-hidden relative shadow-2xl group order-2 md:order-1">
               <Image
-                src="/images/philosophy.png"
+                src="/images/my-philosophy.png"
                 alt="My Philosophy"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"

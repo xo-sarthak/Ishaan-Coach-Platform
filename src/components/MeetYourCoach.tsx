@@ -8,7 +8,7 @@ export const MeetYourCoach = () => {
           <div className="aspect-square rounded-full overflow-hidden relative group bg-transparent">
             {/* Pure image with circular clip and hover scale */}
             <img
-              src="/images/know-coach.png"
+              src="/images/coach.png"
               alt="Ishaan Singh - Coach"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 rounded-full"
             />

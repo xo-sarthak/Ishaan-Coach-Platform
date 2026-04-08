@@ -102,9 +102,13 @@ export default function Footer() {
             <div className="space-y-4">
               <Link 
                 href="/" 
-                className="text-2xl font-serif tracking-tight text-foreground hover:opacity-80 transition-opacity"
+                className="hover:opacity-80 transition-opacity flex items-center"
               >
-                Ishaan Singh
+                <img 
+                  src="/images/ishaan-live-logo-trial.png" 
+                  alt="IshaanLive Logo" 
+                  className="h-16 w-auto"
+                />
               </Link>
               <p className="text-sm text-muted-foreground/80 max-w-xs leading-relaxed">
                 &copy; {currentYear} Ishaan Singh. All rights reserved.
