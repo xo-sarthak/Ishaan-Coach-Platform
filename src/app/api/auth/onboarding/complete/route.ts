@@ -58,11 +58,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'User processing failed' }, { status: 500 });
     }
 
-    // 3. Link purchases to this user ID
-    await supabaseAdmin
+    // 3. Link purchase to this user ID
+    // We get the courseId from onboardingData
+    const course_id = onboardingData.course_id;
+
+    const { error: purchaseError } = await supabaseAdmin
       .from('purchases')
-      .update({ user_id: userId })
-      .eq('email', email);
+      .upsert([
+        { 
+          user_id: userId, 
+          email: email.toLowerCase(), 
+          course_id: course_id,
+          // We don't have the razorpay_payment_id here, but we have the link to the user
+        }
+      ], { onConflict: 'user_id,course_id' });
+
+    if (purchaseError) {
+      console.error('Error recording purchase:', purchaseError);
+      // We don't necessarily block onboarding completion if this logging fails, 
+      // but the user might not see the course in their dashboard immediately.
+    }
 
     // 4. Mark token as used
     await supabaseAdmin
