@@ -7,12 +7,12 @@ export async function POST(req: Request) {
   try {
     const { token, password, isExistingUser } = await req.json();
 
-    if (!token || !password) {
-      return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
+    if (!token) {
+      return NextResponse.json({ error: 'Token is required' }, { status: 400 });
     }
 
     // 1. Verify token and get user email
-    const { data: onboardingData, error: tokenError } = await supabase
+    const { data: onboardingData, error: tokenError } = await supabaseAdmin
       .from('onboarding_tokens')
       .select('*')
       .eq('token', token)
@@ -26,10 +26,19 @@ export async function POST(req: Request) {
     const email = onboardingData.email;
     let userId = null;
 
-    if (isExistingUser) {
-      // 2a. For existing user, we just try to sign in to verify password 
-      // (Normally we'd use regular auth client here, but since this is an onboarding flow 
-      // after a purchase confirmation, we trust the token for email verification).
+    // 2. Check for active session (Passwordless path)
+    if (!password) {
+      const { data: { user: sessionUser }, error: sessionError } = await supabaseAdmin.auth.getUser(
+        req.headers.get('Authorization')?.replace('Bearer ', '') || ""
+      );
+
+      if (!sessionError && sessionUser && sessionUser.email?.toLowerCase() === email.toLowerCase()) {
+        userId = sessionUser.id;
+      } else {
+        return NextResponse.json({ error: 'Session verification failed or password missing.' }, { status: 401 });
+      }
+    } else if (isExistingUser) {
+      // 3a. For existing user with password...
       const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,

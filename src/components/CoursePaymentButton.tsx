@@ -95,13 +95,16 @@ export default function CoursePaymentButton({ courseId, priceStr, className }: C
 
   // If already purchased, show green Access Course button
   if (hasPurchased) {
+    // We remove color-specific classes from className to ensure our emerald theme wins
+    const cleanClassName = className?.replace(/bg-[^\s]+|text-[^\s]+|border-[^\s]+/g, "");
+    
     return (
       <button 
         onClick={handleAccess} 
-        className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 bg-emerald-600 text-white font-bold shadow-lg hover:shadow-emerald-600/40 hover:bg-emerald-700 transition-all hover:scale-[1.02] ${className}`}
+        className={`w-full py-4 rounded-2xl flex items-center justify-center gap-3 bg-emerald-600 text-white font-black shadow-xl shadow-emerald-500/20 hover:bg-emerald-500 hover:scale-[1.03] active:scale-95 transition-all ${cleanClassName}`}
       >
-        <PlayCircle className="w-5 h-5" />
-        Access Course Now
+        <PlayCircle className="w-6 h-6" />
+        Access Content Now
       </button>
     );
   }

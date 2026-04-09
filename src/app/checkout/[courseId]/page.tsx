@@ -7,6 +7,7 @@ import { COHORTS } from "@/data/cohorts";
 import { motion } from "framer-motion";
 import { Loader2, ArrowRight, ShieldCheck, Mail } from "lucide-react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabaseClient";
 
 declare global {
   interface Window {
@@ -24,7 +25,18 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
   const [error, setError] = useState("");
   const [isOwned, setIsOwned] = useState(false);
 
-  // Check if user already owns the course
+  // Initial check for logged-in user
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user?.email) {
+        setEmail(session.user.email);
+      }
+    };
+    checkSession();
+  }, []);
+
+  // Check if user already owns the course (whenever email changes)
   useEffect(() => {
     const checkOwnership = async () => {
       if (email && email.includes('@') && email.includes('.')) {
@@ -39,10 +51,12 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
         } catch (err) {
           console.error("Error checking ownership:", err);
         }
+      } else {
+        setIsOwned(false);
       }
     };
 
-    const timeoutId = setTimeout(checkOwnership, 500);
+    const timeoutId = setTimeout(checkOwnership, 400);
     return () => clearTimeout(timeoutId);
   }, [email, courseId]);
 

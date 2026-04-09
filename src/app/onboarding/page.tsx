@@ -18,6 +18,7 @@ function OnboardingContent() {
   const [error, setError] = useState("");
   const [errorDetails, setErrorDetails] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isAutoLinking, setIsAutoLinking] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -26,28 +27,80 @@ function OnboardingContent() {
       return;
     }
 
-    const verifyToken = async () => {
+    const verifyAndAutoLink = async () => {
       try {
+        // 1. Verify token
         const res = await fetch("/api/auth/onboarding", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token }),
         });
         const data = await res.json();
-        if (res.ok) {
-          setOnboardingData(data);
-        } else {
+        
+        if (!res.ok) {
           setError(data.error || "Invalid or expired link.");
+          setIsLoading(false);
+          return;
+        }
+
+        setOnboardingData(data);
+
+        // 2. Check for active session
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session && session.user.email?.toLowerCase() === data.email.toLowerCase()) {
+          // AUTO-LINK FLOW
+          setIsAutoLinking(true);
+          setIsLoading(false);
+          
+          // Wait a moment for "flow" state
+          await new Promise(r => setTimeout(r, 1500));
+          
+          const completeRes = await fetch("/api/auth/onboarding/complete", {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${session.access_token}`
+            },
+            body: JSON.stringify({ token, isExistingUser: true }),
+          });
+
+          if (completeRes.ok) {
+            setIsSuccess(true);
+            setTimeout(() => router.push("/my-purchases"), 1500);
+          } else {
+            const completeData = await completeRes.json();
+            setError(completeData.error || "Failed to link purchase automatically.");
+            setIsAutoLinking(false);
+          }
+        } else {
+          setIsLoading(false);
         }
       } catch (err) {
         setError("Connection error. Please try again.");
-      } finally {
         setIsLoading(false);
       }
     };
 
-    verifyToken();
-  }, [token]);
+    verifyAndAutoLink();
+  }, [token, router]);
+
+  const handleGoogleLogin = async () => {
+    try {
+      setError("");
+      // Construct the current URL as the return URL, but remove the token if needed
+      // or just redirect back here with the token.
+      const { error: googleError } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.href // Return back here to trigger auto-link
+        }
+      });
+      if (googleError) throw googleError;
+    } catch (err: any) {
+      setError("Google Login failed: " + err.message);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,11 +150,19 @@ function OnboardingContent() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isAutoLinking) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
-        <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse uppercase tracking-widest text-xs">Verifying Access...</p>
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="flex flex-col items-center"
+        >
+          <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
+          <p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
+            {isAutoLinking ? "Linking your purchase... 🚀" : "Verifying Access..."}
+          </p>
+        </motion.div>
       </div>
     );
   }
@@ -151,10 +212,10 @@ function OnboardingContent() {
                 {onboardingData?.userExists ? "Welcome Back! 👋" : "Claim Your Access 🚀"}
               </h1>
               <p className="text-slate-500 mb-10 font-medium">
-                We've linked your purchase to <span className="text-foreground font-bold">{onboardingData?.email}</span>. 
+                We&apos;ve linked your purchase to <span className="text-foreground font-bold">{onboardingData?.email}</span>. 
                 {onboardingData?.userExists 
-                  ? " Please enter your password to unlock your course and access your dashboard." 
-                  : " Please set a password below to create your account and start learning immediately."}
+                  ? " Please enter your password to unlock your course." 
+                  : " Please set a password below to create your account and start learning."}
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -174,15 +235,6 @@ function OnboardingContent() {
                       className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl pl-12 pr-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
                     />
                   </div>
-                  {onboardingData?.userExists && (
-                    <button 
-                      type="button"
-                      onClick={() => router.push(`/auth?email=${encodeURIComponent(onboardingData.email)}`)}
-                      className="text-xs font-bold text-primary hover:underline ml-1"
-                    >
-                      Forgot password? Login via standard page
-                    </button>
-                  )}
                 </div>
 
                 {error && (
@@ -203,6 +255,36 @@ function OnboardingContent() {
                   )}
                 </button>
               </form>
+
+              <div className="relative my-10">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-slate-100"></span>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase tracking-widest font-black text-slate-300">
+                  <span className="bg-white px-4">OR CONTINUE WITH</span>
+                </div>
+              </div>
+
+              <button 
+                type="button"
+                onClick={handleGoogleLogin}
+                className="w-full h-14 bg-white border-2 border-slate-100 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-slate-50 transition-all hover:scale-[1.01] active:scale-[0.98]"
+              >
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
+                {onboardingData?.userExists ? "Login with Google" : "Sign up with Google"}
+              </button>
+
+              {onboardingData?.userExists && (
+                <div className="mt-8 text-center">
+                  <button 
+                    type="button"
+                    onClick={() => router.push(`/auth?email=${encodeURIComponent(onboardingData.email)}`)}
+                    className="text-sm font-bold text-slate-400 hover:text-primary transition-colors"
+                  >
+                    Forgot password? Login via standard page
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         ) : (
