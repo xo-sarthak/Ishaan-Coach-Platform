@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import { Loader2, ArrowRight, PlayCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface CoursePaymentButtonProps {
   courseId: string;
