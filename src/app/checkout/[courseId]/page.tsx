@@ -118,24 +118,6 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
           }
         },
         theme: { color: "#000000" },
-        config: {
-          display: {
-            blocks: {
-              upi_block: {
-                name: 'Pay using UPI / QR',
-                instruments: [
-                  {
-                    method: 'upi'
-                  }
-                ],
-              },
-            },
-            sequence: ['block.upi_block'],
-            preferences: {
-              show_default_blocks: true,
-            },
-          },
-        },
       };
 
       const rzp = new window.Razorpay(options);
