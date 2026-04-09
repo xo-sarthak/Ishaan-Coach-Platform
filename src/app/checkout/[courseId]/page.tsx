@@ -118,6 +118,18 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
           }
         },
         theme: { color: "#000000" },
+        config: {
+          display: {
+            hide: [
+              { method: 'card' },
+              { method: 'netbanking' },
+              { method: 'wallet' }
+            ],
+            preferences: {
+              show_default_blocks: true,
+            },
+          },
+        },
       };
 
       const rzp = new window.Razorpay(options);
