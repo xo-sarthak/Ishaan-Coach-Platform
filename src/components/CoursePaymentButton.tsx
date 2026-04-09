@@ -101,10 +101,16 @@ export default function CoursePaymentButton({ courseId, priceStr, className }: C
     return (
       <button 
         onClick={handleAccess} 
-        className={`w-full py-4 rounded-2xl flex items-center justify-center gap-3 bg-emerald-600 text-white font-black shadow-xl shadow-emerald-500/20 hover:bg-emerald-500 hover:scale-[1.03] active:scale-95 transition-all ${cleanClassName}`}
+        className={`w-full py-4 rounded-2xl flex items-center justify-center gap-3 bg-emerald-600 text-white font-black shadow-xl shadow-emerald-500/30 hover:bg-emerald-500 hover:scale-[1.03] active:scale-95 transition-all relative overflow-hidden group ${cleanClassName}`}
       >
-        <PlayCircle className="w-6 h-6" />
-        Access Content Now
+        <motion.div 
+          initial={{ scale: 1, opacity: 0.5 }}
+          animate={{ scale: 1.5, opacity: 0 }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="absolute inset-0 bg-white rounded-full"
+        />
+        <PlayCircle className="w-6 h-6 z-10" />
+        <span className="z-10 tracking-tight">Access Content Now</span>
       </button>
     );
   }

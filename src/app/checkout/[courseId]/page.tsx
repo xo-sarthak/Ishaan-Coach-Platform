@@ -22,6 +22,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
 
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCheckingOwnership, setIsCheckingOwnership] = useState(false);
   const [error, setError] = useState("");
   const [isOwned, setIsOwned] = useState(false);
 
@@ -40,6 +41,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
   useEffect(() => {
     const checkOwnership = async () => {
       if (email && email.includes('@') && email.includes('.')) {
+        setIsCheckingOwnership(true);
         try {
           const res = await fetch("/api/check-purchase", {
             method: "POST",
@@ -50,9 +52,12 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
           setIsOwned(!!data.owned);
         } catch (err) {
           console.error("Error checking ownership:", err);
+        } finally {
+          setIsCheckingOwnership(false);
         }
       } else {
         setIsOwned(false);
+        setIsCheckingOwnership(false);
       }
     };
 
@@ -90,6 +95,20 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
     setError("");
 
     try {
+      // 0. Final defensive check for ownership to prevent race conditions
+      const checkRes = await fetch("/api/check-purchase", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, courseId: item.id }),
+      });
+      const checkData = await checkRes.json();
+      
+      if (checkData.owned) {
+        setIsOwned(true);
+        setIsLoading(false);
+        return; // BLOCK PAYMENT
+      }
+
       // 1. Create order on backend
       const res = await fetch("/api/create-order", {
         method: "POST",
