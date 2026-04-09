@@ -24,7 +24,7 @@ function PaymentSuccessContent() {
           <CheckCircle2 className="w-12 h-12" />
         </motion.div>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
@@ -33,7 +33,7 @@ function PaymentSuccessContent() {
           Payment Successful! 🚀
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -43,27 +43,27 @@ function PaymentSuccessContent() {
         </motion.p>
 
         {/* Action Card */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5 }}
           className="bg-slate-50 border border-slate-200 rounded-[2.5rem] p-8 md:p-12 mb-12 relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-          
+
           <div className="relative z-10">
             <div className="w-16 h-16 bg-white shadow-md rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Mail className="w-8 h-8 text-primary" />
             </div>
             <h3 className="text-2xl font-black mb-4">Check your Email</h3>
             <p className="text-slate-600 mb-8 font-medium">
-              We've sent a magic link to <span className="text-primary font-bold">{email || "your email"}</span>. 
+              We've sent a magic link to <span className="text-primary font-bold">{email || "your email"}</span>.
               Click the link inside to set your password and access your course.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
-                href="/my-purchases" 
+              <Link
+                href="/my-purchases"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
               >
                 Go to Dashboard <ArrowRight className="w-4 h-4" />
@@ -73,7 +73,7 @@ function PaymentSuccessContent() {
         </motion.div>
 
         {/* Support Section */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -86,8 +86,10 @@ function PaymentSuccessContent() {
               <p className="text-slate-500 text-sm font-medium mb-3">
                 Don't worry, we'll fix it. Take a screenshot of your payment ID and reach out.
               </p>
-              <a 
-                href="mailto:hello@ishaanlive.in" 
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@ishaanlive.in&su=Support Request regarding Course Purchase"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-primary font-bold text-sm hover:underline flex items-center gap-2"
               >
                 Contact Support via Email <Mail className="w-4 h-4" />

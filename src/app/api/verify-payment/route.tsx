@@ -72,7 +72,9 @@ export async function POST(req: Request) {
     const item = COURSES.find(c => c.id === courseId || c.slug === courseId)
       || COHORTS.find(c => c.id === courseId || c.slug === courseId);
 
-    const onboardingUrl = `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/onboarding?token=${magicToken}`;
+    const host = req.headers.get('host') || process.env.NEXT_PUBLIC_SITE_URL?.replace(/^https?:\/\//, '') || 'ishaanlive.in';
+    const protocol = host.includes('localhost') ? 'http' : 'https';
+    const onboardingUrl = `${protocol}://${host}/onboarding?token=${magicToken}`;
 
     if (resend && item) {
       try {
