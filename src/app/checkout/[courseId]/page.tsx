@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { COURSES } from "@/data/courses";
 import { COHORTS } from "@/data/cohorts";
 import { motion } from "framer-motion";
@@ -18,7 +18,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
   const params = use(paramsPromise);
   const router = useRouter();
   const courseId = params.courseId;
-  
+
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -46,8 +46,8 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
     return () => clearTimeout(timeoutId);
   }, [email, courseId]);
 
-  const item = COURSES.find(c => c.id === courseId || c.slug === courseId) 
-             || COHORTS.find(c => c.id === courseId || c.slug === courseId);
+  const item = COURSES.find(c => c.id === courseId || c.slug === courseId)
+    || COHORTS.find(c => c.id === courseId || c.slug === courseId);
 
   useEffect(() => {
     // Load Razorpay script
@@ -69,7 +69,6 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
   // Handle different data structures for Courses vs Cohorts
   const priceDisplay = 'pricing' in item ? item.pricing[0].price : item.price;
   const rawPrice = priceDisplay.replace(/[^0-9]/g, '');
-  const amount = parseInt(rawPrice);
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,6 +118,24 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
           }
         },
         theme: { color: "#000000" },
+        config: {
+          display: {
+            blocks: {
+              upi_block: {
+                name: 'Pay using UPI / QR',
+                instruments: [
+                  {
+                    method: 'upi'
+                  }
+                ],
+              },
+            },
+            sequence: ['block.upi_block'],
+            preferences: {
+              show_default_blocks: true,
+            },
+          },
+        },
       };
 
       const rzp = new window.Razorpay(options);
@@ -134,7 +151,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-xl">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden"
@@ -153,7 +170,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
           <div className="p-8 md:p-12">
             <h2 className="text-2xl font-black mb-4">Complete your purchase</h2>
             <p className="text-slate-500 mb-8 font-medium">
-              Enter the email where you'd like to receive your course access. No login required.
+              Enter the email where you&apos;d like to receive your course access. No login required.
             </p>
 
             <form onSubmit={handlePayment} className="space-y-6">
@@ -161,9 +178,9 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
                 <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">Email Address</label>
                 <div className="relative group">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
-                  <input 
-                    type="email" 
-                    required 
+                  <input
+                    type="email"
+                    required
                     placeholder="Enter your best email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -183,8 +200,8 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
                       <p className="text-emerald-700 text-sm font-medium">You've already purchased this course.</p>
                     </div>
                   </div>
-                  <Link 
-                    href="/my-purchases" 
+                  <Link
+                    href="/my-purchases"
                     className="w-full h-12 bg-emerald-500 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all shadow-md shadow-emerald-200"
                   >
                     Go to My Purchases <ArrowRight className="w-4 h-4" />
@@ -199,7 +216,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
               )}
 
               {!isOwned && (
-                <button 
+                <button
                   type="submit"
                   disabled={isLoading}
                   className="w-full h-16 bg-primary text-primary-foreground rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-primary/90 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 shadow-lg shadow-primary/20"
@@ -219,7 +236,7 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
             </div>
           </div>
         </motion.div>
-        
+
         <p className="text-center mt-8 text-slate-400 text-sm font-medium">
           By continuing, you agree to our <Link href="/terms" className="underline">Terms</Link> and <Link href="/privacy" className="underline">Privacy Policy</Link>
         </p>
