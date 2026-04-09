@@ -86,14 +86,10 @@ function PaymentSuccessContent() {
               <p className="text-slate-500 text-sm font-medium mb-3">
                 Don't worry, we'll fix it. Take a screenshot of your payment ID and reach out.
               </p>
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@ishaanlive.in&su=Support Request regarding Course Purchase"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary font-bold text-sm hover:underline flex items-center gap-2"
-              >
-                Contact Support via Email <Mail className="w-4 h-4" />
-              </a>
+              <div className="mt-2 p-3 bg-white border border-slate-200 rounded-xl flex items-center justify-between group shadow-sm">
+                <span className="text-primary font-black text-base select-all tracking-tight">hello@ishaanlive.in</span>
+                <Mail className="w-4 h-4 text-slate-300 group-hover:text-primary transition-colors" />
+              </div>
             </div>
           </div>
 
