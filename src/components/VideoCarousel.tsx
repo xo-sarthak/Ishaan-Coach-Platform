@@ -69,8 +69,6 @@ export function VideoCarousel() {
     });
   };
 
-  if (!isLoading && videos.length === 0) return null;
-
   return (
     <section 
       className="w-full bg-[#FAFAFA] dark:bg-card border-y border-border/40 py-24 overflow-hidden focus:outline-none"
@@ -92,10 +90,10 @@ export function VideoCarousel() {
             </p>
           </div>
           <div className="hidden md:flex items-center gap-2">
-            <button onClick={() => scroll("left")} aria-label="Scroll videos left" className="p-2.5 rounded-full border border-border bg-card hover:bg-muted transition-colors text-foreground shadow-sm">
+            <button onClick={() => scroll("left")} disabled={videos.length === 0} aria-label="Scroll videos left" className="p-2.5 rounded-full border border-border bg-card hover:bg-muted transition-colors text-foreground shadow-sm disabled:opacity-50">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={() => scroll("right")} aria-label="Scroll videos right" className="p-2.5 rounded-full border border-border bg-card hover:bg-muted transition-colors text-foreground shadow-sm">
+            <button onClick={() => scroll("right")} disabled={videos.length === 0} aria-label="Scroll videos right" className="p-2.5 rounded-full border border-border bg-card hover:bg-muted transition-colors text-foreground shadow-sm disabled:opacity-50">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -112,7 +110,7 @@ export function VideoCarousel() {
             [...Array(4)].map((_, i) => (
               <div key={i} className="flex-none w-[280px] sm:w-[320px] aspect-[9/16] bg-muted animate-pulse rounded-3xl" />
             ))
-          ) : (
+          ) : videos.length > 0 ? (
             videos.map((video) => (
               <a
                 key={video.external_id}
@@ -161,6 +159,16 @@ export function VideoCarousel() {
                 </div>
               </a>
             ))
+          ) : (
+            <div className="w-full py-12 flex flex-col items-center justify-center border-2 border-dashed border-border rounded-3xl bg-muted/20">
+              <p className="text-muted-foreground mb-4">Latest videos temporarily unavailable.</p>
+              <button 
+                onClick={() => window.location.reload()} 
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                Try Refreshing
+              </button>
+            </div>
           )}
         </div>
       </div>

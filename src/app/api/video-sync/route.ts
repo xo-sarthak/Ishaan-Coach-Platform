@@ -69,6 +69,28 @@ export async function GET() {
 
   } catch (error: any) {
     console.error('Sync error:', error);
+    
+    // LAST RESORT: Try to get whatever we have in the DB, even if stale
+    try {
+      const supabase = getSupabaseAdmin();
+      const { data: cachedVideos } = await supabase
+        .from('social_videos')
+        .select('*')
+        .eq('platform', 'youtube')
+        .order('published_at', { ascending: false })
+        .limit(10);
+
+      if (cachedVideos && cachedVideos.length > 0) {
+        return NextResponse.json({ 
+          success: true, 
+          source: 'error_fallback',
+          data: cachedVideos 
+        });
+      }
+    } catch (fallbackError) {
+      console.error('Fallback error:', fallbackError);
+    }
+
     return NextResponse.json({ 
       success: false, 
       error: error.message 
