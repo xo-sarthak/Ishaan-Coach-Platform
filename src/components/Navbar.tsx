@@ -49,10 +49,21 @@ export default function Navbar() {
     await supabase.auth.signOut();
   };
 
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-card/80 border-b border-border/40">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="hover:opacity-80 transition-opacity">
+        <Link 
+          href="/" 
+          onClick={handleHomeClick}
+          className="hover:opacity-80 transition-opacity"
+        >
           <img
             src="/images/ishaan-live-logo-trial.png"
             alt="IshaanLive Logo"
