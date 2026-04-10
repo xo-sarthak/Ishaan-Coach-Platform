@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const SOCIAL_LINKS = [
   {
     name: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/ishaan_live/",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -14,7 +17,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "YouTube",
-    href: "#",
+    href: "https://www.youtube.com/@ishaanlive25/featured",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path>
@@ -24,7 +27,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Twitter",
-    href: "#",
+    href: "https://x.com/MehrIshaan",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
         <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
@@ -33,7 +36,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Substack",
-    href: "#",
+    href: "https://substack.com/@ishaansinghlive?utm_campaign=profile&utm_medium=profile-page",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
         <path d="M22.539 8.242H1.46V5.406h21.078v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.078V0z" />
@@ -42,7 +45,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/share/1EaTaFZeGQ/",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
@@ -92,6 +95,14 @@ const FOOTER_COLUMNS = [
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <footer className="w-full border-t border-border/40 mt-12 mb-12 bg-white/50 dark:bg-card/50">
@@ -100,13 +111,14 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-8">
             <div className="space-y-4">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
+                onClick={handleHomeClick}
                 className="hover:opacity-80 transition-opacity flex items-center"
               >
-                <img 
-                  src="/images/ishaan-live-logo-trial.png" 
-                  alt="IshaanLive Logo" 
+                <img
+                  src="/images/ishaan-live-logo-trial.png"
+                  alt="IshaanLive Logo"
                   className="h-16 w-auto"
                 />
               </Link>
@@ -117,16 +129,16 @@ export default function Footer() {
 
             {/* Support / Help Section */}
             <div className="space-y-2">
-               <p className="text-sm text-foreground/80 font-medium leading-relaxed">
-                  For any queries or collaborations, reach out to:
-                  <br />
-                  <a 
-                    href="mailto:hello@ishaanlive.in" 
-                    className="text-lg font-bold text-primary hover:text-foreground transition-colors underline decoration-primary/20 underline-offset-8"
-                  >
-                    hello@ishaanlive.in
-                  </a>
-               </p>
+              <p className="text-sm text-foreground/80 font-medium leading-relaxed">
+                For any queries or collaborations, reach out to:
+                <br />
+                <a
+                  href="mailto:hello@ishaanlive.in"
+                  className="text-lg font-bold text-primary hover:text-foreground transition-colors underline decoration-primary/20 underline-offset-8"
+                >
+                  hello@ishaanlive.in
+                </a>
+              </p>
             </div>
 
             <div className="flex flex-wrap gap-3 pt-2">
@@ -154,6 +166,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
+                      onClick={link.href === "/" ? handleHomeClick : undefined}
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                     >
                       {link.name}
