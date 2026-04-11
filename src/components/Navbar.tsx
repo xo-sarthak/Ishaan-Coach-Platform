@@ -59,8 +59,8 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-card/80 border-b border-border/40">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           onClick={handleHomeClick}
           className="hover:opacity-80 transition-opacity"
         >
@@ -106,6 +106,13 @@ export default function Navbar() {
             <div className="hidden sm:flex w-[72px] h-9 bg-muted animate-pulse rounded-md items-center justify-center" />
           )}
 
+          <Link
+            href="/contact"
+            className="hidden sm:inline-flex h-9 items-center justify-center rounded-md border border-primary text-primary px-4 py-2 text-sm font-bold transition-all hover:bg-primary/5 active:scale-95"
+          >
+            Contact Us
+          </Link>
+
           {/* Mobile Menu Toggle Button */}
           <button
             className="lg:hidden p-2 text-foreground -mr-2"
@@ -138,8 +145,13 @@ export default function Navbar() {
               </Link>
             )}
 
-            {/* Mobile Auth Button */}
-            <div className="py-4 sm:hidden">
+            <div className="py-4 sm:hidden flex flex-col gap-3">
+              <Link
+                href="/contact"
+                className="w-full h-10 inline-flex items-center justify-center rounded-md border border-primary text-primary px-4 py-2 text-sm font-bold transition-all hover:bg-primary/5 active:scale-95"
+              >
+                Contact Us
+              </Link>
               {mounted && (
                 user ? (
                   <button

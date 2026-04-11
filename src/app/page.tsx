@@ -225,6 +225,7 @@ export default function Home() {
         </div>
       </section>
 
+
       <ResourceCarousel
         title="Free Resources"
         description="Templates, guides, and ebooks to kickstart your journey."
