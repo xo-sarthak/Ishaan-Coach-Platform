@@ -128,7 +128,7 @@ export const COURSES: CourseData[] = [
         id: "masterclass",
         name: "Masterclass Entry",
         subtitle: "Full Access",
-        price: "₹999",
+        price: "₹5",
         features: [
           { name: "90-minute recorded Video masterclass", included: true },
           { name: "Full recording access — life time ke liye", included: true },
