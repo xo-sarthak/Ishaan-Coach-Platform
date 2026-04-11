@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "919999913516";
+const WHATSAPP_NUMBER = "";
 const DEFAULT_MESSAGE = "Hi, I came from your website and want to know more.";
 
 export function getWhatsAppLink() {
