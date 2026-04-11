@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../**/*.{ts,tsx}";
+
 
 :root {
   --background: #fdfbf7; /* Warm high-end white */

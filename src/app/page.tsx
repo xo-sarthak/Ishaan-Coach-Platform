@@ -12,6 +12,7 @@ import Image from "next/image";
 import { COURSES as GLOBAL_COURSES } from "@/data/courses";
 import { RESOURCES as GLOBAL_RESOURCES } from "@/data/resources";
 import { COHORTS as GLOBAL_COHORTS } from "@/data/cohorts";
+import { BOOKS as GLOBAL_BOOKS } from "@/data/books";
 
 // Mapped for the carousel
 const COURSES: CarouselItem[] = GLOBAL_COURSES.map(c => ({
@@ -42,12 +43,15 @@ const RESOURCES: CarouselItem[] = GLOBAL_RESOURCES.map(r => ({
 }));
 
 const BOOKS: CarouselItem[] = [
-  { id: "b1", title: "Make Epic Money", subtitle: "By Ankur Warikoo", image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=600&auto=format&fit=crop", link: "/book-recommendations", tag: "Finance" },
-  { id: "b2", title: "Atomic Habits", subtitle: "By James Clear", image: "https://images.unsplash.com/photo-1589998059171-98c98c1503c9?q=80&w=600&auto=format&fit=crop", link: "/book-recommendations", tag: "Productivity" },
-  { id: "b3", title: "The Psychology of Money", subtitle: "By Morgan Housel", image: "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=600&auto=format&fit=crop", link: "/book-recommendations", tag: "Finance" },
-  { id: "b4", title: "Man's Search for Meaning", subtitle: "By Viktor Frankl", image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop", link: "/book-recommendations", tag: "Philosophy" },
-  { id: "b5", title: "Deep Work", subtitle: "By Cal Newport", image: "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?q=80&w=600&auto=format&fit=crop", link: "/book-recommendations", tag: "Focus" },
-  { id: "b6", title: "Thinking, Fast and Slow", subtitle: "By Daniel Kahneman", image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=600&auto=format&fit=crop", link: "/book-recommendations", tag: "Psychology" },
+  // Picking one strong book from each category for the homepage
+  ...GLOBAL_BOOKS.filter(b => ["prod-1", "money-1", "rel-1", "mind-1", "bio-1", "bio-2"].includes(b.id)).map(b => ({
+    id: b.id,
+    title: b.title,
+    subtitle: `By ${b.author}`,
+    image: b.image,
+    link: "/book-recommendations",
+    tag: b.tag
+  }))
 ];
 
 const GIFTS: CarouselItem[] = [
