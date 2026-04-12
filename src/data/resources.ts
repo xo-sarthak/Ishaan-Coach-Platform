@@ -14,9 +14,9 @@ export interface ResourceData {
 export const RESOURCES: ResourceData[] = [
   {
     id: "r1",
-    slug: "the-failure-resume-template",
-    title: "The Failure Resume Template",
-    subtitle: "Reframe your losses",
+    slug: "the-long-distance-relationship-survival-kit",
+    title: "The Long Distance Relationship Survival Kit",
+    subtitle: "How to make long distance easy",
     tag: "Template",
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=600&auto=format&fit=crop",
     description: "A printable template designed to help you document and reframe your biggest professional and personal failures into actionable growth vectors.",

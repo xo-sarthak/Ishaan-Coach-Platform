@@ -96,7 +96,8 @@ export default function Home() {
                 fill
                 className="object-cover rounded-[2.5rem]"
                 priority
-                quality={100}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={95}
               />
             </div>
           </div>
