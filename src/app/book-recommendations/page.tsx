@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BOOKS, Book } from "@/data/books";
 
 const CATEGORIES = [
-  { id: "All", label: "All Books", icon: LayoutGrid },
+  { id: "All", label: "Books", icon: LayoutGrid },
   { id: "Productivity", label: "Productivity", icon: Zap },
   { id: "Money", label: "Money", icon: DollarSign },
   { id: "Relationships", label: "Relationships", icon: Heart },
@@ -16,7 +16,7 @@ const CATEGORIES = [
 ];
 
 const LANGUAGES = [
-  { id: "All", label: "All Languages" },
+  { id: "All", label: "Languages" },
   { id: "English", label: "English" },
   { id: "Hindi", label: "Hindi" },
 ];
@@ -175,17 +175,18 @@ export default function BookRecommendationsPage() {
               ))}
             </div>
 
-            {/* Search Bar */}
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input 
-                type="text"
-                placeholder="Search by title or author..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white dark:bg-card border border-border/60 rounded-2xl pl-12 pr-6 py-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
-              />
-            </div>
+          </div>
+
+          {/* Search Bar on a New Line */}
+          <div className="relative w-full max-w-3xl mx-auto">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B5C]/40" />
+            <input 
+              type="text"
+              placeholder="Search by title or author..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white dark:bg-card border border-border/60 rounded-2xl pl-14 pr-6 py-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-[#2A3B5C]/20 transition-all shadow-sm text-[#2A3B5C] dark:text-white placeholder:text-[#2A3B5C]/40"
+            />
           </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Clock, Calendar, Star } from "lucide-react";
+import { Clock, Calendar, Star, Search } from "lucide-react";
 import { COURSES } from "@/data/courses";
 
 // Get unique tags
@@ -11,10 +11,14 @@ const filters = ["All", ...allTags];
 
 export default function CoursesPage() {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredCourses = activeFilter === "All" 
-    ? COURSES 
-    : COURSES.filter(c => c.tag === activeFilter);
+  const filteredCourses = COURSES.filter(course => {
+    const matchesFilter = activeFilter === "All" || course.tag === activeFilter;
+    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         course.description?.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
 
   return (
     <div className="w-full bg-background min-h-screen pt-32 pb-24">
@@ -33,21 +37,34 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
-          {filters.map(filter => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
-                activeFilter === filter 
-                  ? 'bg-secondary text-[#2A3B5C] shadow-sm transform scale-105' 
-                  : 'bg-white border border-border text-[#2A3B5C]/60 hover:border-[#2A3B5C]/30 hover:text-[#2A3B5C]'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+        {/* Filter & Search Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-16">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+            {filters.map(filter => (
+              <button
+                key={filter}
+                onClick={() => setActiveFilter(filter)}
+                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${
+                  activeFilter === filter 
+                    ? 'bg-secondary text-[#2A3B5C] shadow-sm transform scale-105' 
+                    : 'bg-white border border-border text-[#2A3B5C]/60 hover:border-[#2A3B5C]/30 hover:text-[#2A3B5C]'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative w-full md:w-80 shrink-0 min-w-[280px]">
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#2A3B5C]/40" />
+            <input 
+              type="text"
+              placeholder="Search courses..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white border border-border/60 rounded-full pl-12 pr-6 py-3 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#2A3B5C]/10 transition-all shadow-sm text-[#2A3B5C] placeholder:text-[#2A3B5C]/30"
+            />
+          </div>
         </div>
 
         {/* Grid */}
@@ -62,7 +79,7 @@ export default function CoursesPage() {
               <Link
                 key={course.id}
                 href={`/courses/${course.slug}`}
-                className="group relative bg-white border border-border rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 flex flex-col hover:-translate-y-1"
+                className="group relative bg-white border border-border rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-300 flex flex-col hover:-translate-y-1 no-underline"
               >
                 {/* Image */}
                 <div className="aspect-[4/3] relative bg-muted overflow-hidden mx-3 mt-3 rounded-2xl">
