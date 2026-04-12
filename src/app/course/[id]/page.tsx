@@ -79,7 +79,7 @@ export default function ProtectedCoursePage({ params }: { params: Promise<{ id: 
           {course.vimeoId ? (
             <div className="w-full h-full relative">
               <iframe
-                src={`https://player.vimeo.com/video/${course.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+                src={`https://player.vimeo.com/video/${course.vimeoId}?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479`}
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
                 title={course.title}
@@ -98,17 +98,24 @@ export default function ProtectedCoursePage({ params }: { params: Promise<{ id: 
         </div>
         
         {/* Resources Placeholder */}
-        <div className="p-8 md:p-10 bg-card rounded-[2rem] border border-border flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
-            <div>
-                <h3 className="text-2xl font-bold mb-2 text-foreground">Downloads & Materials</h3>
-                <p className="text-muted-foreground">Access your workbook and assignment guides associated with this masterclass.</p>
-            </div>
-            
-            <button className="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shrink-0">
-                <FileDown className="w-5 h-5" />
-                Download Workbook
-            </button>
-        </div>
+        {course.workbookUrl && (
+          <div className="p-8 md:p-10 bg-card rounded-[2rem] border border-border flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300 fill-mode-both">
+              <div>
+                  <h3 className="text-2xl font-bold mb-2 text-foreground">Downloads & Materials</h3>
+                  <p className="text-muted-foreground">Access your workbook and assignment guides associated with this masterclass.</p>
+              </div>
+              
+              <a 
+                href={course.workbookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full md:w-auto px-8 py-4 bg-primary text-primary-foreground font-bold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shrink-0 shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                  <FileDown className="w-5 h-5" />
+                  Download Workbook
+              </a>
+          </div>
+        )}
       </div>
     </div>
   );

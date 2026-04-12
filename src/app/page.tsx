@@ -80,8 +80,13 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section (Anna Coaching Light Theme) */}
-      <section className="w-full bg-background pt-32 pb-12 overflow-hidden px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 relative">
+      <section className="w-full bg-background pt-20 pb-12 overflow-hidden px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 relative"
+        >
 
           {/* Decorative Floating Circles */}
           <div className="absolute -top-16 -left-16 w-56 h-56 bg-primary rounded-full mix-blend-multiply opacity-60 z-0 hidden md:block" />
@@ -154,7 +159,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Coaching Sessions Section */}

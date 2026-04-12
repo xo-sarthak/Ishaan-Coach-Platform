@@ -30,6 +30,7 @@ export interface CourseData {
   faqs: { question: string; answer: string }[];
   vimeoId?: string;
   videoUrl?: string;
+  workbookUrl?: string;
 }
 
 /*
@@ -94,34 +95,46 @@ const DEFAULT_FAQS = [
 export const COURSES: CourseData[] = [
   {
     id: "c0",
-    slug: "ek-taraf-ka-love",
-    title: "Ek Taraf Ka Love",
+    slug: "esa-lagta-hai-ki-usko-mujhse-pyar-nhi",
+    title: "Esa Lagta Hai Ki Usko Mujhse Pyar Nhi",
     subtitle: "Masterclass by Ishaan Singh",
     tag: "Masterclass",
     image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop",
     rating: "4.9",
-    enrollmentCount: "1,200+",
+    enrollmentCount: "100+",
     duration: "90 Minutes",
-    description: "Jab sirf tum dete ho… aur partner lena bhool jaata hai. 90 minutes that can change everything. In Hindi.",
-    vimeoId: "76979871",
+    description: "Aisa feel ho raha hai ki partner badal gaya hai… par samajh nahi aa raha kya sach hai? Overthinking, doubt, aur confusion ke beech — yeh 90-minute masterclass tumhe clarity dega. Samajh paoge kya actually ho raha hai, kya karna chahiye, aur kaise apni peace wapas laani hai — bina guesswork ke.",
+    vimeoId: "1182386856",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     problems: [
-      "Jab sirf tum dete ho… aur partner lena bhool jaata hai.",
-      "Mujhe lagta tha ki main hi zyada sochti hoon, zyada feel karti hoon.",
-      "Mujhe darr tha ki agar maine apni baat ki toh woh chhod degi.",
-      "Ek rishta jo tumhe andar se toota hua feel kara raha hai.",
-      "Aksar humari tendencies baar-baar repeat hoti hain."
+      "Pehle sab normal tha… ab lagta hai woh emotionally door ho gaya hai.",
+      "Replies slow ho gaye hain, effort kam ho gaya hai — par reason clear nahi hai.",
+      "Tum sochte ho problem tum mein hai — ya shayad tum overthink kar rahe ho.",
+      "Dil kehta hai pyaar hai… par behavior kuch aur bol raha hai.",
+      "Sabse bada struggle — clarity nahi hai, sirf confusion hai."
     ],
     curriculum: [
-      { module: "Module 1", description: "Iska jawab tumhare childhood mein hai, tumhari attachment style mein hai. Samajhoge toh sab clear ho jaayega — bina khud ko blame kiye." },
-      { module: "Module 2", description: "Exact words seekhoge — partner se kaise baat karein, bina lad ke, bina toote. Woh conversation jo tum mahino se avoid kar rahe ho." },
-      { module: "Module 3", description: "Pyar mein khud ko mitaana zaroori nahin. Boundaries kaise set karein, apni value kaise jagaayein — rishte ko tod ke nahin, build karke." },
-      { module: "Module 4", description: "Sabse important aur sabse mushkil sawaal. Clarity milegi — bina guilt ke, bina darr ke. Yeh sirf tum decide karoge, lekin informed hokar." }
+      {
+        module: "Module 1: Samajhna kya ho raha hai",
+        description: "Tumhe clarity milegi ki partner ke behavior ke peeche kya ho sakta hai — bina unnecessary self-blame ke."
+      },
+      {
+        module: "Module 2: Sahi tareeke se baat karna",
+        description: "Kaise approach karein situation ko bina fight ke — taaki tumhe real answers mil sakein."
+      },
+      {
+        module: "Module 3: Apni value aur boundaries",
+        description: "Kaise khud ko lose kiye bina relationship handle karein — aur apni emotional strength wapas laayein."
+      },
+      {
+        module: "Module 4: Final clarity & decision",
+        description: "End tak tumhe clear ho jayega — kya yeh relationship worth hai ya nahi, aur next step kya hona chahiye."
+      }
     ],
     testimonials: [
-      { name: "Student 1", text: "Mujhe lagta tha ki main hi zyada sochti hoon, zyada feel karti hoon. Ishaan ne pehli baar explain kiya ki yeh weakness nahin — yeh mera caring nature hai. Aur iska fayda uthane dena band karna hai. 3 saal ki frustration ek session mein clear ho gayi." },
-      { name: "Student 2", text: "Mujhe darr tha ki agar maine apni baat ki toh woh chhod degi. Ishaan ne jo conversation ka structure diya — woh actually kaam kiya. Pehli baar meri girlfriend ne mujhe suna. Pehli baar hum actually baat kar paaye." },
-      { name: "Student 3", text: "2 saal mein pehli baar mujhe clarity mili — chhodni chahiye ya nahin. Ishaan ne judge nahin kiya. Sirf sach bataaya. Aur woh sach sun ne ki mujhe bahut zaroorat thi. Iss masterclass ne meri life badal di — literally." }
+      { name: "Student 1", text: "Mujhe lagta tha main hi zyada feel karti hoon. Ishaan ne samjhaya ki yeh weakness nahi — clarity ki kami thi. 3 saal ka confusion ek session mein clear ho gaya." },
+      { name: "Student 2", text: "Main apni baat bolne se darta tha. Jo structure yahan mila — usse pehli baar meri partner ne mujhe seriously suna. Game changer." },
+      { name: "Student 3", text: "Sabse bada gift — clarity. Stay karna hai ya move on, finally samajh aaya. Yeh session honestly life changing tha." }
     ],
     pricing: [
       {
@@ -130,23 +143,40 @@ export const COURSES: CourseData[] = [
         subtitle: "Full Access",
         price: "₹499",
         features: [
-          { name: "90-minute recorded Video masterclass", included: true },
-          { name: "Full recording access — life time ke liye", included: true },
-          { name: "PDF workbook + conversation scripts download", included: true },
-          { name: "Private Q&A session during the live class", included: true },
-          { name: "Community access — same-story logon se connect karo", included: true },
-          { name: "100% Money-back guarantee", included: true },
-          { name: "Monthly Live Group Q&A Sessions", included: false }
+          { name: "90-minute deep-dive masterclass (recorded)", included: true },
+          { name: "Instant access after purchase — no waiting", included: true },
+          { name: "Lifetime access — revisit anytime you need clarity", included: true },
+          { name: "Downloadable workbook for self-reflection & clarity", included: true },
+          { name: "Proven communication frameworks (real-life situations ke liye)", included: true },
+          { name: "Step-by-step clarity on what to do next in your relationship", included: true },
+          { name: "Access from any device — mobile, laptop, anytime", included: true },
+          { name: "Built for real clarity — not just motivation", included: true }
         ]
       }
     ],
     faqs: [
-      { question: "Registration ke baad kya hoga?", answer: "Registration ke baad tumhe email aur WhatsApp par exact date, time aur Video link milega. Hum dates regularly schedule karte hain — toh tumhara slot jaldi confirm ho jaata hai. Recording bhi milegi toh koi miss nahin hoga." },
-      { question: "Agar live class miss ho gayi toh?", answer: "Koi tension nahin! Registration ke baad tumhe full recording milegi — jab chaaho dekh sako. Content ka ek bhi word miss nahin hoga. Recording lifetime ke liye tumhare paas rahegi." },
-      { question: "Kya yeh sirf couples ke liye hai?", answer: "Bilkul nahin! Yeh masterclass har us insaan ke liye hai jo ek taraf ka love ka pattern samajhna chahta/chahti hai — chahe relationship mein ho, chahe dating mein ho, chahe simply apni patterns ko understand karna ho." },
-      { question: "Kya partner ko aana zaroori hai?", answer: "Haan, zaroor! Agar tumhara partner bhi attend karna chahta/chahti hai, toh unke liye alag registration karni hogi. Lekin yeh masterclass khaas taur pe un logon ke liye design ki gayi hai jo feel karte hain ki sirf wahi dete hain — toh akele bhi aa sakte ho." },
-      { question: "Agar masterclass pasand na aayi toh?", answer: "Main samajh sakta hoon. Lekin socho — ek rishta jo tumhe andar se toota hua feel kara raha hai, woh tumhari energy, health aur happiness le raha hai. ₹999 ek coffee machine se bhi sasta hai. Aur agar yeh kaam nahin kiya, hum 100% refund denge. Toh actually risk koi nahin hai. ❤️" }
-    ]
+      {
+        question: "Payment ke baad kya hoga?",
+        answer: "Payment complete karte hi tumhe email par access link mil jaayega. Bas us link par click karo, apna account login ya create karo — aur turant masterclass access kar paoge. Simple, no waiting."
+      },
+      {
+        question: "Kya yeh live class hai?",
+        answer: "Nahi, yeh recorded masterclass hai. Iska matlab — tum apne time pe, apni speed pe dekh sakte ho. Pause, replay, revisit — jab chaaho tab clarity le sakte ho."
+      },
+      {
+        question: "Kya main ise baad mein bhi dekh sakta/sakti hoon?",
+        answer: "Haan, tumhe lifetime access milega. Ek baar purchase karne ke baad tum kabhi bhi wapas aa kar ise dekh sakte ho — jab bhi tumhe clarity ki zarurat ho."
+      },
+      {
+        question: "Kya yeh sirf couples ke liye hai?",
+        answer: "Nahi. Yeh un sab ke liye hai jo feel karte hain ki woh relationship mein zyada de rahe hain — chahe tum relationship mein ho, dating stage mein ho, ya bas apne patterns samajhna chahte ho."
+      },
+      {
+        question: "Agar mujhe masterclass pasand na aaye toh?",
+        answer: "Yeh masterclass is tarah design ki gayi hai ki tumhe real clarity mile — sirf motivation nahi. Isme kaafi thought aur structure diya gaya hai. Isliye currently hum refund offer nahi karte. Lekin agar tum genuinely clarity chahte ho, yeh session tumhare liye worth hoga."
+      }
+    ],
+    workbookUrl: "https://drive.google.com/uc?export=download&id=1Qa8S1fB21-DP9VRWiPNB3pKxzUpuCVtP"
   }
   // {
   //   id: "c1",
