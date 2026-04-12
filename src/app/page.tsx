@@ -13,6 +13,7 @@ import { COURSES as GLOBAL_COURSES } from "@/data/courses";
 import { RESOURCES as GLOBAL_RESOURCES } from "@/data/resources";
 import { COHORTS as GLOBAL_COHORTS } from "@/data/cohorts";
 import { BOOKS as GLOBAL_BOOKS } from "@/data/books";
+import { SOCIAL_LINKS } from "@/data/socials";
 
 // Mapped for the carousel
 const COURSES: CarouselItem[] = GLOBAL_COURSES.map(c => ({
@@ -21,7 +22,14 @@ const COURSES: CarouselItem[] = GLOBAL_COURSES.map(c => ({
   subtitle: c.subtitle,
   image: c.image,
   link: `/courses/${c.slug}`,
-  tag: c.tag
+  tag: c.tag,
+  description: c.description,
+  rating: c.rating || "5.0",
+  reviewCount: c.enrollmentCount ? (parseInt(c.enrollmentCount.replace(/,/g, '')) / 100).toFixed(0) : "150",
+  duration: c.duration,
+  authorName: "Ishaan Singh",
+  authorImage: "/images/coach4.png",
+  price: c.pricing?.[0]?.price || "Get"
 }));
 
 const COHORTS: CarouselItem[] = GLOBAL_COHORTS.map(c => ({
@@ -39,7 +47,9 @@ const RESOURCES: CarouselItem[] = GLOBAL_RESOURCES.map(r => ({
   subtitle: r.subtitle,
   image: r.image,
   link: `/resources/${r.slug}`,
-  tag: r.tag
+  tag: r.tag,
+  authorName: "Ishaan Singh",
+  authorImage: "/images/coach4.png"
 }));
 
 const BOOKS: CarouselItem[] = [
@@ -50,7 +60,9 @@ const BOOKS: CarouselItem[] = [
     subtitle: `By ${b.author}`,
     image: b.image,
     link: "/book-recommendations",
-    tag: b.tag
+    tag: b.tag,
+    authorName: "Ishaan Singh",
+    authorImage: "/images/coach4.png"
   }))
 ];
 
@@ -67,82 +79,236 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Hero Section */}
-      {/* Hero Section */}
-      <section className="w-full bg-[#000000] flex flex-col items-center justify-center overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="w-full max-w-[1920px] flex justify-center"
-        >
-          <img
-            src="/images/hero-trial3.png"
-            alt="Ishaan Singh"
-            className="w-full h-auto"
-          />
-        </motion.div>
-      </section>
+      {/* Hero Section (Anna Coaching Light Theme) */}
+      <section className="w-full bg-background pt-32 pb-12 overflow-hidden px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 relative">
 
-      {/* About Section */}
-      <section className="w-full bg-card dark:bg-background py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col gap-24">
+          {/* Decorative Floating Circles */}
+          <div className="absolute -top-16 -left-16 w-56 h-56 bg-primary rounded-full mix-blend-multiply opacity-60 z-0 hidden md:block" />
+          <div className="absolute -bottom-8 left-1/3 w-32 h-32 bg-primary rounded-full mix-blend-multiply opacity-60 z-0 hidden md:block" />
 
-          {/* Row 1 */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold font-serif tracking-tight mb-6">About the Creator</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                I'm a dedicated life and relationship coach helping young adults navigate dating, breakups, career clarity, and long-term improvement.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                My framework is practical, empathetic, and actionable. Over the years, I've helped hundreds of students build a resilient mindset. Now I'm bringing those tools here.
-              </p>
-              <Link href="/courses" className="inline-flex items-center gap-2 font-medium text-primary hover:text-muted-foreground transition-colors group">
-                Explore my courses <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-            <div className="aspect-square bg-muted rounded-[2.5rem] border border-border overflow-hidden relative shadow-2xl group">
+          {/* Left: Image Container */}
+          <div className="flex-1 relative z-10 flex items-center justify-center overflow-hidden">
+            <div className="w-full aspect-[4/5] relative rounded-[2.5rem] bg-white border border-border mt-4">
               <Image
-                src="/images/about-creator.png"
-                alt="Ishaan Singh - Creator"
+                src="/images/hero-ishaan3.png"
+                alt="Ishaan Singh"
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover rounded-[2.5rem]"
                 priority
+                quality={100}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </div>
 
-          {/* Row 2 */}
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="aspect-square bg-muted rounded-[2.5rem] border border-border overflow-hidden relative shadow-2xl group order-2 md:order-1">
-              <Image
-                src="/images/my-philosophy.png"
-                alt="My Philosophy"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
-            <div className="order-1 md:order-2">
-              <h2 className="text-3xl font-bold font-serif tracking-tight mb-6">My Philosophy</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Awareness is the foundation of growth. I believe that every choice we make should come from a profound place of intention, rather than default patterns.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Whether you're struggling to communicate in a relationship or trying to figure out your next career move, my goal is to give you frameworks that cut through the noise and deliver measurable results.
-              </p>
+          {/* Right: Content Block */}
+          <div className="flex-1 bg-primary rounded-[2.5rem] p-12 md:p-16 flex flex-col justify-center relative z-10 overflow-hidden shadow-sm mt-4">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-foreground mb-6 leading-tight">
+              Life & Relationship <br />Coach
+            </h1>
+            <p className="text-lg text-foreground/80 mb-12 max-w-sm">
+              Guidance to Empower Your Journey Toward Balance, Clarity, and Growth.
+            </p>
+
+            {/* Integrated Newsletter Form */}
+            <div className="mt-4 bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-sm border border-white/60 relative overflow-hidden group">
+              <div className="flex flex-col gap-1.5 mb-6">
+                <h3 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-[#2A3B5C] flex items-center gap-2">
+                  Subscribe to Sunday Insights <span className="inline-block origin-bottom-left -rotate-12 transform group-hover:rotate-12 transition-transform duration-500">✍️</span>
+                </h3>
+                <p className="text-[#2A3B5C]/80 text-sm leading-relaxed max-w-sm">
+                  Join a growing community. Each week, I share actionable productivity tips, practical life advice, and book highlights directly to your inbox.
+                </p>
+              </div>
+
+              <form className="flex flex-col sm:flex-row gap-0 bg-white/80 p-1.5 rounded-full border border-white shadow-inner max-w-md w-full focus-within:ring-2 focus-within:ring-[#2A3B5C]/20 transition-all">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-1 rounded-full px-5 py-2.5 border-none bg-transparent text-sm outline-none placeholder:text-[#2A3B5C]/40 font-medium text-[#2A3B5C]"
+                  required
+                />
+                <button type="submit" className="bg-[#2A3B5C] text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-opacity-90 transition-opacity shadow-sm whitespace-nowrap">
+                  Subscribe
+                </button>
+              </form>
+
+              {/* Social Proof */}
+              <div className="flex items-center gap-3 text-xs text-[#2A3B5C]/80 font-medium mt-6">
+                <div className="flex -space-x-3">
+                  <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=1" alt="Reader" className="w-full h-full object-cover" /></div>
+                  <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=5" alt="Reader" className="w-full h-full object-cover" /></div>
+                  <div className="w-8 h-8 rounded-full bg-slate-400 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=9" alt="Reader" className="w-full h-full object-cover" /></div>
+                </div>
+                <div className="flex flex-col justify-center">
+                  <div className="flex items-center gap-0.5">
+                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
+                  </div>
+                  <span className="mt-0.5">Join 2,500+ friendly readers</span>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* Sunday Insights Newsletter */}
-      <NewsletterForm />
+      {/* Coaching Sessions Section */}
+      <section className="w-full bg-background pb-20 pt-8 px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header with Line */}
+          <div className="flex items-center justify-between border-b border-border pb-4 mb-8">
+            <h2 className="text-2xl font-serif text-foreground">Coaching Sessions</h2>
+            <Link href="/courses" className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm px-6 py-1.5 rounded-full transition-colors font-medium">
+              Explore
+            </Link>
+          </div>
+
+          {/* 4 Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            {/* Card 1: Life Coaching */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-0 w-3 h-3 bg-muted-foreground/30 rounded-sm" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-primary rounded-full" />
+                <div className="absolute top-2 right-1 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-primary/60 rotate-45" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Life Coaching</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Identify your goals, overcome obstacles, and design the life you've always envisioned.
+              </p>
+              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+            {/* Card 2: Therapy for Stress */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-0 w-6 h-6 bg-primary rounded-full opacity-80" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-[#2A3B5C] rounded-full opacity-80" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Stress Mastery</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Our coaching services focus on equipping you with effective tools to build emotional resilience and mental toughness.
+              </p>
+              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+            {/* Card 3: Leadership Coaching */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-0 w-5 h-3 bg-[#2A3B5C] opacity-80" />
+                <div className="absolute bottom-2 left-2 w-5 h-3 bg-muted-foreground/30" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Leadership Coaching</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Navigating career changes, or enhancing leadership skills, we help you unlock professional success.
+              </p>
+              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+            {/* Card 4: Love Therapy */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-1 w-5 h-6 bg-primary rounded-t-full opacity-80" />
+                <div className="absolute bottom-0 left-0 w-7 h-2 bg-[#2A3B5C] opacity-80" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Relationship Guidance</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Learn how to communicate effectively, resolve conflicts, and build deeper connections with those who matter most.
+              </p>
+              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* About The Coach Section */}
+      <section className="w-full bg-background py-24 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+
+          {/* Left: Image Box */}
+          <div className="w-full lg:w-5/12 aspect-[4/5] relative rounded-3xl overflow-hidden shadow-sm">
+            <Image
+              src="/images/about-creator2.jpg"
+              alt="Ishaan Singh - Coach"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+
+          {/* Right: Content Box */}
+          <div className="w-full lg:w-7/12 flex flex-col justify-center">
+            <span className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-secondary text-secondary-foreground text-sm font-medium w-max mb-6 ring-1 ring-secondary-foreground/10">
+              <span className="text-secondary-foreground/60">❖</span> Meet Ishaan
+            </span>
+
+            <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif text-foreground mb-4 leading-tight">
+              A Coach Who Helps You Move from Stuck to Strong
+            </h2>
+
+            <div className="text-[#2A3B5C] font-bold text-xl mb-6 flex items-center gap-2">
+              Life & Relationship Coach <span className="text-primary font-normal">|</span> Mentor
+            </div>
+
+            <p className="text-foreground/70 leading-relaxed mb-10 text-lg">
+              With over 5 years of experience, I've guided hundreds of individuals to rebuild confidence, find clarity in life decisions, and create consistent habits that last. My approach blends empathy, structure, & action so you can see real change—inside & out.
+            </p>
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-8 mb-12">
+              <div className="flex items-center gap-4 text-sm text-foreground/80 font-medium">
+                Follow me:
+                <div className="flex gap-3">
+                  {SOCIAL_LINKS.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 flex items-center justify-center rounded-full border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                      aria-label={social.name}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Stats Row */}
+            <div className="grid grid-cols-3 gap-4 border-t border-border pt-8">
+              <div>
+                <div className="text-3xl font-bold text-foreground mb-1">5+</div>
+                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Years of Excellence</div>
+              </div>
+              <div className="border-l border-border pl-4">
+                <div className="text-3xl font-bold text-foreground mb-1">50+</div>
+                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Coaching Sessions</div>
+              </div>
+              <div className="border-l border-border pl-4">
+                <div className="text-3xl font-bold text-foreground mb-1">1K+</div>
+                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Clients Transformed</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter successfully moved to Hero */}
 
       {/* Dedicated Courses Section */}
       <ResourceCarousel
@@ -206,24 +372,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Talk With Me CTA Section */}
-      <section className="w-full bg-primary py-16 md:py-24 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply" />
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold font-serif tracking-tight text-primary-foreground mb-6">
-            Talk with me directly
-          </h2>
-          <p className="text-xl text-primary-foreground/90 mb-10 leading-relaxed font-medium">
-            Get personalized advice via WhatsApp or use my AI Coach for instant replies. We're here to help you navigate your biggest challenges.
-          </p>
-          <Link
-            href="/talk-with-me"
-            className="inline-flex items-center justify-center gap-3 rounded-full bg-white text-primary px-8 py-4 text-lg font-bold shadow-xl transition-all hover:bg-white/90 hover:scale-105"
-          >
-            Start Talking <MessageCircle className="w-5 h-5" />
-          </Link>
-        </div>
-      </section>
 
 
       <ResourceCarousel
@@ -243,14 +391,14 @@ export default function Home() {
         bgWhite={false}
       />
 
-      <ResourceCarousel
+      {/* <ResourceCarousel
         title="Top Gifts"
         description="Practical, high-quality items that make for the perfect gift."
         items={GIFTS}
         viewAllLink="/gift-recommendations"
         viewAllText="View all gifts"
         bgWhite={true}
-      />
+      /> */}
 
       {/* Embedded Videos section */}
       <VideoCarousel />

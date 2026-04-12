@@ -3,17 +3,21 @@
 
 
 :root {
-  --background: #fdfbf7; /* Warm high-end white */
-  --foreground: #2c2b29; /* Soft dark charcoal */
+  --background: #F8F7F3; /* Warm, creamy off-white */
+  --foreground: #2A3B5C; /* Premium Navy instead of Deep Charcoal */
   --card: #ffffff;
-  --card-foreground: #2c2b29;
-  --border: #e7e5e4;
-  --primary: #b05c46; /* Empowering Terracotta */
-  --primary-foreground: #ffffff;
-  --secondary: #8f9e8b; /* Sage Green */
-  --secondary-foreground: #ffffff;
-  --muted: #f4f5f0; /* Gentle sage tint for muted sections/highlights */
-  --muted-foreground: #78716c; /* Warm grey */
+  --card-foreground: #2A3B5C;
+  --border: #E8E8E8;
+  --primary: #B3C1E5; /* Soft pastel periwinkle blue */
+  --primary-foreground: #1E232E;
+  --secondary: #F3F982; /* Bright soft yellow for circle CTA */
+  --secondary-foreground: #1E232E;
+  --muted: #F0F4E8; /* Soft green-grey */
+  --muted-foreground: #4A5A7A; /* Darker navy-grey to fix the faded look */
+
+  /* Feature Section Greens */
+  --feature-bg: #1B4E2B;
+  --feature-accent: #D9F063;
 }
 
 @theme inline {
@@ -28,6 +32,8 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-feature-bg: var(--feature-bg);
+  --color-feature-accent: var(--feature-accent);
   
   --font-sans: var(--font-outfit);
   --font-serif: var(--font-playfair);

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Star, Clock, Calendar, User } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
 export interface CarouselItem {
@@ -11,6 +11,14 @@ export interface CarouselItem {
   image: string;
   link: string;
   tag?: string;
+  description?: string;
+  rating?: string;
+  reviewCount?: string;
+  duration?: string;
+  date?: string;
+  authorName?: string;
+  authorImage?: string;
+  price?: string;
 }
 
 interface ResourceCarouselProps {
@@ -70,12 +78,12 @@ export function ResourceCarousel({
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">
+          <div className="max-w-3xl">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-4 text-[#2A3B5C]">
               {title}
             </h2>
             {description && (
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-[#2A3B5C]/70 leading-relaxed font-medium">
                 {description}
               </p>
             )}
@@ -84,7 +92,7 @@ export function ResourceCarousel({
             {viewAllLink && (
               <Link
                 href={viewAllLink}
-                className="inline-flex items-center justify-center font-medium text-primary hover:text-primary/80 transition-colors group"
+                className="inline-flex items-center justify-center font-bold text-[#2A3B5C] hover:opacity-70 transition-opacity group"
               >
                 {viewAllText} <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -110,30 +118,65 @@ export function ResourceCarousel({
             <Link
               key={item.id}
               href={item.link}
-              className="group relative flex-none w-[280px] sm:w-[320px] snap-center sm:snap-start bg-card border border-border rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 transform hover:-translate-y-1 block flex flex-col focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="group relative flex-none w-[320px] sm:w-[350px] snap-center sm:snap-start bg-white border border-border rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 transform hover:-translate-y-1 block flex flex-col focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               {/* Image Container */}
-              <div className="aspect-[4/3] sm:aspect-video relative bg-muted overflow-hidden">
+              <div className="aspect-[4/3] sm:aspect-video relative bg-muted overflow-hidden mx-3 mt-3 rounded-2xl">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
+                {item.tag && (
+                  <div className="absolute top-3 left-3 bg-secondary text-secondary-foreground text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">
+                    {item.tag}
+                  </div>
+                )}
               </div>
               
               {/* Content Container */}
               <div className="p-6 flex flex-col flex-grow">
-                {item.subtitle && (
-                  <p className="text-xs text-primary font-bold tracking-wide uppercase mb-2">
-                    {item.subtitle}
-                  </p>
-                )}
-                <h3 className="text-xl font-bold leading-snug line-clamp-2 mb-3 group-hover:text-primary transition-colors">
+                {/* Reviews Row */}
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-0.5">
+                    <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
+                    <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
+                  </div>
+                  <span className="text-[11px] font-bold text-foreground/50">{item.rating || '5.0'} ({item.reviewCount || '150'} Reviews)</span>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold font-serif leading-snug line-clamp-2 mb-2 group-hover:opacity-80 transition-opacity text-[#2A3B5C]">
                   {item.title}
                 </h3>
-                <div className="mt-auto pt-4 flex items-center text-sm font-semibold text-muted-foreground group-hover:text-primary transition-colors">
-                  Explore <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                
+                {/* Description to fill whitespace */}
+                {item.description && (
+                  <p className="text-sm text-[#2A3B5C]/70 line-clamp-2 mb-5 leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+
+                {/* Grouped Footer to prevent weird stretching gaps */}
+                <div className="mt-auto">
+                  <div className="flex items-center justify-between text-[11px] font-bold text-foreground/50 uppercase tracking-widest mb-4">
+                    <div className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5"/> {item.duration || 'Self-Paced'}</div>
+                    <div className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5"/> {item.date || 'Ongoing'}</div>
+                  </div>
+
+                  <div className="border-t border-border w-full mb-4" />
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                       <img src={item.authorImage || 'https://i.pravatar.cc/100?img=11'} alt={item.authorName || 'Instructor'} className="w-8 h-8 rounded-full border border-border object-cover" />
+                       <span className="text-sm font-bold text-[#2A3B5C]">{item.authorName || 'Ishaan Singh'}</span>
+                    </div>
+                    <div className="text-lg font-bold text-[#2A3B5C]">{item.price || 'Get'}</div>
+                  </div>
                 </div>
               </div>
             </Link>

@@ -71,7 +71,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
 
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-muted-foreground text-sm font-medium">
              <div className="flex items-center gap-2"><Clock className="w-4 h-4"/> <span>{course.duration}</span></div>
-             <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4"/> <span>100% Refund Policy</span></div>
+             <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4"/> <span>Lifetime Access</span></div>
              <div className="flex items-center gap-2"><Globe2 className="w-4 h-4"/> <span>English & Hindi</span></div>
           </div>
         </div>
@@ -149,11 +149,11 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
       <section id="pricing" className="w-full py-24 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400 border border-emerald-500/30 text-sm font-black tracking-widest uppercase mb-6 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)]">
-              Risk-Free Investment
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-black tracking-widest uppercase mb-6 shadow-sm">
+              Lifetime Access
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Choose the Plan That Fits You Best</h2>
-            <p className="text-lg text-muted-foreground">Get lifetime access on a one-time payment. Cancel anytime within 14 days and get a full refund, no questions asked.</p>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Enroll in the Course</h2>
+            <p className="text-lg text-muted-foreground">Get immediate lifetime access on a fast, secure one-time payment.</p>
           </div>
 
           <div className={`grid gap-8 items-start mx-auto ${

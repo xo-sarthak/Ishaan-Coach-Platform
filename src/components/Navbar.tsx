@@ -10,9 +10,7 @@ const NAV_LINKS = [
   { name: "Courses", href: "/courses" },
   { name: "Cohorts", href: "/cohorts" },
   { name: "Free Resources", href: "/resources" },
-  { name: "Talk with me", href: "/talk-with-me" },
   { name: "Book Recommends", href: "/book-recommendations" },
-  { name: "Gift Recommends", href: "/gift-recommendations" },
 ];
 
 export default function Navbar() {
@@ -57,7 +55,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-card/80 border-b border-border/40">
+    <nav className="sticky top-4 z-50 w-full max-w-6xl mx-auto backdrop-blur-xl bg-white/90 rounded-full border border-border/60 drop-shadow-sm px-2">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link
           href="/"
