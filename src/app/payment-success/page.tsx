@@ -63,10 +63,10 @@ function PaymentSuccessContent() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/my-purchases"
+                href="/"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-2xl font-bold hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
               >
-                Go to Dashboard <ArrowRight className="w-4 h-4" />
+                Explore More <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
