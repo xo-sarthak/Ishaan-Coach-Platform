@@ -121,11 +121,11 @@ export function ResourceCarousel({
               className="group relative flex-none w-[320px] sm:w-[350px] snap-center sm:snap-start bg-white border border-border rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 transform hover:-translate-y-1 block flex flex-col focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               {/* Image Container */}
-              <div className="aspect-[4/3] sm:aspect-video relative bg-muted overflow-hidden mx-3 mt-3 rounded-2xl">
+              <div className="aspect-[4/3] sm:aspect-video relative bg-white overflow-hidden mx-3 mt-3 rounded-2xl border border-border/10">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-2 sm:p-4"
                   loading="lazy"
                 />
                 {item.tag && (

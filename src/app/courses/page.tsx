@@ -79,11 +79,11 @@ export default function CoursesPage() {
                 className="group relative bg-white border border-border rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-black/5 transition-all duration-300 flex flex-col hover:-translate-y-1 no-underline"
               >
                 {/* Image */}
-                <div className="aspect-[4/3] relative bg-muted overflow-hidden mx-3 mt-3 rounded-2xl">
+                <div className="aspect-[4/3] relative bg-white overflow-hidden mx-3 mt-3 rounded-2xl border border-border/10 flex items-center justify-center">
                   <img
                     src={course.image}
                     alt={course.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-3"
                     loading="lazy"
                   />
                   {course.tag && (

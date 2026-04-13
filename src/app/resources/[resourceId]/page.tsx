@@ -57,9 +57,8 @@ export default async function ResourceLandingPage({ params }: { params: Promise<
           </div>
 
           <div className="order-1 md:order-2 w-full flex justify-center md:justify-end relative">
-            <div className="relative w-full max-w-md aspect-[4/5] md:aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-border shadow-2xl group animate-in slide-in-from-right duration-1000">
-               <img src={resource.image} alt={resource.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+            <div className="relative w-full max-w-md aspect-[4/5] md:aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-border bg-white shadow-2xl group animate-in slide-in-from-right duration-1000 flex items-center justify-center">
+               <img src={resource.image} alt={resource.title} className="w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105 p-4 md:p-8" />
             </div>
           </div>
 
