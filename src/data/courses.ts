@@ -132,9 +132,9 @@ export const COURSES: CourseData[] = [
       }
     ],
     testimonials: [
-      { name: "Student 1", text: "Mujhe lagta tha main hi zyada feel karti hoon. Ishaan ne samjhaya ki yeh weakness nahi — clarity ki kami thi. 3 saal ka confusion ek session mein clear ho gaya." },
-      { name: "Student 2", text: "Main apni baat bolne se darta tha. Jo structure yahan mila — usse pehli baar meri partner ne mujhe seriously suna. Game changer." },
-      { name: "Student 3", text: "Sabse bada gift — clarity. Stay karna hai ya move on, finally samajh aaya. Yeh session honestly life changing tha." }
+      { name: "Sakshi", text: "Mujhe lagta tha main hi zyada feel karti hoon. Ishaan ne samjhaya ki yeh weakness nahi — clarity ki kami thi. 3 saal ka confusion ek session mein clear ho gaya." },
+      { name: "Ansh", text: "Main apni baat bolne se darta tha. Jo structure yahan mila — usse pehli baar meri partner ne mujhe seriously suna. Game changer." },
+      { name: "Poorvi", text: "Sabse bada gift — clarity. Stay karna hai ya move on, finally samajh aaya. Yeh session honestly life changing tha." }
     ],
     pricing: [
       {

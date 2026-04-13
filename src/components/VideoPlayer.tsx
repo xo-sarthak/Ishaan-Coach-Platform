@@ -63,11 +63,11 @@ export function VideoPlayer({ videoUrl, thumbnail, title }: VideoPlayerProps) {
       </div>
 
       {/* Intro Badge */}
-      <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end transition-all duration-500 group-hover:bottom-10">
-          <div className="bg-white/10 backdrop-blur-md border border-white/10 px-6 py-3 rounded-2xl text-white text-base font-bold tracking-tight shadow-xl">
-             Watch Program Preview
+      <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 flex justify-between items-end transition-all duration-500 sm:group-hover:bottom-10">
+          <div className="bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 sm:px-6 sm:py-3 rounded-xl sm:rounded-2xl text-white text-sm sm:text-base font-bold tracking-tight shadow-xl whitespace-nowrap">
+             Watch Preview
           </div>
-          <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/5 text-[10px] text-white/80 font-mono uppercase tracking-[0.2em]">
+          <div className="hidden sm:block bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/5 text-[10px] text-white/80 font-mono uppercase tracking-[0.2em]">
              4K High Fidelity
           </div>
       </div>

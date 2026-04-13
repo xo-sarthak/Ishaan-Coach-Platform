@@ -17,8 +17,8 @@ export const RESOURCES: ResourceData[] = [
     slug: "the-long-distance-relationship-survival-kit",
     title: "The Long Distance Relationship Survival Kit",
     subtitle: "How to make long distance easy",
-    tag: "Template",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=600&auto=format&fit=crop",
+    tag: "Survival Kit",
+    image: "/free-resources/long-distance.png",
     description: "A printable template designed to help you document and reframe your biggest professional and personal failures into actionable growth vectors.",
     benefits: [
       "Immediately reduces the emotional weight of past mistakes.",

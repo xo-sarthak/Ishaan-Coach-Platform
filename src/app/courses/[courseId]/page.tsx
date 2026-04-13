@@ -30,7 +30,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
     <div className="flex flex-col items-center w-full bg-background selection:bg-primary/20">
       
       {/* 1. HERO SECTION */}
-      <section className="w-full relative py-20 md:py-32 overflow-hidden bg-card border-b border-border">
+      <section className="w-full relative pt-32 pb-16 md:pt-32 md:pb-32 overflow-hidden bg-card border-b border-border">
         <div className="absolute inset-0 opacity-15 dark:opacity-10 blur-xl bg-cover bg-center mix-blend-multiply" style={{ backgroundImage: `url('${course.image}')` }} />
         <div className="max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide uppercase mb-8">
@@ -44,10 +44,13 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
             {course.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6 text-sm font-semibold text-foreground bg-background rounded-full border border-border py-3 px-6 shadow-sm mb-12">
-             <div className="flex items-center gap-2"><Star className="w-5 h-5 text-yellow-500 fill-yellow-500"/> <span className="text-lg">{course.rating} Rating</span></div>
-             <div className="hidden sm:block w-px h-6 bg-border" />
-             <div className="flex items-center gap-2"><span className="text-lg font-bold">{course.enrollmentCount}</span> Students</div>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12">
+             <div className="flex items-center gap-2 bg-background rounded-full border border-border py-2.5 px-5 shadow-sm text-sm font-semibold text-foreground">
+                <Star className="w-5 h-5 text-yellow-500 fill-yellow-500"/> <span className="text-base sm:text-lg">{course.rating} Rating</span>
+             </div>
+             <div className="flex items-center gap-2 bg-background rounded-full border border-border py-2.5 px-5 shadow-sm text-sm font-semibold text-foreground">
+                <span className="text-base sm:text-lg font-bold">{course.enrollmentCount}</span> Students
+             </div>
           </div>
 
           {course.videoUrl ? (
