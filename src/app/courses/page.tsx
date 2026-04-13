@@ -70,9 +70,6 @@ export default function CoursesPage() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {filteredCourses.map((course) => {
-            const reviewCount = course.enrollmentCount 
-              ? (parseInt(course.enrollmentCount.replace(/,/g, '')) / 100).toFixed(0) 
-              : "150";
             const price = course.pricing?.[0]?.price || 'Get';
 
             return (
@@ -106,7 +103,7 @@ export default function CoursesPage() {
                       <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
                       <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
                     </div>
-                    <span className="text-[11px] font-bold text-foreground/50">{course.rating || '5.0'} ({reviewCount} Reviews)</span>
+                    <span className="text-[11px] font-bold text-foreground/50">{course.rating || '5.0'} ({course.reviewCount} Reviews)</span>
                   </div>
 
                   <h3 className="text-xl font-bold font-serif leading-snug line-clamp-2 mb-2 group-hover:opacity-80 transition-opacity text-[#2A3B5C]">

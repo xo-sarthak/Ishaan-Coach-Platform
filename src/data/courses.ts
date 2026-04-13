@@ -20,6 +20,7 @@ export interface CourseData {
   tag: string;
   image: string;
   rating: string;
+  reviewCount: string;
   enrollmentCount: string;
   duration: string;
   problems: string[];
@@ -101,6 +102,7 @@ export const COURSES: CourseData[] = [
     tag: "Masterclass",
     image: "/courses/masterclass-1.png",
     rating: "4.9",
+    reviewCount: "150",
     enrollmentCount: "100+",
     duration: "90 Minutes",
     description: "Aisa feel ho raha hai ki partner badal gaya hai… par samajh nahi aa raha kya sach hai? Overthinking, doubt, aur confusion ke beech — yeh 90-minute masterclass tumhe clarity dega. Samajh paoge kya actually ho raha hai, kya karna chahiye, aur kaise apni peace wapas laani hai — bina guesswork ke.",

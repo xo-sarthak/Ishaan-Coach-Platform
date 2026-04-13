@@ -46,7 +46,7 @@ export function HeroNewsletter() {
     <div className="mt-4 bg-white/70 backdrop-blur-md rounded-3xl p-5 md:p-8 shadow-sm border border-white/60 relative overflow-hidden group">
       <div className="flex flex-col gap-1.5 mb-6">
         <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#2A3B5C] flex items-center gap-2">
-          Subscribe to Sunday Insights <span className="inline-block origin-bottom-left -rotate-12 transform group-hover:rotate-12 transition-transform duration-500">✍️</span>
+          Subscribe to Newsletter <span className="inline-block origin-bottom-left -rotate-12 transform group-hover:rotate-12 transition-transform duration-500">✍️</span>
         </h3>
         <p className="text-[#2A3B5C]/80 text-sm leading-relaxed max-w-sm">
           Join a growing community. Each week, I share actionable productivity tips, practical life advice, and book highlights directly to your inbox.
@@ -65,8 +65,8 @@ export function HeroNewsletter() {
               required
               disabled={status === "submitting"}
             />
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={status === "submitting"}
               className="bg-[#2A3B5C] text-white px-8 py-3.5 sm:py-2.5 rounded-full font-bold text-sm hover:bg-opacity-90 transition-opacity shadow-sm whitespace-nowrap min-w-[120px] flex items-center justify-center"
             >
@@ -100,7 +100,7 @@ export function HeroNewsletter() {
           <p className="text-sm text-[#2A3B5C]/80 font-medium leading-relaxed pl-11">
             {message}
           </p>
-          <button 
+          <button
             onClick={() => { setStatus("idle"); setEmail(""); }}
             className="mt-4 ml-11 text-xs font-bold text-[#2A3B5C]/40 hover:text-[#2A3B5C] transition-colors flex items-center gap-1"
           >

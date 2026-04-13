@@ -146,7 +146,7 @@ export function ResourceCarousel({
                     <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
                     <Star className="w-3.5 h-3.5 fill-[#F9A826] text-[#F9A826]" />
                   </div>
-                  <span className="text-[11px] font-bold text-foreground/50">{item.rating || '5.0'} ({item.reviewCount || '150'} Reviews)</span>
+                  <span className="text-[11px] font-bold text-foreground/50">{item.rating || '5.0'} ({item.reviewCount || '0'} Reviews)</span>
                 </div>
 
                 {/* Title */}

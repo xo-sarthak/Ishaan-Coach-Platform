@@ -26,7 +26,7 @@ const COURSES: CarouselItem[] = GLOBAL_COURSES.map(c => ({
   tag: c.tag,
   description: c.description,
   rating: c.rating || "5.0",
-  reviewCount: c.enrollmentCount ? (parseInt(c.enrollmentCount.replace(/,/g, '')) / 100).toFixed(0) : "150",
+  reviewCount: c.reviewCount,
   duration: c.duration,
   authorName: "Ishaan Singh",
   authorImage: "/images/coach4.png",
@@ -49,6 +49,8 @@ const RESOURCES: CarouselItem[] = GLOBAL_RESOURCES.map(r => ({
   image: r.image,
   link: `/resources/${r.slug}`,
   tag: r.tag,
+  rating: r.rating,
+  reviewCount: r.reviews,
   authorName: "Ishaan Singh",
   authorImage: "/images/coach4.png"
 }));
@@ -82,7 +84,7 @@ export default function Home() {
     <div className="flex flex-col items-center">
       {/* Hero Section (Anna Coaching Light Theme) */}
       <section id="newsletter" className="w-full bg-background pt-12 md:pt-20 pb-12 overflow-hidden px-4 md:px-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -123,84 +125,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Coaching Sessions Section */}
-      <section className="w-full bg-background pb-20 pt-8 px-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header with Line */}
-          <div className="flex items-center justify-between border-b border-border pb-4 mb-8">
-            <h2 className="text-2xl font-serif text-foreground">Coaching Sessions</h2>
-            <Link href="/courses" className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm px-6 py-1.5 rounded-full transition-colors font-medium">
-              Explore
-            </Link>
-          </div>
 
-          {/* 4 Column Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-            {/* Card 1: Life Coaching */}
-            <div className="bg-white/80 rounded-2xl border border-border p-5 md:p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
-              <div className="relative w-8 h-8 mb-4 md:mb-6">
-                <div className="absolute top-0 left-0 w-3 h-3 bg-muted-foreground/30 rounded-sm" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 bg-primary rounded-full" />
-                <div className="absolute top-2 right-1 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-primary/60 rotate-45" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 md:mb-3 text-[#2A3B5C]">Life Coaching</h3>
-              <p className="text-foreground/70 text-sm leading-relaxed mb-4 md:mb-6 flex-grow">
-                Identify your goals, overcome obstacles, and design the life you've always envisioned.
-              </p>
-              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
-                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </div>
-
-            {/* Card 2: Therapy for Stress */}
-            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
-              <div className="relative w-8 h-8 mb-6">
-                <div className="absolute top-0 left-0 w-6 h-6 bg-primary rounded-full opacity-80" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 bg-[#2A3B5C] rounded-full opacity-80" />
-              </div>
-              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Stress Mastery</h3>
-              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
-                Our coaching services focus on equipping you with effective tools to build emotional resilience and mental toughness.
-              </p>
-              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
-                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </div>
-
-            {/* Card 3: Leadership Coaching */}
-            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
-              <div className="relative w-8 h-8 mb-6">
-                <div className="absolute top-0 left-0 w-5 h-3 bg-[#2A3B5C] opacity-80" />
-                <div className="absolute bottom-2 left-2 w-5 h-3 bg-muted-foreground/30" />
-              </div>
-              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Leadership Coaching</h3>
-              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
-                Navigating career changes, or enhancing leadership skills, we help you unlock professional success.
-              </p>
-              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
-                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </div>
-
-            {/* Card 4: Love Therapy */}
-            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
-              <div className="relative w-8 h-8 mb-6">
-                <div className="absolute top-0 left-1 w-5 h-6 bg-primary rounded-t-full opacity-80" />
-                <div className="absolute bottom-0 left-0 w-7 h-2 bg-[#2A3B5C] opacity-80" />
-              </div>
-              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Relationship Guidance</h3>
-              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
-                Learn how to communicate effectively, resolve conflicts, and build deeper connections with those who matter most.
-              </p>
-              <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
-                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </div>
-
-          </div>
-        </div>
-      </section>
 
       {/* About The Coach Section */}
       <section className="w-full bg-background py-16 md:py-24 px-4 md:px-6">
@@ -232,7 +157,7 @@ export default function Home() {
             </div>
 
             <p className="text-foreground/70 leading-relaxed mb-8 md:mb-10 text-base md:text-lg">
-              With over 5 years of experience, I've guided hundreds of individuals to rebuild confidence, find clarity in life decisions, and create consistent habits that last. My approach blends empathy, structure, & action so you can see real change—inside & out.
+              With over 10 years of experience, I've guided hundreds of individuals to rebuild confidence, find clarity in life decisions, and create consistent habits that last. My approach blends empathy, structure, & action so you can see real change—inside & out.
             </p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-8 mb-12">
@@ -258,16 +183,16 @@ export default function Home() {
             {/* Stats Row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 border-t border-border pt-8 text-center sm:text-left">
               <div>
-                <div className="text-3xl font-bold text-foreground mb-1">5+</div>
+                <div className="text-3xl font-bold text-foreground mb-1">10+</div>
                 <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Years of Excellence</div>
               </div>
               <div className="border-t sm:border-t-0 sm:border-l border-border pt-4 sm:pt-0 sm:pl-4">
-                <div className="text-3xl font-bold text-foreground mb-1">50+</div>
+                <div className="text-3xl font-bold text-foreground mb-1">150+</div>
                 <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Coaching Sessions</div>
               </div>
               <div className="border-t sm:border-t-0 sm:border-l border-border pt-4 sm:pt-0 sm:pl-4">
-                <div className="text-3xl font-bold text-foreground mb-1">1K+</div>
-                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Clients Transformed</div>
+                <div className="text-3xl font-bold text-foreground mb-1">200K+</div>
+                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Lives Transformed</div>
               </div>
             </div>
 
@@ -286,6 +211,85 @@ export default function Home() {
         viewAllText="Explore all courses"
         bgWhite={false}
       />
+
+      {/* Coaching Sessions Section */}
+      <section className="w-full bg-background pb-20 pt-8 px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header with Line */}
+          <div className="flex items-center justify-between border-b border-border pb-4 mb-8">
+            <h2 className="text-2xl font-serif text-foreground">Coaching Sessions</h2>
+            <Link href="/book-1-on-1" className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm px-6 py-1.5 rounded-full transition-colors font-medium">
+              Book a Session
+            </Link>
+          </div>
+
+          {/* 4 Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            {/* Card 1: Life Coaching */}
+            <div className="bg-white/80 rounded-2xl border border-border p-5 md:p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-4 md:mb-6">
+                <div className="absolute top-0 left-0 w-3 h-3 bg-muted-foreground/30 rounded-sm" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-primary rounded-full" />
+                <div className="absolute top-2 right-1 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-primary/60 rotate-45" />
+              </div>
+              <h3 className="font-bold text-lg mb-2 md:mb-3 text-[#2A3B5C]">Life Coaching</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-4 md:mb-6 flex-grow">
+                Identify your goals, overcome obstacles, and design the life you've always envisioned.
+              </p>
+              <Link href="/book-1-on-1" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+            {/* Card 2: Therapy for Stress */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-0 w-6 h-6 bg-primary rounded-full opacity-80" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-[#2A3B5C] rounded-full opacity-80" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Stress Mastery</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Our coaching services focus on equipping you with effective tools to build emotional resilience and mental toughness.
+              </p>
+              <Link href="/book-1-on-1" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+            {/* Card 3: Leadership Coaching */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-0 w-5 h-3 bg-[#2A3B5C] opacity-80" />
+                <div className="absolute bottom-2 left-2 w-5 h-3 bg-muted-foreground/30" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Leadership Coaching</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Navigating career changes, or enhancing leadership skills, we help you unlock professional success.
+              </p>
+              <Link href="/book-1-on-1" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+            {/* Card 4: Love Therapy */}
+            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-6">
+                <div className="absolute top-0 left-1 w-5 h-6 bg-primary rounded-t-full opacity-80" />
+                <div className="absolute bottom-0 left-0 w-7 h-2 bg-[#2A3B5C] opacity-80" />
+              </div>
+              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Relationship Guidance</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+                Learn how to communicate effectively, resolve conflicts, and build deeper connections with those who matter most.
+              </p>
+              <Link href="/book-1-on-1" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
+                Learn More <span className="font-normal text-muted-foreground group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       {/* Hero-style Cohort Section */}
       <section className="w-full bg-card dark:bg-background py-16 md:py-24">

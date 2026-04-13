@@ -9,6 +9,8 @@ export interface ResourceData {
   benefits: string[];
   howToUse: string;
   downloadUrl: string;
+  reviews: string;
+  rating: string;
 }
 
 export const RESOURCES: ResourceData[] = [
@@ -27,7 +29,9 @@ export const RESOURCES: ResourceData[] = [
       "Shifts your mindset from victim to active learner."
     ],
     howToUse: "Print this single-page PDF and keep it in your journal. Whenever you face a major rejection or failure, fill out a row. Over time, you'll see how these 'failures' were actually prerequisites for your biggest wins.",
-    downloadUrl: "https://ishaanlive.in/resources/failure-resume.pdf"
+    downloadUrl: "https://ishaanlive.in/resources/failure-resume.pdf",
+    reviews: "100",
+    rating: "4.6"
   }
   // {
   //   id: "r2",

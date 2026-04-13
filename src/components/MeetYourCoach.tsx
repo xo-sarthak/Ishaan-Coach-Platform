@@ -27,12 +27,12 @@ export const MeetYourCoach = () => {
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-background p-6 rounded-[2rem] border border-border text-center shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-3xl font-black text-primary mb-1">10k+</div>
-              <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Students Taught</div>
+              <div className="text-3xl font-black text-primary mb-1">200k+</div>
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Lives Changed</div>
             </div>
             <div className="bg-background p-6 rounded-[2rem] border border-border text-center shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-3xl font-black text-primary mb-1">4.9/5</div>
-              <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Average Rating</div>
+              <div className="text-3xl font-black text-primary mb-1">200M+</div>
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Views</div>
             </div>
             <div className="bg-background p-6 rounded-[2rem] border border-border text-center shadow-sm hover:shadow-md transition-shadow hidden lg:block">
               <div className="text-3xl font-black text-primary mb-1">130K+</div>

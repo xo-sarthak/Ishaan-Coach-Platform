@@ -36,6 +36,7 @@ const FOOTER_COLUMNS = [
     links: [
       { name: "Courses", href: "/courses" },
       { name: "Cohorts", href: "/cohorts" },
+      { name: "Schedule Call", href: "/book-1-on-1" },
       // { name: "AI Life Coach", href: "/ai-life" },
       // { name: "AI Relationship Coach", href: "/ai-relationship" },
     ],
