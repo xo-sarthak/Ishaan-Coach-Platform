@@ -50,7 +50,7 @@ export default function BookOneOnOnePage() {
     <div className="flex flex-col items-center w-full bg-background selection:bg-primary/20">
 
       {/* 1. HERO SECTION */}
-      <section className="w-full relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-card border-b border-border">
+      <section className="w-full relative pt-24 pb-16 md:pt-40 md:pb-32 overflow-hidden bg-card border-b border-border">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
           <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-primary rounded-full blur-[120px]" />
@@ -66,11 +66,11 @@ export default function BookOneOnOnePage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-black tracking-widest uppercase mb-8">
               Private 1:1 Mentorship
             </div>
-            <h1 className="text-5xl md:text-7xl font-serif font-bold tracking-tight text-foreground mb-8 leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold tracking-tight text-foreground mb-6 md:mb-8 leading-[1.1]">
               A Safe Space to <br />
               <span className="text-primary italic">Rewrite Your Life.</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-xl leading-relaxed mb-10 font-medium">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-8 md:mb-10 font-medium">
               Struggling with personal roadblocks or relationship patterns? Let&apos;s talk 1-on-1. No judgment, just pure clarity and a practical roadmap forward.
             </p>
 
@@ -135,9 +135,9 @@ export default function BookOneOnOnePage() {
       </section>
 
       {/* 2. STATS BAR */}
-      <section className="w-full py-12 bg-background border-b border-border">
+      <section className="w-full py-8 md:py-12 bg-background border-b border-border">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-6 gap-8 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-8 text-center">
             {stats.map((stat, i) => (
               <div key={i} className="flex flex-col items-center">
                 <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center text-primary mb-3">
@@ -152,23 +152,23 @@ export default function BookOneOnOnePage() {
       </section>
 
       {/* 3. EMPATHY SECTION - THE SILENT STRUGGLES */}
-      <section className="w-full py-24 bg-background">
+      <section className="w-full py-16 md:py-24 bg-background">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-8">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground mb-6 md:mb-8">
               Why I Open My Calendar to You
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-16 italic font-medium">
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed mb-12 md:mb-16 italic font-medium">
               &quot;I know what it feels like to have everything on paper but nothing in your peace.&quot;
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 text-left">
-            <div className="p-10 bg-card rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
+            <div className="p-6 md:p-10 bg-card rounded-3xl md:rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-500 mb-6">
                 <Heart className="w-6 h-6" />
               </div>
@@ -178,7 +178,7 @@ export default function BookOneOnOnePage() {
               </p>
             </div>
 
-            <div className="p-10 bg-card rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
+            <div className="p-6 md:p-10 bg-card rounded-3xl md:rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-500 mb-6">
                 <Brain className="w-6 h-6" />
               </div>
@@ -188,7 +188,7 @@ export default function BookOneOnOnePage() {
               </p>
             </div>
 
-            <div className="p-10 bg-card rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
+            <div className="p-6 md:p-10 bg-card rounded-3xl md:rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-500 mb-6">
                 <Target className="w-6 h-6" />
               </div>
@@ -198,7 +198,7 @@ export default function BookOneOnOnePage() {
               </p>
             </div>
 
-            <div className="p-10 bg-card rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
+            <div className="p-6 md:p-10 bg-card rounded-3xl md:rounded-[2.5rem] border border-border hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-500 mb-6">
                 <ShieldCheck className="w-6 h-6" />
               </div>
@@ -253,9 +253,9 @@ export default function BookOneOnOnePage() {
       </section>
 
       {/* 5. BOOKING SECTION */}
-      <section id="book" className="w-full py-24 bg-background">
+      <section id="book" className="w-full py-16 md:py-24 bg-background">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-[#2A3B5C] rounded-[3.5rem] p-10 md:p-20 text-center text-white relative overflow-hidden shadow-[0_30px_60px_-15px_rgba(42,59,92,0.4)]">
+          <div className="bg-[#2A3B5C] rounded-3xl md:rounded-[3.5rem] p-8 md:p-20 text-center text-white relative overflow-hidden shadow-[0_30px_60px_-15px_rgba(42,59,92,0.4)]">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-10 flex flex-wrap gap-4 p-8 pointer-events-none">
               {Array.from({ length: 100 }).map((_, i) => (
