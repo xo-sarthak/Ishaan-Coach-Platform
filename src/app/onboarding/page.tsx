@@ -15,6 +15,9 @@ function OnboardingContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [onboardingData, setOnboardingData] = useState<{ email: string; userExists: boolean } | null>(null);
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
   const [errorDetails, setErrorDetails] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -107,6 +110,19 @@ function OnboardingContent() {
     setIsSubmitting(true);
     setError("");
 
+    if (!onboardingData?.userExists) {
+      if (password !== confirmPassword) {
+        setError("Passwords do not match.");
+        setIsSubmitting(false);
+        return;
+      }
+      if (!fullName || !phoneNumber) {
+        setError("Please fill in all fields (Name & Phone).");
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
     try {
       const res = await fetch("/api/auth/onboarding/complete", {
         method: "POST",
@@ -114,7 +130,9 @@ function OnboardingContent() {
         body: JSON.stringify({ 
           token, 
           password, 
-          isExistingUser: onboardingData?.userExists 
+          isExistingUser: onboardingData?.userExists,
+          fullName: !onboardingData?.userExists ? fullName : undefined,
+          phone: !onboardingData?.userExists ? phoneNumber : undefined
         }),
       });
 
@@ -218,22 +236,69 @@ function OnboardingContent() {
                   : " Please set a password below to create your account and start learning."}
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">
-                    {onboardingData?.userExists ? "Confirm Password" : "Set Password"}
-                  </label>
-                  <div className="relative group">
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
-                    <input 
-                      type="password" 
-                      required 
-                      autoFocus
-                      placeholder="••••••••"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl pl-12 pr-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
-                    />
+              <form onSubmit={handleSubmit} className="space-y-10">
+                <div className="space-y-6">
+                  {!onboardingData?.userExists && (
+                    <>
+                      <div className="space-y-2">
+                        <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">Full Name</label>
+                        <input 
+                          type="text" 
+                          required 
+                          placeholder="John Doe"
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                          className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">Phone Number</label>
+                        <input 
+                          type="tel" 
+                          required 
+                          placeholder="+91 98765 43210"
+                          value={phoneNumber}
+                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">
+                        {onboardingData?.userExists ? "Confirm Password" : "Create Password"}
+                      </label>
+                      <div className="relative group">
+                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
+                        <input 
+                          type="password" 
+                          required 
+                          placeholder="••••••••"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl pl-12 pr-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
+                        />
+                      </div>
+                    </div>
+
+                    {!onboardingData?.userExists && (
+                      <div className="space-y-2">
+                        <label className="text-sm font-black uppercase tracking-wider text-slate-400 ml-1">Confirm Password</label>
+                        <div className="relative group">
+                          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
+                          <input 
+                            type="password" 
+                            required 
+                            placeholder="••••••••"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl pl-12 pr-6 outline-none focus:border-primary/30 focus:ring-4 focus:ring-primary/5 transition-all font-bold text-lg"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 

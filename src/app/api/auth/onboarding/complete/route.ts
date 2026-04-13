@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 export async function POST(req: Request) {
   const supabaseAdmin = getSupabaseAdmin();
   try {
-    const { token, password, isExistingUser } = await req.json();
+    const { token, password, isExistingUser, fullName, phone } = await req.json();
 
     if (!token) {
       return NextResponse.json({ error: 'Token is required' }, { status: 400 });
@@ -53,7 +53,11 @@ export async function POST(req: Request) {
       const { data: newUser, error: createError } = await supabaseAdmin.auth.admin.createUser({
         email: email,
         password: password,
-        email_confirm: true // Force confirmation since they've already used the magic link email
+        email_confirm: true, // Force confirmation since they've already used the magic link email
+        user_metadata: {
+          full_name: fullName,
+          phone: phone
+        }
       });
 
       if (createError) {

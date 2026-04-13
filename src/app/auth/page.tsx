@@ -16,6 +16,9 @@ function AuthContent() {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -54,6 +57,19 @@ function AuthContent() {
     setErrorMsg("");
     setSuccessMsg("");
 
+    if (!isLogin) {
+      if (password !== confirmPassword) {
+        setErrorMsg("Passwords do not match.");
+        setIsLoading(false);
+        return;
+      }
+      if (!fullName || !phoneNumber) {
+        setErrorMsg("Please fill in all fields.");
+        setIsLoading(false);
+        return;
+      }
+    }
+
     if (isLogin) {
       const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -70,6 +86,10 @@ function AuthContent() {
         password,
         options: {
           emailRedirectTo: typeof window !== "undefined" ? window.location.origin + destination : destination,
+          data: {
+            full_name: fullName,
+            phone: phoneNumber
+          }
         },
       });
       if (error) {
@@ -152,9 +172,38 @@ function AuthContent() {
               />
             </div>
 
+            {!isLogin && (
+              <>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold leading-none text-foreground/80">Full Name</label>
+                  <input
+                    type="text"
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="John Doe"
+                    required
+                    className="flex h-11 w-full rounded-xl border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-foreground"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold leading-none text-foreground/80">Phone Number</label>
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="+91 98765 43210"
+                    required
+                    className="flex h-11 w-full rounded-xl border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-foreground"
+                  />
+                </div>
+              </>
+            )}
+
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-semibold leading-none text-foreground/80">Password</label>
+                <label className="text-sm font-semibold leading-none text-foreground/80">
+                  {isLogin ? "Password" : "Create Password"}
+                </label>
                 {isLogin && (
                   <Link 
                     href="/auth/forgot-password" 
@@ -173,6 +222,20 @@ function AuthContent() {
                 className="flex h-11 w-full rounded-xl border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-foreground"
               />
             </div>
+
+            {!isLogin && (
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold leading-none text-foreground/80">Confirm Password</label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="flex h-11 w-full rounded-xl border border-border bg-card px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all text-foreground"
+                />
+              </div>
+            )}
 
             <button
               type="submit"

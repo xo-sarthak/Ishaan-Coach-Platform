@@ -10,6 +10,7 @@ const FOOTER_COLUMNS = [
     title: "General",
     links: [
       { name: "Home", href: "/" },
+      { name: "Newsletter", href: "/#newsletter" },
       { name: "Contact Us", href: "/contact" },
       { name: "My Account", href: "/auth" },
     ],
@@ -35,8 +36,8 @@ const FOOTER_COLUMNS = [
     links: [
       { name: "Courses", href: "/courses" },
       { name: "Cohorts", href: "/cohorts" },
-      { name: "AI Life Coach", href: "/ai-life" },
-      { name: "AI Relationship Coach", href: "/ai-relationship" },
+      // { name: "AI Life Coach", href: "/ai-life" },
+      // { name: "AI Relationship Coach", href: "/ai-relationship" },
     ],
   },
 ];
@@ -46,6 +47,13 @@ export default function Footer() {
   const pathname = usePathname();
 
   const handleHomeClick = (e: React.MouseEvent) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleNewsletterClick = (e: React.MouseEvent) => {
     if (pathname === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -116,7 +124,13 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      onClick={link.href === "/" ? handleHomeClick : undefined}
+                      onClick={
+                        link.href === "/" 
+                          ? handleHomeClick 
+                          : link.name === "Newsletter" 
+                            ? handleNewsletterClick 
+                            : undefined
+                      }
                       className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
                     >
                       {link.name}

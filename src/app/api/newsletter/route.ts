@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabaseClient';
+import { getSupabaseAdmin } from '@/lib/supabaseAdmin';
 
 export async function POST(req: Request) {
   try {
@@ -24,9 +24,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3. Attempt to insert into Supabase
-    // We rely on the UNIQUE constraint on the email column
-    const { error } = await supabase
+    // 3. Attempt to insert into Supabase using Admin Client (Bypasses RLS)
+    const supabaseAdmin = getSupabaseAdmin();
+    const { error } = await supabaseAdmin
       .from('newsletter_subscriptions')
       .insert([{ email }]);
 

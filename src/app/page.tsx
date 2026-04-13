@@ -4,6 +4,7 @@ import { getWhatsAppLink } from "@/lib/whatsapp";
 import { VideoCarousel } from "@/components/VideoCarousel";
 import { ResourceCarousel, CarouselItem } from "@/components/ResourceCarousel";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { HeroNewsletter } from "@/components/HeroNewsletter";
 import Link from "next/link";
 import { MessageCircle, ArrowRight, PlayCircle, Star, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
@@ -80,7 +81,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section (Anna Coaching Light Theme) */}
-      <section className="w-full bg-background pt-20 pb-12 overflow-hidden px-6">
+      <section id="newsletter" className="w-full bg-background pt-20 pb-12 overflow-hidden px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,47 +118,7 @@ export default function Home() {
             </p>
 
             {/* Integrated Newsletter Form */}
-            <div className="mt-4 bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-sm border border-white/60 relative overflow-hidden group">
-              <div className="flex flex-col gap-1.5 mb-6">
-                <h3 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-[#2A3B5C] flex items-center gap-2">
-                  Subscribe to Sunday Insights <span className="inline-block origin-bottom-left -rotate-12 transform group-hover:rotate-12 transition-transform duration-500">✍️</span>
-                </h3>
-                <p className="text-[#2A3B5C]/80 text-sm leading-relaxed max-w-sm">
-                  Join a growing community. Each week, I share actionable productivity tips, practical life advice, and book highlights directly to your inbox.
-                </p>
-              </div>
-
-              <form className="flex flex-col sm:flex-row gap-0 bg-white/80 p-1.5 rounded-full border border-white shadow-inner max-w-md w-full focus-within:ring-2 focus-within:ring-[#2A3B5C]/20 transition-all">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 rounded-full px-5 py-2.5 border-none bg-transparent text-sm outline-none placeholder:text-[#2A3B5C]/40 font-medium text-[#2A3B5C]"
-                  required
-                />
-                <button type="submit" className="bg-[#2A3B5C] text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-opacity-90 transition-opacity shadow-sm whitespace-nowrap">
-                  Subscribe
-                </button>
-              </form>
-
-              {/* Social Proof */}
-              <div className="flex items-center gap-3 text-xs text-[#2A3B5C]/80 font-medium mt-6">
-                <div className="flex -space-x-3">
-                  <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=1" alt="Reader" className="w-full h-full object-cover" /></div>
-                  <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=5" alt="Reader" className="w-full h-full object-cover" /></div>
-                  <div className="w-8 h-8 rounded-full bg-slate-400 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=9" alt="Reader" className="w-full h-full object-cover" /></div>
-                </div>
-                <div className="flex flex-col justify-center">
-                  <div className="flex items-center gap-0.5">
-                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
-                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
-                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
-                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
-                    <Star className="w-3.5 h-3.5 fill-current text-[#F9A826]" />
-                  </div>
-                  <span className="mt-0.5">Join 2,500+ friendly readers</span>
-                </div>
-              </div>
-            </div>
+            <HeroNewsletter />
           </div>
         </motion.div>
       </section>
