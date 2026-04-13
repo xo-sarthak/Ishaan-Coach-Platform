@@ -43,9 +43,9 @@ export function HeroNewsletter() {
   };
 
   return (
-    <div className="mt-4 bg-white/70 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-sm border border-white/60 relative overflow-hidden group">
+    <div className="mt-4 bg-white/70 backdrop-blur-md rounded-3xl p-5 md:p-8 shadow-sm border border-white/60 relative overflow-hidden group">
       <div className="flex flex-col gap-1.5 mb-6">
-        <h3 className="font-serif text-2xl md:text-3xl font-bold tracking-tight text-[#2A3B5C] flex items-center gap-2">
+        <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[#2A3B5C] flex items-center gap-2">
           Subscribe to Sunday Insights <span className="inline-block origin-bottom-left -rotate-12 transform group-hover:rotate-12 transition-transform duration-500">✍️</span>
         </h3>
         <p className="text-[#2A3B5C]/80 text-sm leading-relaxed max-w-sm">
@@ -55,20 +55,20 @@ export function HeroNewsletter() {
 
       {status === "idle" || status === "submitting" || status === "error" ? (
         <>
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-0 bg-white/80 p-1.5 rounded-full border border-white shadow-inner max-w-md w-full focus-within:ring-2 focus-within:ring-[#2A3B5C]/20 transition-all">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-0 bg-transparent sm:bg-white/80 p-0 sm:p-1.5 rounded-none sm:rounded-full sm:border sm:border-white sm:shadow-inner max-w-md w-full focus-within:ring-0 sm:focus-within:ring-2 sm:focus-within:ring-[#2A3B5C]/20 transition-all">
             <input
               type="email"
               placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 rounded-full px-5 py-2.5 border-none bg-transparent text-sm outline-none placeholder:text-[#2A3B5C]/40 font-medium text-[#2A3B5C]"
+              className="flex-1 rounded-full px-5 py-3.5 sm:py-2.5 border border-white/60 sm:border-none bg-white sm:bg-transparent text-sm outline-none focus:ring-2 focus:ring-[#2A3B5C]/20 sm:focus:ring-0 placeholder:text-[#2A3B5C]/40 font-medium text-[#2A3B5C] shadow-sm sm:shadow-none"
               required
               disabled={status === "submitting"}
             />
             <button 
               type="submit" 
               disabled={status === "submitting"}
-              className="bg-[#2A3B5C] text-white px-8 py-2.5 rounded-full font-bold text-sm hover:bg-opacity-90 transition-opacity shadow-sm whitespace-nowrap min-w-[120px] flex items-center justify-center"
+              className="bg-[#2A3B5C] text-white px-8 py-3.5 sm:py-2.5 rounded-full font-bold text-sm hover:bg-opacity-90 transition-opacity shadow-sm whitespace-nowrap min-w-[120px] flex items-center justify-center"
             >
               {status === "submitting" ? (
                 <Loader2 className="w-4 h-4 animate-spin" />

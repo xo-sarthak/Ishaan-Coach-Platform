@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       {/* Hero Section (Anna Coaching Light Theme) */}
-      <section id="newsletter" className="w-full bg-background pt-20 pb-12 overflow-hidden px-6">
+      <section id="newsletter" className="w-full bg-background pt-12 md:pt-20 pb-12 overflow-hidden px-4 md:px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -109,11 +109,11 @@ export default function Home() {
           </div>
 
           {/* Right: Content Block */}
-          <div className="flex-1 bg-primary rounded-[2.5rem] p-12 md:p-16 flex flex-col justify-center relative z-10 overflow-hidden shadow-sm mt-4">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-foreground mb-6 leading-tight">
+          <div className="flex-1 bg-primary rounded-[2.5rem] p-8 md:p-12 lg:p-16 flex flex-col justify-center relative z-10 overflow-hidden shadow-sm mt-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground mb-4 md:mb-6 leading-tight">
               Life & Relationship <br />Coach
             </h1>
-            <p className="text-lg text-foreground/80 mb-12 max-w-sm">
+            <p className="text-base md:text-lg text-foreground/80 mb-8 md:mb-12 max-w-sm leading-relaxed">
               Guidance to Empower Your Journey Toward Balance, Clarity, and Growth.
             </p>
 
@@ -138,14 +138,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {/* Card 1: Life Coaching */}
-            <div className="bg-white/80 rounded-2xl border border-border p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
-              <div className="relative w-8 h-8 mb-6">
+            <div className="bg-white/80 rounded-2xl border border-border p-5 md:p-6 flex flex-col items-start hover:shadow-md transition-shadow group cursor-pointer">
+              <div className="relative w-8 h-8 mb-4 md:mb-6">
                 <div className="absolute top-0 left-0 w-3 h-3 bg-muted-foreground/30 rounded-sm" />
                 <div className="absolute bottom-0 right-0 w-4 h-4 bg-primary rounded-full" />
                 <div className="absolute top-2 right-1 w-0 h-0 border-l-[6px] border-r-[6px] border-b-[10px] border-l-transparent border-r-transparent border-b-primary/60 rotate-45" />
               </div>
-              <h3 className="font-bold text-lg mb-3 text-[#2A3B5C]">Life Coaching</h3>
-              <p className="text-foreground/70 text-sm leading-relaxed mb-6 flex-grow">
+              <h3 className="font-bold text-lg mb-2 md:mb-3 text-[#2A3B5C]">Life Coaching</h3>
+              <p className="text-foreground/70 text-sm leading-relaxed mb-4 md:mb-6 flex-grow">
                 Identify your goals, overcome obstacles, and design the life you've always envisioned.
               </p>
               <Link href="/courses" className="text-[#2A3B5C] text-sm font-bold inline-flex items-center gap-2">
@@ -203,8 +203,8 @@ export default function Home() {
       </section>
 
       {/* About The Coach Section */}
-      <section className="w-full bg-background py-24 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
+      <section className="w-full bg-background py-16 md:py-24 px-4 md:px-6">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
 
           {/* Left: Image Box */}
           <div className="w-full lg:w-5/12 aspect-[4/5] relative rounded-3xl overflow-hidden shadow-sm">
@@ -223,15 +223,15 @@ export default function Home() {
               <span className="text-secondary-foreground/60">❖</span> Meet Ishaan
             </span>
 
-            <h2 className="text-4xl md:text-5xl lg:text-5xl font-serif text-foreground mb-4 leading-tight">
+            <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif text-foreground mb-4 leading-tight">
               A Coach Who Helps You Move from Stuck to Strong
             </h2>
 
-            <div className="text-[#2A3B5C] font-bold text-xl mb-6 flex items-center gap-2">
+            <div className="text-[#2A3B5C] font-bold text-lg md:text-xl xl:text-xl mb-4 md:mb-6 flex items-center gap-2">
               Life & Relationship Coach <span className="text-primary font-normal">|</span> Mentor
             </div>
 
-            <p className="text-foreground/70 leading-relaxed mb-10 text-lg">
+            <p className="text-foreground/70 leading-relaxed mb-8 md:mb-10 text-base md:text-lg">
               With over 5 years of experience, I've guided hundreds of individuals to rebuild confidence, find clarity in life decisions, and create consistent habits that last. My approach blends empathy, structure, & action so you can see real change—inside & out.
             </p>
 
@@ -256,16 +256,16 @@ export default function Home() {
             </div>
 
             {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-4 border-t border-border pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 border-t border-border pt-8 text-center sm:text-left">
               <div>
                 <div className="text-3xl font-bold text-foreground mb-1">5+</div>
                 <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Years of Excellence</div>
               </div>
-              <div className="border-l border-border pl-4">
+              <div className="border-t sm:border-t-0 sm:border-l border-border pt-4 sm:pt-0 sm:pl-4">
                 <div className="text-3xl font-bold text-foreground mb-1">50+</div>
                 <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Coaching Sessions</div>
               </div>
-              <div className="border-l border-border pl-4">
+              <div className="border-t sm:border-t-0 sm:border-l border-border pt-4 sm:pt-0 sm:pl-4">
                 <div className="text-3xl font-bold text-foreground mb-1">1K+</div>
                 <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Clients Transformed</div>
               </div>
@@ -289,21 +289,21 @@ export default function Home() {
 
       {/* Hero-style Cohort Section */}
       <section className="w-full bg-card dark:bg-background py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="bg-primary/5 border border-primary/20 rounded-[2.5rem] p-8 md:p-16 flex flex-col lg:flex-row items-center gap-12 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply" />
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="bg-primary/5 border border-primary/20 rounded-[2.5rem] p-6 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-8 md:gap-12 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full opacity-10 bg-[url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1500&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply" />
 
-            <div className="lg:w-1/2 relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6">
+            <div className="lg:w-1/2 relative z-10 text-center lg:text-left">
+              <div className="inline-flex items-center justify-center lg:justify-start gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold mb-6 mx-auto lg:mx-0">
                 <Calendar className="w-4 h-4" /> Waitlist Open
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold font-serif tracking-tight mb-6 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-bold font-serif tracking-tight mb-4 md:mb-6 leading-tight">
                 The Life Mastery <br className="hidden md:block" /> Live Cohort
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
+              <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
                 Join a highly vetted group of peers for a multi-week intensive program. Together, we'll build discipline, find career clarity, and forge deep connections.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 sm:gap-4">
                 <Link href="/cohorts" className="w-full sm:w-auto inline-flex items-center justify-center rounded-ull bg-primary px-8 py-4 text-sm font-bold text-primary-foreground hover:bg-primary/90 transition-all rounded-full hover:scale-105">
                   Join the Waitlist
                 </Link>

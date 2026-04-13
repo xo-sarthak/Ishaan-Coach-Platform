@@ -99,7 +99,7 @@ export const COURSES: CourseData[] = [
     title: "Esa Lagta Hai Ki Usko Mujhse Pyar Nhi",
     subtitle: "Masterclass by Ishaan Singh",
     tag: "Masterclass",
-    image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop",
+    image: "/courses/masterclass-1.png",
     rating: "4.9",
     enrollmentCount: "100+",
     duration: "90 Minutes",
