@@ -96,8 +96,8 @@ const DEFAULT_FAQS = [
 export const COURSES: CourseData[] = [
   {
     id: "c0",
-    slug: "esa-lagta-hai-ki-usko-mujhse-pyar-nhi",
-    title: "Esa Lagta Hai Ki Usko Mujhse Pyar Nhi",
+    slug: "solve-every-relationship-problem-get-your-happiness-back",
+    title: "Solve every relationship problem & get your happiness back",
     subtitle: "Masterclass by Ishaan Singh",
     tag: "Masterclass",
     image: "/courses/masterclass-1.png",
@@ -105,7 +105,7 @@ export const COURSES: CourseData[] = [
     reviewCount: "150",
     enrollmentCount: "100+",
     duration: "90 Minutes",
-    description: "Aisa feel ho raha hai ki partner badal gaya hai… par samajh nahi aa raha kya sach hai? Overthinking, doubt, aur confusion ke beech — yeh 90-minute masterclass tumhe clarity dega. Samajh paoge kya actually ho raha hai, kya karna chahiye, aur kaise apni peace wapas laani hai — bina guesswork ke.",
+    description: "Aap ab bhi apne partner ko pyaar karte ho, Par wo ab kuch badal gaye hain? Relationship pehle jaisa feel nahi hota? Aap pareshan ho, confused ho, aur ek solution dhoondh rahe ho? This class will give you clarity!",
     vimeoId: "1182386856",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     problems: [
@@ -117,20 +117,34 @@ export const COURSES: CourseData[] = [
     ],
     curriculum: [
       {
-        module: "Module 1: Samajhna kya ho raha hai",
-        description: "Tumhe clarity milegi ki partner ke behavior ke peeche kya ho sakta hai — bina unnecessary self-blame ke."
+        module: "Module 1: Understand the Problem & Get Clarity",
+        description: `→ Understand what you will get from this class
+→ Leave your confusion, understand few core truths
+→ Relationship issues ke root causes ko samjho (6 root causes covered)
+→ Frameworks to discuss the problem with your partner so that it works
+→ Understand if your partner will change or not
+→ Red flags & green flags (list)`
       },
       {
-        module: "Module 2: Sahi tareeke se baat karna",
-        description: "Kaise approach karein situation ko bina fight ke — taaki tumhe real answers mil sakein."
+        module: "Module 2: 5 Major Scenarios",
+        description: `→ WhatsApp message delay
+→ Partner not showing interest
+→ Partner stopped caring
+→ Inconsistent behaviour
+→ Partner is always busy`
       },
       {
-        module: "Module 3: Apni value aur boundaries",
-        description: "Kaise khud ko lose kiye bina relationship handle karein — aur apni emotional strength wapas laayein."
+        module: "Module 3: Take Decision with Clarity",
+        description: `→ Understand your partner's patterns & nature
+→ Understand if your partner will change or not
+→ Protect your self-respect & happiness
+→ Decide with clarity without guilt (stay or leave?)`
       },
       {
-        module: "Module 4: Final clarity & decision",
-        description: "End tak tumhe clear ho jayega — kya yeh relationship worth hai ya nahi, aur next step kya hona chahiye."
+        module: "Module 4: Conclusion",
+        description: `→ Leave with confidence
+→ Leave with clarity → remove guilt
+→ Protect your future self from the same pain`
       }
     ],
     testimonials: [

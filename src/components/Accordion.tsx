@@ -31,7 +31,7 @@ function AccordionItem({ title, content, isOpen, onClick }: AccordionItemProps) 
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <div className="px-6 pb-6 text-muted-foreground leading-relaxed">
+            <div className="px-6 pb-6 text-muted-foreground leading-relaxed whitespace-pre-wrap">
               {content}
             </div>
           </motion.div>
