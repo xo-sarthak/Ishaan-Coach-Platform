@@ -22,7 +22,7 @@ export function VideoCarousel() {
   useEffect(() => {
     async function getVideos() {
       try {
-        const res = await fetch('/api/video-sync');
+        const res = await fetch('/api/video-sync', { cache: 'no-store' });
         const json = await res.json();
         if (json.success) {
           setVideos(json.data);

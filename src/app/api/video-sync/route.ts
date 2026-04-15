@@ -6,10 +6,11 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET() {
+  console.log('--- Starting Video Sync ---');
   try {
     const supabase = getSupabaseAdmin();
     
-    // 1. Check if we have fresh data in the DB
+    // 1. Check current DB state
     const { data: recentVideos, error: fetchError } = await supabase
       .from('social_videos')
       .select('*')
@@ -17,22 +18,34 @@ export async function GET() {
       .order('published_at', { ascending: false })
       .limit(10);
 
-    if (fetchError) throw fetchError;
+    if (fetchError) {
+      console.error('DB Fetch Error:', fetchError);
+      throw fetchError;
+    }
 
     const oneHourAgo = new Date(Date.now() - 3600000);
-    const isDataFresh = recentVideos && recentVideos.length > 0 && new Date(recentVideos[0].updated_at) > oneHourAgo;
+    // Check if the LATEST sync was successful recently
+    const latestSyncTime = recentVideos && recentVideos.length > 0 
+      ? new Date(Math.max(...recentVideos.map(v => new Date(v.updated_at).getTime())))
+      : new Date(0);
+    
+    const isDataFresh = latestSyncTime > oneHourAgo;
+    console.log('Data Freshness Check:', { latestSyncTime, isDataFresh });
 
     // 2. If data is fresh, return it immediately
-    if (isDataFresh) {
+    if (isDataFresh && recentVideos && recentVideos.length > 0) {
       return NextResponse.json({ 
         success: true, 
         source: 'cache',
+        timestamp: new Date().toISOString(),
         data: recentVideos 
       });
     }
 
     // 3. If data is stale or missing, fetch from YouTube API
+    console.log('Fetching fresh data from YouTube API...');
     const youtubeVideos = await fetchYouTubeShorts();
+    console.log(`YouTube API returned ${youtubeVideos.length} videos.`);
 
     if (youtubeVideos.length > 0) {
       // 4. Upsert into Supabase
@@ -48,15 +61,22 @@ export async function GET() {
 
       const { error: upsertError } = await supabase
         .from('social_videos')
-        .upsert(upsertData, { onConflict: 'external_id' });
+        .upsert(upsertData, { 
+          onConflict: 'external_id',
+          ignoreDuplicates: false // Ensure we update existing records too
+        });
 
       if (upsertError) {
-        console.error('Sync error:', upsertError);
+        console.error('Critical Upsert Error:', upsertError);
+        throw upsertError; // Don't swallow this, we need to know
       }
+
+      console.log('Successfully upserted videos to DB.');
 
       return NextResponse.json({ 
         success: true, 
         source: 'api',
+        timestamp: new Date().toISOString(),
         data: upsertData 
       });
     }
@@ -64,13 +84,14 @@ export async function GET() {
     return NextResponse.json({ 
       success: true, 
       source: 'cache_fallback',
+      timestamp: new Date().toISOString(),
       data: recentVideos || [] 
     });
 
   } catch (error: any) {
-    console.error('Sync error:', error);
+    console.error('Final Sync Route Error:', error.message);
     
-    // LAST RESORT: Try to get whatever we have in the DB, even if stale
+    // LAST RESORT: Try to get whatever we have in the DB
     try {
       const supabase = getSupabaseAdmin();
       const { data: cachedVideos } = await supabase
@@ -84,11 +105,13 @@ export async function GET() {
         return NextResponse.json({ 
           success: true, 
           source: 'error_fallback',
+          error: error.message,
+          timestamp: new Date().toISOString(),
           data: cachedVideos 
         });
       }
     } catch (fallbackError) {
-      console.error('Fallback error:', fallbackError);
+      console.error('Double failure in fallback:', fallbackError);
     }
 
     return NextResponse.json({ 
