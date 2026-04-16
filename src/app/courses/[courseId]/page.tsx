@@ -75,7 +75,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
           <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-muted-foreground text-sm font-medium">
             <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> <span>{course.duration}</span></div>
             <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4" /> <span>Lifetime Access</span></div>
-            <div className="flex items-center gap-2"><Globe2 className="w-4 h-4" /> <span>English & Hindi</span></div>
+            <div className="flex items-center gap-2"><Globe2 className="w-4 h-4" /> <span>Hindi</span></div>
           </div>
         </div>
       </section>
@@ -160,8 +160,8 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
           </div>
 
           <div className={`grid gap-8 items-start mx-auto ${course.pricing.length === 1 ? 'lg:grid-cols-1 max-w-md' :
-              course.pricing.length === 2 ? 'lg:grid-cols-2 max-w-4xl' :
-                'lg:grid-cols-3'
+            course.pricing.length === 2 ? 'lg:grid-cols-2 max-w-4xl' :
+              'lg:grid-cols-3'
             }`}>
             {course.pricing.map((plan) => (
               <div

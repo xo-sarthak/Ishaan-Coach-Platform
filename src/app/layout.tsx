@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Modern Coach Platform",
+  title: "Ishaan Live",
   description: "Life and relationship advice, courses, and AI coaching.",
 };
 
