@@ -100,7 +100,7 @@ export const COURSES: CourseData[] = [
     title: "Solve every relationship problem & get your happiness back",
     subtitle: "Masterclass by Ishaan Singh",
     tag: "Masterclass",
-    image: "/courses/masterclass-1.png",
+    image: "/images/trial-2.png",
     rating: "4.9",
     reviewCount: "150",
     enrollmentCount: "100+",
