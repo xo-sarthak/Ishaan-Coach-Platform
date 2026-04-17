@@ -10,9 +10,41 @@ import { Loader2, ArrowRight, Play, BookOpen } from "lucide-react";
 export default function MyPurchases() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState("");
   const [purchasedCourses, setPurchasedCourses] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [unmatchedCount, setUnmatchedCount] = useState(0);
+
+  const handleSync = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) return;
+
+    setIsSyncing(true);
+    setSyncMessage("Searching for purchases...");
+    try {
+      const res = await fetch("/api/auth/sync-purchases", {
+        method: "POST",
+        headers: { 
+          "Authorization": `Bearer ${session.access_token}`,
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await res.json();
+      if (data.synced > 0) {
+        setSyncMessage(`Found ${data.synced} purchase(s)!`);
+        return true; // Indicate success to fetcher
+      }
+    } catch (err) {
+      console.error("Manual sync failed:", err);
+    } finally {
+      setTimeout(() => {
+        setIsSyncing(false);
+        setSyncMessage("");
+      }, 2000);
+    }
+    return false;
+  };
 
   useEffect(() => {
     const fetchPurchases = async () => {
@@ -22,18 +54,8 @@ export default function MyPurchases() {
           return;
       }
 
-      // Sync any unclaimed purchases before fetching
-      try {
-        await fetch("/api/auth/sync-purchases", {
-          method: "POST",
-          headers: { 
-            "Authorization": `Bearer ${session.access_token}`,
-            "Content-Type": "application/json"
-          }
-        });
-      } catch (syncErr) {
-        console.error("Purchase sync failed:", syncErr);
-      }
+      // Initial auto-sync
+      await handleSync();
 
       const { data, error: fetchError } = await supabase
         .from("purchases")
@@ -95,13 +117,36 @@ export default function MyPurchases() {
                 <Loader2 className="w-10 h-10 animate-spin text-primary" />
             </div>
         ) : purchasedCourses.length === 0 ? (
-            <div className="p-12 text-center border border-border border-dashed rounded-3xl bg-card">
-                <BookOpen className="w-16 h-16 text-muted-foreground/30 mx-auto mb-6" />
-                <h3 className="text-2xl font-bold mb-2">No courses unlocked yet</h3>
-                <p className="text-muted-foreground mb-8">Ready to master your life and relationships?</p>
-                <Link href="/" className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white font-bold rounded-lg hover:scale-105 transition-transform">
-                    Explore Masterclasses
+            <div className="text-center py-20 bg-slate-100 rounded-[3rem] border-2 border-dashed border-slate-200">
+              <div className="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                <ShieldCheck className="w-10 h-10 text-slate-400" />
+              </div>
+              <h2 className="text-2xl font-black mb-4">No purchases found</h2>
+              <p className="text-slate-500 mb-8 max-w-sm mx-auto font-medium">You haven&apos;t purchased any courses yet or they haven&apos;t been linked to your account.</p>
+              
+              <div className="flex flex-col items-center gap-4">
+                <Link 
+                  href="/" 
+                  className="px-8 py-3 bg-primary text-primary-foreground rounded-2xl font-bold hover:scale-105 transition-all inline-block"
+                >
+                  Browse Courses
                 </Link>
+                
+                <button 
+                  onClick={async () => {
+                    const found = await handleSync();
+                    if (found) window.location.reload();
+                  }}
+                  disabled={isSyncing}
+                  className="text-sm font-bold text-slate-400 hover:text-primary transition-colors flex items-center gap-2 group"
+                >
+                  {isSyncing ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> {syncMessage || "Syncing..."}</>
+                  ) : (
+                    <>Missing a purchase? <span className="underline decoration-dotted">Sync with payment email</span> <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
+                  )}
+                </button>
+              </div>
             </div>
         ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
