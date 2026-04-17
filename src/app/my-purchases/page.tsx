@@ -5,7 +5,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { COURSES } from "@/data/courses";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Loader2, ArrowRight, Play, BookOpen } from "lucide-react";
+import { Loader2, ArrowRight, Play, ShieldCheck } from "lucide-react";
 
 export default function MyPurchases() {
   const router = useRouter();
@@ -152,7 +152,7 @@ export default function MyPurchases() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {purchasedCourses.map((course, idx) => (
                     <div key={idx} className="bg-card rounded-[2rem] border border-border p-3 flex flex-col group overflow-hidden">
-                        <Link href={`/courses/${course.slug}`} className="block flex-shrink-0">
+                        <Link href={`/course/${course.slug}`} className="block flex-shrink-0">
                             <div className="aspect-video w-full rounded-2xl overflow-hidden relative mb-5 flex items-center justify-center bg-white">
                                 <img 
                                     src={course.image} 
@@ -168,7 +168,7 @@ export default function MyPurchases() {
                         </Link>
 
                         <div className="px-3 pb-4 flex flex-col flex-grow">
-                            <Link href={`/courses/${course.slug}`} className="block hover:text-primary transition-colors">
+                            <Link href={`/course/${course.slug}`} className="block hover:text-primary transition-colors">
                                 <h3 className="text-xl font-bold mb-2 leading-tight">
                                     {course.title}
                                 </h3>
@@ -179,7 +179,7 @@ export default function MyPurchases() {
 
                             <div className="mt-auto">
                                 <Link 
-                                    href={`/courses/${course.slug}`} 
+                                    href={`/course/${course.slug}`} 
                                     className="w-full inline-flex items-center justify-center gap-2 h-14 bg-muted hover:bg-muted/80 text-foreground font-bold rounded-2xl transition-all"
                                 >
                                     Access Content <ArrowRight className="w-5 h-5" />
