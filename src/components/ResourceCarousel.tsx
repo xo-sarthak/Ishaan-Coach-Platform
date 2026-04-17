@@ -19,6 +19,7 @@ export interface CarouselItem {
   authorName?: string;
   authorImage?: string;
   price?: string;
+  originalPrice?: string;
 }
 
 interface ResourceCarouselProps {
@@ -121,11 +122,11 @@ export function ResourceCarousel({
               className="group relative flex-none w-[320px] sm:w-[350px] snap-center sm:snap-start bg-white border border-border rounded-3xl overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 transform hover:-translate-y-1 block flex flex-col focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               {/* Image Container */}
-              <div className="aspect-[16/10] sm:aspect-video relative bg-muted overflow-hidden">
+              <div className="aspect-[16/10] sm:aspect-video relative bg-white overflow-hidden flex items-center justify-center">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-2"
                   loading="lazy"
                 />
                 {item.tag && (
@@ -175,7 +176,14 @@ export function ResourceCarousel({
                        <img src={item.authorImage || 'https://i.pravatar.cc/100?img=11'} alt={item.authorName || 'Instructor'} className="w-8 h-8 rounded-full border border-border object-cover" />
                        <span className="text-sm font-bold text-[#2A3B5C]">{item.authorName || 'Ishaan Singh'}</span>
                     </div>
-                    <div className="text-lg font-bold text-[#2A3B5C]">{item.price || 'Get'}</div>
+                    <div className="flex flex-col items-end">
+                      {item.originalPrice && (
+                        <span className="text-xs font-bold text-foreground/60 line-through mb-0.5">
+                          {item.originalPrice}
+                        </span>
+                      )}
+                      <div className="text-lg font-bold text-[#2A3B5C]">{item.price || 'Get'}</div>
+                    </div>
                   </div>
                 </div>
               </div>

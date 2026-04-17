@@ -20,7 +20,7 @@ export const RESOURCES: ResourceData[] = [
     title: "The Long Distance Relationship Survival Kit",
     subtitle: "How to make long distance easy",
     tag: "Survival Kit",
-    image: "/free-resources/long-distance.png",
+    image: "/free-resources/long-distance-trial.png",
     description: "A printable template designed to help you document and reframe your biggest professional and personal failures into actionable growth vectors.",
     benefits: [
       "Immediately reduces the emotional weight of past mistakes.",
@@ -29,7 +29,7 @@ export const RESOURCES: ResourceData[] = [
       "Shifts your mindset from victim to active learner."
     ],
     howToUse: "Print this single-page PDF and keep it in your journal. Whenever you face a major rejection or failure, fill out a row. Over time, you'll see how these 'failures' were actually prerequisites for your biggest wins.",
-    downloadUrl: "https://ishaanlive.in/resources/failure-resume.pdf",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1QacdPW_E-6L5YF8epTctJFJDby1Hnqbf",
     reviews: "100",
     rating: "4.6"
   }

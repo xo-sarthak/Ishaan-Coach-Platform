@@ -176,7 +176,19 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
                 <div className="p-8 md:p-10 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <p className="text-muted-foreground font-medium mb-6">{plan.subtitle}</p>
-                  <div className="text-4xl font-black mb-8">{plan.price}</div>
+                  <div className="flex items-baseline gap-3 mb-8">
+                    <span className="text-4xl font-black">{plan.price}</span>
+                    {plan.originalPrice && (
+                      <span className="text-xl text-muted-foreground/50 line-through font-bold">
+                        {plan.originalPrice}
+                      </span>
+                    )}
+                    {plan.originalPrice && (
+                      <span className="ml-2 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md border border-primary/20">
+                        Limited Offer
+                      </span>
+                    )}
+                  </div>
 
                   <div className="space-y-4 mb-10 flex-grow">
                     {plan.features.map((feature, i) => (

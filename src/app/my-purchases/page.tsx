@@ -94,11 +94,11 @@ export default function MyPurchases() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {purchasedCourses.map((course, idx) => (
                     <div key={idx} className="bg-card rounded-[2rem] border border-border p-3 flex flex-col group overflow-hidden">
-                        <div className="aspect-[4/3] w-full rounded-2xl overflow-hidden relative mb-5 flex-shrink-0 bg-muted">
+                        <div className="aspect-video w-full rounded-2xl overflow-hidden relative mb-5 flex-shrink-0 bg-white flex items-center justify-center">
                             <img 
                                 src={course.image} 
                                 alt={course.title}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-2"
                             />
                             {/* Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

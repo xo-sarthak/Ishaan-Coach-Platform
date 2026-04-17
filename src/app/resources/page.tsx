@@ -47,8 +47,8 @@ export default function ResourcesPage() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredResources.map((resource) => (
            <Link key={resource.id} href={`/resources/${resource.slug}`} className="group block bg-white rounded-3xl border border-border shadow-sm hover:shadow-2xl hover:shadow-black/5 transition-all duration-300 overflow-hidden flex flex-col hover:-translate-y-1 no-underline">
-             <div className="aspect-[4/3] w-full bg-muted relative">
-               <img src={resource.image} alt={resource.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+             <div className="aspect-video w-full bg-white relative flex items-center justify-center overflow-hidden border-b border-border/10">
+               <img src={resource.image} alt={resource.title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-3" loading="lazy" />
              </div>
              <div className="p-6 md:p-8 flex flex-col flex-grow text-left">
                {resource.subtitle && <span className="text-[#2A3B5C]/60 text-xs font-bold tracking-wider uppercase mb-2 block">{resource.subtitle}</span>}

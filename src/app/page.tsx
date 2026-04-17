@@ -30,7 +30,8 @@ const COURSES: CarouselItem[] = GLOBAL_COURSES.map(c => ({
   duration: c.duration,
   authorName: "Ishaan Singh",
   authorImage: "/images/coach4.png",
-  price: c.pricing?.[0]?.price || "Get"
+  price: c.pricing?.[0]?.price || "Get",
+  originalPrice: c.pricing?.[0]?.originalPrice
 }));
 
 const COHORTS: CarouselItem[] = GLOBAL_COHORTS.map(c => ({
@@ -39,7 +40,9 @@ const COHORTS: CarouselItem[] = GLOBAL_COHORTS.map(c => ({
   subtitle: c.status === "Waitlist" ? "Waitlist Open" : "Enrollment Open",
   image: c.image,
   link: `/cohorts/${c.slug}`,
-  tag: c.tag
+  tag: c.tag,
+  price: c.price,
+  originalPrice: c.originalPrice
 }));
 
 const RESOURCES: CarouselItem[] = GLOBAL_RESOURCES.map(r => ({

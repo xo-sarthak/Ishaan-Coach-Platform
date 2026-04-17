@@ -3,6 +3,7 @@ export interface PricingPlan {
   name: string;
   subtitle: string;
   price: string;
+  originalPrice?: string;
   isPopular?: boolean;
   features: { name: string; included: boolean }[];
 }
@@ -97,7 +98,7 @@ export const COURSES: CourseData[] = [
   {
     id: "c0",
     slug: "solve-every-relationship-problem-get-your-happiness-back",
-    title: "Solve every relationship problem & get your happiness back",
+    title: "Solve Every Relationship Problem & Get Your Happiness Back",
     subtitle: "Masterclass by Ishaan Singh",
     tag: "Masterclass",
     image: "/images/trial-2.png",
@@ -106,8 +107,8 @@ export const COURSES: CourseData[] = [
     enrollmentCount: "100+",
     duration: "90 Minutes",
     description: "Aap ab bhi apne partner ko pyaar karte ho, Par wo ab kuch badal gaye hain? Relationship pehle jaisa feel nahi hota? Aap pareshan ho, confused ho, aur ek solution dhoondh rahe ho? This class will give you clarity!",
-    vimeoId: "1182386856",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    vimeoId: "1184164861",
+    videoUrl: "https://www.youtube.com/embed/uUI_qVCdWcs",
     problems: [
       "Pehle sab normal tha… ab lagta hai woh emotionally door ho gaya hai.",
       "Replies slow ho gaye hain, effort kam ho gaya hai — par reason clear nahi hai.",
@@ -157,7 +158,8 @@ export const COURSES: CourseData[] = [
         id: "masterclass",
         name: "Masterclass Entry",
         subtitle: "Full Access",
-        price: "₹499",
+        price: "₹5",
+        originalPrice: "₹499",
         features: [
           { name: "90-minute deep-dive masterclass (recorded)", included: true },
           { name: "Instant access after purchase — no waiting", included: true },
