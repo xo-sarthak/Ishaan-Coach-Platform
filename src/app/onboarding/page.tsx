@@ -20,6 +20,7 @@ function OnboardingContent() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
   const [errorDetails, setErrorDetails] = useState("");
+  const [failedAttempts, setFailedAttempts] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isAutoLinking, setIsAutoLinking] = useState(false);
 
@@ -139,8 +140,7 @@ function OnboardingContent() {
       const data = await res.json();
 
       if (res.ok) {
-        // After server-side work is done, we MUST sign in on the client-side
-        // to establish the persistent browser session (cookies/localStorage)
+        // ... success logic ...
         const { error: signInError } = await supabase.auth.signInWithPassword({
           email: data.email || onboardingData?.email || "",
           password: password,
@@ -158,8 +158,14 @@ function OnboardingContent() {
           router.push("/my-purchases");
         }, 1500);
       } else {
+        // Handle failure without navigating away
         setError(data.error || "Failed to complete onboarding.");
         setErrorDetails(data.details || "");
+        
+        // Count attempts for password failures
+        if (onboardingData?.userExists && data.error?.toLowerCase().includes("password")) {
+          setFailedAttempts(prev => prev + 1);
+        }
       }
     } catch (err) {
       setError("Connection error. Please try again.");
@@ -185,7 +191,8 @@ function OnboardingContent() {
     );
   }
 
-  if (error) {
+  // Only show the hard "Access Restricted" view if we haven't even successfully loaded token data yet
+  if (error && !onboardingData) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 px-6 text-center">
         <div className="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-6">
@@ -303,9 +310,35 @@ function OnboardingContent() {
                 </div>
 
                 {error && (
-                  <p className="text-red-500 text-sm font-bold bg-red-50 p-4 rounded-xl border border-red-100 italic">
-                    {error}
-                  </p>
+                  <div className="space-y-4">
+                    <p className="text-red-500 text-sm font-bold bg-red-50 p-4 rounded-xl border border-red-100 italic">
+                      {error}
+                    </p>
+                    
+                    {failedAttempts >= 3 && (
+                      <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 animate-in fade-in slide-in-from-bottom-2">
+                        <p className="text-[#2A3B5C] font-bold text-sm mb-4">
+                           Having trouble with your password? 
+                        </p>
+                        <div className="flex flex-col gap-3">
+                          <button 
+                            type="button" 
+                            onClick={() => router.push(`/auth?email=${encodeURIComponent(onboardingData?.email || '')}`)}
+                            className="text-xs font-black uppercase tracking-widest text-primary hover:underline flex items-center gap-2"
+                          >
+                            <ArrowRight className="w-3 h-3" /> Forgot Password? Use standard login
+                          </button>
+                          <button 
+                            type="button" 
+                            onClick={handleGoogleLogin}
+                            className="text-xs font-black uppercase tracking-widest text-[#2A3B5C] hover:underline flex items-center gap-2"
+                          >
+                            <ArrowRight className="w-3 h-3" /> Try Login with Google
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 )}
 
                 <button 

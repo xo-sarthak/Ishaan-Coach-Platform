@@ -22,6 +22,19 @@ export default function MyPurchases() {
           return;
       }
 
+      // Sync any unclaimed purchases before fetching
+      try {
+        await fetch("/api/auth/sync-purchases", {
+          method: "POST",
+          headers: { 
+            "Authorization": `Bearer ${session.access_token}`,
+            "Content-Type": "application/json"
+          }
+        });
+      } catch (syncErr) {
+        console.error("Purchase sync failed:", syncErr);
+      }
+
       const { data, error: fetchError } = await supabase
         .from("purchases")
         .select("course_id, created_at")

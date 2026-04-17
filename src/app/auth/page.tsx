@@ -26,6 +26,12 @@ function AuthContent() {
   const destination = searchParams.get("redirectTo") || "/my-purchases";
 
   useEffect(() => {
+    // Pre-fill email if provided in URL
+    const emailParam = searchParams.get("email");
+    if (emailParam) {
+      setEmail(emailParam);
+    }
+
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -33,7 +39,7 @@ function AuthContent() {
       }
     };
     checkSession();
-  }, [router, destination]);
+  }, [router, destination, searchParams]);
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
