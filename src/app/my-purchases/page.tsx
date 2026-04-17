@@ -152,30 +152,39 @@ export default function MyPurchases() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {purchasedCourses.map((course, idx) => (
                     <div key={idx} className="bg-card rounded-[2rem] border border-border p-3 flex flex-col group overflow-hidden">
-                        <div className="aspect-video w-full rounded-2xl overflow-hidden relative mb-5 flex-shrink-0 bg-white flex items-center justify-center">
-                            <img 
-                                src={course.image} 
-                                alt={course.title}
-                                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-2"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                            <div className="absolute bottom-4 left-4 right-4 text-white">
-                                <div className="text-xs font-bold uppercase tracking-wider mb-1 bg-primary/20 px-2 py-0.5 rounded w-max backdrop-blur-sm">Purchased {course.purchaseDate}</div>
+                        <Link href={`/courses/${course.slug}`} className="block flex-shrink-0">
+                            <div className="aspect-video w-full rounded-2xl overflow-hidden relative mb-5 flex items-center justify-center bg-white">
+                                <img 
+                                    src={course.image} 
+                                    alt={course.title}
+                                    className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 p-2"
+                                />
+                                {/* Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                <div className="absolute bottom-4 left-4 right-4 text-white">
+                                    <div className="text-xs font-bold uppercase tracking-wider mb-1 bg-primary/20 px-2 py-0.5 rounded w-max backdrop-blur-sm">Purchased {course.purchaseDate}</div>
+                                </div>
                             </div>
-                            
-                            <div className="absolute inset-0 m-auto w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:scale-110 duration-300">
-                                <Play className="w-8 h-8 text-white fill-white ml-1" />
-                            </div>
-                        </div>
-                        
-                        <div className="px-4 pb-4 flex flex-col flex-grow">
-                            <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{course.title}</h3>
-                            <p className="text-muted-foreground text-sm flex-grow mb-6">{course.subtitle}</p>
-                            
-                            <Link href={`/course/${course.id}`} className="w-full py-3 bg-muted group-hover:bg-primary group-hover:text-primary-foreground text-foreground font-bold rounded-xl flex justify-center items-center gap-2 transition-all">
-                                Access Content <ArrowRight className="w-4 h-4" />
+                        </Link>
+
+                        <div className="px-3 pb-4 flex flex-col flex-grow">
+                            <Link href={`/courses/${course.slug}`} className="block hover:text-primary transition-colors">
+                                <h3 className="text-xl font-bold mb-2 leading-tight">
+                                    {course.title}
+                                </h3>
+                                <p className="text-muted-foreground text-sm mb-6">
+                                    Masterclass by Ishaan Singh
+                                </p>
                             </Link>
+
+                            <div className="mt-auto">
+                                <Link 
+                                    href={`/courses/${course.slug}`} 
+                                    className="w-full inline-flex items-center justify-center gap-2 h-14 bg-muted hover:bg-muted/80 text-foreground font-bold rounded-2xl transition-all"
+                                >
+                                    Access Content <ArrowRight className="w-5 h-5" />
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 ))}
