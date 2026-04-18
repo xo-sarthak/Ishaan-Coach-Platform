@@ -17,6 +17,7 @@ export interface CohortData {
   testimonials: { name: string; text: string }[];
   curriculum: { module: string; description: string }[];
   faqs: { question: string; answer: string }[];
+  vimeoId?: string;
   videoUrl?: string;
   liveLink: string;
 }

@@ -51,10 +51,11 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
              <div className="flex items-center gap-2 pl-2"><Clock className="w-5 h-5 text-primary"/> <span className="text-base text-muted-foreground">{cohort.schedule}</span></div>
           </div>
 
-          {cohort.videoUrl ? (
+          {cohort.videoUrl || cohort.vimeoId ? (
             <div className="w-full max-w-5xl mb-12">
               <VideoPlayer 
-                videoUrl={cohort.videoUrl} 
+                videoUrl={cohort.videoUrl}
+                vimeoId={cohort.vimeoId}
                 thumbnail={cohort.image} 
                 title={cohort.title} 
               />

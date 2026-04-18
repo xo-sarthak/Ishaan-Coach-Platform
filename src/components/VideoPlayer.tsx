@@ -4,12 +4,13 @@ import { useState } from "react";
 import { Play } from "lucide-react";
 
 interface VideoPlayerProps {
-  videoUrl: string;
+  videoUrl?: string;
+  vimeoId?: string;
   thumbnail: string;
   title: string;
 }
 
-export function VideoPlayer({ videoUrl, thumbnail, title }: VideoPlayerProps) {
+export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // Clean the YouTube URL to ensure it's in embed format and has autoplay
@@ -27,13 +28,27 @@ export function VideoPlayer({ videoUrl, thumbnail, title }: VideoPlayerProps) {
   if (isPlaying) {
     return (
       <div className="w-full aspect-video rounded-[2rem] overflow-hidden bg-black shadow-2xl border border-border animate-in fade-in zoom-in duration-500">
-        <iframe
-          src={getEmbedUrl(videoUrl)}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full border-0"
-        />
+        {vimeoId ? (
+          <iframe
+            src={`https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`}
+            title={title}
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full border-0"
+          />
+        ) : videoUrl ? (
+          <iframe
+            src={getEmbedUrl(videoUrl)}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full border-0"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-white">
+            Video unavailable
+          </div>
+        )}
       </div>
     );
   }

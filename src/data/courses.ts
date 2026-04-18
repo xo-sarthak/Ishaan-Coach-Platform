@@ -107,7 +107,7 @@ export const COURSES: CourseData[] = [
     enrollmentCount: "100+",
     duration: "90 Minutes",
     description: "Aap ab bhi apne partner ko pyaar karte ho, Par wo ab kuch badal gaye hain? Relationship pehle jaisa feel nahi hota? Aap pareshan ho, confused ho, aur ek solution dhoondh rahe ho? This class will give you clarity!",
-    vimeoId: "1184164861",
+    vimeoId: "1184415177",
     videoUrl: "https://www.youtube.com/embed/uUI_qVCdWcs",
     problems: [
       "Pehle sab normal tha… ab lagta hai woh emotionally door ho gaya hai.",
