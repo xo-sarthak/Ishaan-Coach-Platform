@@ -30,19 +30,19 @@ export default function BookOneOnOnePage() {
 
   const testimonials = [
     {
-      name: "Sahil Mehta",
+      name: "Sushmit",
       feedback: "Bhai, seriously clarity mil gayi. I was so stuck in my relationship for months, and I couldn't focus on my work. One session with Ishaan and I finally know where I was going wrong.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+      image: "/testimonials/rishab.jpg",
     },
     {
-      name: "Ananya Iyer",
+      name: "Shatakshi",
       feedback: "Maine bahut try kiya khud se resolve karne ka, but guidance ki kami thi. Ishaan sir ne problem ko aise simplify kiya ki lag raha tha ye toh kitna simple tha. Safe space feel hota hai baat karte waqt.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
+      image: "/testimonials/riya.jpg",
     },
     {
-      name: "Rohan Das",
+      name: "Sarthak",
       feedback: "Deep knowledge and genuine care. He is not just a coach, he talks like an elder brother who actually wants you to win. 10/10 recommendation if you are feeling lost.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+      image: "/testimonials/sarthak.jpg",
     },
   ];
 
@@ -273,27 +273,27 @@ export default function BookOneOnOnePage() {
               <div className="bg-white rounded-[2.5rem] p-10 md:p-16 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] relative overflow-hidden group border border-white/10">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full -mr-24 -mt-24 transition-transform group-hover:scale-150 duration-1000" />
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary/5 rounded-full -ml-16 -mb-16" />
-                
+
                 <div className="relative z-10 flex flex-col items-center text-center">
                   <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center mb-8 shadow-inner">
                     <Users className="w-10 h-10 text-primary" />
                   </div>
-                  
+
                   <h3 className="text-3xl md:text-5xl font-serif font-bold text-[#2A3B5C] mb-4 tracking-tight">
                     Exclusive 1:1 Booking Portal
                   </h3>
                   <div className="flex flex-col items-center mb-10">
                     <div className="flex items-baseline gap-3 mb-2">
-                       <span className="text-4xl md:text-6xl font-black text-[#2A3B5C]">₹1,499</span>
-                       <span className="text-xl md:text-2xl text-[#2A3B5C]/60 line-through font-bold">₹2,499</span>
+                      <span className="text-4xl md:text-6xl font-black text-[#2A3B5C]">₹1,499</span>
+                      <span className="text-xl md:text-2xl text-[#2A3B5C]/60 line-through font-bold">₹2,499</span>
                     </div>
                     <span className="bg-primary/10 text-primary text-[10px] md:text-xs font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-lg border border-primary/20">
                       Limited Time Offer
                     </span>
                   </div>
-                  
-                  <a 
-                    href="https://topmate.io/ishaan_live" 
+
+                  <a
+                    href="https://topmate.io/ishaan_live"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group/btn relative bg-[#2A3B5C] text-white px-12 py-6 rounded-full font-black text-xl hover:scale-105 transition-all shadow-[0_20px_40px_-10px_rgba(42,59,92,0.5)] flex items-center gap-4 active:scale-95"
@@ -301,14 +301,14 @@ export default function BookOneOnOnePage() {
                     <span className="relative z-10">Select Your Time Slot</span>
                     <ArrowRight className="w-6 h-6 group-hover/btn:translate-x-2 transition-transform" />
                   </a>
-                  
+
                   <div className="mt-8 flex items-center gap-2 text-xs font-bold text-[#2A3B5C]/40 uppercase tracking-[0.3em]">
                     <ShieldCheck className="w-4 h-4" />
                     Secure External Checkout
                   </div>
                 </div>
               </div>
- 
+
               <div className="mt-16 flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-white/40 text-xs font-bold uppercase tracking-[0.2em]">
                 <div className="flex items-center gap-2.5 hover:text-white/60 transition-colors"><CheckCircle2 className="w-4 h-4 text-primary" /> 1:1 Video Calls</div>
                 <div className="flex items-center gap-2.5 hover:text-white/60 transition-colors"><CheckCircle2 className="w-4 h-4 text-primary" /> Action Plan Provided</div>
