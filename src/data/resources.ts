@@ -21,52 +21,56 @@ export const RESOURCES: ResourceData[] = [
     subtitle: "How to make long distance easy",
     tag: "Survival Kit",
     image: "/free-resources/long-distance-trial.png",
-    description: "A printable template designed to help you document and reframe your biggest professional and personal failures into actionable growth vectors.",
+    description: "A no-BS digital guide to surviving long distance—better communication, deeper connection, and real ways to stay close even when you're far.",
     benefits: [
-      "Immediately reduces the emotional weight of past mistakes.",
-      "Identifies hidden patterns in why certain projects failed.",
-      "Helps you confidently answer the 'biggest failure' interview question.",
-      "Shifts your mindset from victim to active learner."
+      "Strengthens communication so small misunderstandings don’t turn into big fights.",
+      "Builds trust that lasts through months of separation.",
+      "Gives you structured ways to spend quality time together, even online.",
+      "Helps you handle jealousy and insecurity before they spiral."
     ],
-    howToUse: "Print this single-page PDF and keep it in your journal. Whenever you face a major rejection or failure, fill out a row. Over time, you'll see how these 'failures' were actually prerequisites for your biggest wins.",
+    howToUse: "Don’t just read it, use it together. Hop on a call, go page by page, and talk it out. Be real, not perfect. Come back to it whenever things feel off.",
     downloadUrl: "https://drive.google.com/uc?export=download&id=1QacdPW_E-6L5YF8epTctJFJDby1Hnqbf",
     reviews: "100",
     rating: "4.6"
+  },
+  {
+    id: "r2",
+    slug: "how-to-get-over-a-breakup",
+    title: "How to Get Over a Breakup",
+    subtitle: "Learn about coping up after a relationship ends",
+    tag: "Guide",
+    image: "/free-resources/get-over-a-breakup.png",
+    description: "A practical digital guide designed to help you heal after a breakup, rebuild your confidence, and move forward with clarity. It walks you step-by-step through processing emotions, breaking unhealthy patterns, and creating a stronger version of yourself.",
+    benefits: [
+      "Helps you process emotions instead of suppressing them",
+      "Breaks unhealthy attachment and overthinking cycles.",
+      "Rebuilds confidence and personal direction",
+      "Turns pain into fuel for growth"
+    ],
+    howToUse: "Don’t rush through it. Take your time with each section. Be honest with yourself. This is for your eyes only. Use it to understand what went wrong, what you learned, and how to build something better next time.",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1ZK1b8lS85vLRRSTMkZ8WqE6nFRhj3S2U",
+    reviews: "80",
+    rating: "4.8"
+  },
+  {
+    id: "r3",
+    slug: "hard-earned-lessons",
+    title: "Hard Earned Lessons",
+    subtitle: "10 Life Lessons",
+    tag: "Guide",
+    image: "/free-resources/hard-earned-lesson.png",
+    description: "A practical digital guide that shares 10 powerful life lessons to help you think clearly, make better decisions, and build a life aligned with your values. It’s based on real experiences and designed to give you clarity, direction, and control over your life.",
+    benefits: [
+      "Helps you gain clarity on decisions and life direction",
+      "Builds a strong mindset rooted in accountability and purpose",
+      "Teaches you to handle relationships, money, and career with maturity",
+      "Gives you practical wisdom that actually works in real life"
+    ],
+    howToUse: "Read one lesson at a time and reflect on how it applies to your life. Don’t rush, pause, think, and internalize each idea. Apply what resonates and ignore what doesn’t. Revisit it whenever you feel lost or need direction.",
+    downloadUrl: "https://drive.google.com/uc?export=download&id=1TwvuexouTIwMH-mdWFBkf4dhMQGTS0sh",
+    reviews: "50",
+    rating: "4.5"
   }
-  // {
-  //   id: "r2",
-  //   slug: "weekly-planning-routine",
-  //   title: "Weekly Planning Routine",
-  //   subtitle: "Take back your Sundays",
-  //   tag: "PDF Guide",
-  //   image: "https://images.unsplash.com/photo-1507925922893-875c7cd392a9?q=80&w=600&auto=format&fit=crop",
-  //   description: "A 5-step checklist to conduct a highly effective weekly review, ensuring you start every Monday with absolute clarity.",
-  //   benefits: [
-  //     "Eliminates Monday morning overwhelm and anxiety.",
-  //     "Ensures critical tasks aren't forgotten during busy weeks.",
-  //     "Creates a clear boundary between work and weekend recovery.",
-  //     "Helps track macro-goals across the year."
-  //   ],
-  //   howToUse: "Block out 30 minutes every Sunday afternoon. Use this PDF guide alongside a warm beverage to brain-dump your tasks, review the past week's performance, and prioritize the Big 3 items for the vital days ahead.",
-  //   downloadUrl: "https://ishaanlive.in/resources/weekly-planner.pdf"
-  // },
-  // {
-  //   id: "r3",
-  //   slug: "100-questions-before-dating",
-  //   title: "100 Questions Before Dating",
-  //   subtitle: "Screen for alignment",
-  //   tag: "E-Book",
-  //   image: "https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?q=80&w=600&auto=format&fit=crop",
-  //   description: "A curated list of deep, insightful questions to ask potential partners early on, saving you months of wasted time with incompatible people.",
-  //   benefits: [
-  //     "Bypasses boring small talk for meaningful conversation.",
-  //     "Highlights red flags regarding core values and finances early.",
-  //     "Accelerates emotional intimacy in a safe, structured way.",
-  //     "Acts as a fantastic ice-breaker for awkward first dates."
-  //   ],
-  //   howToUse: "Read through the specific categories. Keep 3-4 questions in your mental back pocket for dinner dates, or literally pull out the PDF and make a fun game out of it with your partner.",
-  //   downloadUrl: "#"
-  // },
   // {
   //   id: "r4",
   //   slug: "habit-tracker-printable",
