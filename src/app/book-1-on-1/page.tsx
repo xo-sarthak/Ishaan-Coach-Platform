@@ -32,12 +32,12 @@ export default function BookOneOnOnePage() {
     {
       name: "Sushmit",
       feedback: "Bhai, seriously clarity mil gayi. I was so stuck in my relationship for months, and I couldn't focus on my work. One session with Ishaan and I finally know where I was going wrong.",
-      image: "/testimonials/rishab.jpg",
+      image: "/testimonials/rishab.jpeg",
     },
     {
       name: "Shatakshi",
       feedback: "Maine bahut try kiya khud se resolve karne ka, but guidance ki kami thi. Ishaan sir ne problem ko aise simplify kiya ki lag raha tha ye toh kitna simple tha. Safe space feel hota hai baat karte waqt.",
-      image: "/testimonials/riya.jpg",
+      image: "/testimonials/riya.jpeg",
     },
     {
       name: "Sarthak",
