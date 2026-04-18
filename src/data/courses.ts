@@ -158,7 +158,7 @@ export const COURSES: CourseData[] = [
         id: "masterclass",
         name: "Masterclass Entry",
         subtitle: "Full Access",
-        price: "₹5",
+        price: "₹199",
         originalPrice: "₹499",
         features: [
           { name: "90-minute deep-dive masterclass (recorded)", included: true },
