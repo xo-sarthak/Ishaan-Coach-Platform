@@ -76,10 +76,10 @@ export default function ProtectedCoursePage({ params }: { params: Promise<{ id: 
 
         {/* Video Player */}
         <div className="aspect-video w-full bg-card rounded-[2rem] border border-border shadow-2xl flex items-center justify-center overflow-hidden relative mb-12 shadow-primary/10">
-          {(course.fullVideoId || course.vimeoId) ? (
+          {course.fullVideoId ? (
             <div className="w-full h-full relative">
               {(() => {
-                const [id, hash] = (course.fullVideoId || course.vimeoId || "").split("/");
+                const [id, hash] = (course.fullVideoId || "").split("/");
                 const vimeoSrc = `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1${hash ? `&h=${hash}` : ""}`;
                 return (
                   <iframe

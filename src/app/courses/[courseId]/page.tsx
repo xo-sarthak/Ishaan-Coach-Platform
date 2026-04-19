@@ -53,11 +53,11 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
             </div>
           </div>
 
-          {course.videoUrl || course.vimeoId ? (
+          {course.videoUrl || course.trailerId ? (
             <div className="w-full max-w-4xl mb-12">
               <VideoPlayer
                 videoUrl={course.videoUrl}
-                vimeoId={course.vimeoId}
+                vimeoId={course.trailerId}
                 thumbnail={course.image}
                 title={course.title}
               />
