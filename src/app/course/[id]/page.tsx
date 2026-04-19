@@ -79,9 +79,10 @@ export default function ProtectedCoursePage({ params }: { params: Promise<{ id: 
           {course.vimeoId ? (
             <div className="w-full h-full relative">
               <iframe
-                src={`https://player.vimeo.com/video/${course.vimeoId}?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479`}
+                src={`https://player.vimeo.com/video/${course.vimeoId}?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1`}
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                referrerPolicy="strict-origin-when-cross-origin"
                 title={course.title}
                 className="w-full h-full"
               ></iframe>

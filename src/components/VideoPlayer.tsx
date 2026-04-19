@@ -30,10 +30,11 @@ export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title }: VideoPlayer
       <div className="w-full aspect-video rounded-[2rem] overflow-hidden bg-black shadow-2xl border border-border animate-in fade-in zoom-in duration-500">
         {vimeoId ? (
           <iframe
-            src={`https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0`}
+            src={`https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0&dnt=1`}
             title={title}
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             className="w-full h-full border-0"
           />
         ) : videoUrl ? (
@@ -42,6 +43,7 @@ export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title }: VideoPlayer
             title={title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             className="w-full h-full border-0"
           />
         ) : (
