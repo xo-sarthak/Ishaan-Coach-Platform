@@ -26,11 +26,14 @@ export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title }: VideoPlayer
   };
 
   if (isPlaying) {
+    const [id, hash] = (vimeoId || "").split("/");
+    const vimeoSrc = `https://player.vimeo.com/video/${id}?autoplay=1&muted=0&title=0&byline=0&portrait=0&dnt=1${hash ? `&h=${hash}` : ""}`;
+
     return (
       <div className="w-full aspect-video rounded-[2rem] overflow-hidden bg-black shadow-2xl border border-border animate-in fade-in zoom-in duration-500">
         {vimeoId ? (
           <iframe
-            src={`https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=0&title=0&byline=0&portrait=0&dnt=1`}
+            src={vimeoSrc}
             title={title}
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen

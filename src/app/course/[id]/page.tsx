@@ -76,16 +76,22 @@ export default function ProtectedCoursePage({ params }: { params: Promise<{ id: 
 
         {/* Video Player */}
         <div className="aspect-video w-full bg-card rounded-[2rem] border border-border shadow-2xl flex items-center justify-center overflow-hidden relative mb-12 shadow-primary/10">
-          {course.vimeoId ? (
+          {(course.fullVideoId || course.vimeoId) ? (
             <div className="w-full h-full relative">
-              <iframe
-                src={`https://player.vimeo.com/video/${course.vimeoId}?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1`}
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                referrerPolicy="strict-origin-when-cross-origin"
-                title={course.title}
-                className="w-full h-full"
-              ></iframe>
+              {(() => {
+                const [id, hash] = (course.fullVideoId || course.vimeoId || "").split("/");
+                const vimeoSrc = `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&dnt=1${hash ? `&h=${hash}` : ""}`;
+                return (
+                  <iframe
+                    src={vimeoSrc}
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    title={course.title}
+                    className="w-full h-full"
+                  ></iframe>
+                );
+              })()}
             </div>
           ) : (
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 text-center">
