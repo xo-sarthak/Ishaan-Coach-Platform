@@ -58,6 +58,13 @@ async function performYouTubeFetch(): Promise<YoutubeVideo[]> {
       `https://www.googleapis.com/youtube/v3/channels?forHandle=${encodeURIComponent(handle)}&part=id,contentDetails&key=${YOUTUBE_API_KEY}`,
       { headers: fetchHeaders }
     );
+
+    if (!channelRes.ok) {
+      const errorText = await channelRes.text();
+      console.error('YouTube Channel Fetch Error:', channelRes.status, errorText);
+      throw new Error(`YouTube API Channel fetch failed (${channelRes.status}): ${errorText}`);
+    }
+
     const channelData = await channelRes.json();
 
     if (!channelData.items || channelData.items.length === 0) {
@@ -67,6 +74,13 @@ async function performYouTubeFetch(): Promise<YoutubeVideo[]> {
         `https://www.googleapis.com/youtube/v3/channels?forHandle=${encodeURIComponent(handleWithoutAt)}&part=id,contentDetails&key=${YOUTUBE_API_KEY}`,
         { headers: fetchHeaders }
       );
+
+      if (!retryRes.ok) {
+        const errorText = await retryRes.text();
+        console.error('YouTube Channel Retry Error:', retryRes.status, errorText);
+        throw new Error(`YouTube API Channel retry failed (${retryRes.status}): ${errorText}`);
+      }
+
       const retryData = await retryRes.json();
       
       if (!retryData.items || retryData.items.length === 0) {
@@ -99,12 +113,20 @@ async function performYouTubeFetch(): Promise<YoutubeVideo[]> {
   }
 
   const uploadsPlaylistId = detailsData.items[0].contentDetails.relatedPlaylists.uploads;
+  console.log(`YouTube Sync: Resolved Uploads Playlist ID: ${uploadsPlaylistId} for Channel: ${channelId}`);
 
   // 2. Fetch latest videos from the Uploads playlist
   const videosRes = await fetch(
     `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${uploadsPlaylistId}&part=snippet,contentDetails&maxResults=20&key=${YOUTUBE_API_KEY}`,
     { headers: fetchHeaders }
   );
+
+  if (!videosRes.ok) {
+    const errorText = await videosRes.text();
+    console.error('YouTube PlaylistItems Error:', videosRes.status, errorText);
+    throw new Error(`YouTube API Playlist fetch failed (${videosRes.status}): ${errorText}`);
+  }
+
   const videosData = await videosRes.json();
 
   if (!videosData.items) {

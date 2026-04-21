@@ -5,8 +5,11 @@ import { fetchYouTubeShorts } from '@/lib/youtube';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export async function GET() {
-  console.log('--- Starting Video Sync ---');
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const force = searchParams.get('force') === 'true';
+  
+  console.log(`--- Starting Video Sync (Force: ${force}) ---`);
   try {
     const supabase = getSupabaseAdmin();
     
@@ -30,10 +33,10 @@ export async function GET() {
       : new Date(0);
     
     const isDataFresh = latestSyncTime > oneHourAgo;
-    console.log('Data Freshness Check:', { latestSyncTime, isDataFresh });
+    console.log('Data Freshness Check:', { latestSyncTime, isDataFresh, force });
 
-    // 2. If data is fresh, return it immediately
-    if (isDataFresh && recentVideos && recentVideos.length > 0) {
+    // 2. If data is fresh AND not forced, return it immediately
+    if (isDataFresh && !force && recentVideos && recentVideos.length > 0) {
       return NextResponse.json({ 
         success: true, 
         source: 'cache',
@@ -90,30 +93,6 @@ export async function GET() {
 
   } catch (error: any) {
     console.error('Final Sync Route Error:', error.message);
-    
-    // LAST RESORT: Try to get whatever we have in the DB
-    try {
-      const supabase = getSupabaseAdmin();
-      const { data: cachedVideos } = await supabase
-        .from('social_videos')
-        .select('*')
-        .eq('platform', 'youtube')
-        .order('published_at', { ascending: false })
-        .limit(10);
-
-      if (cachedVideos && cachedVideos.length > 0) {
-        return NextResponse.json({ 
-          success: true, 
-          source: 'error_fallback',
-          error: error.message,
-          timestamp: new Date().toISOString(),
-          data: cachedVideos 
-        });
-      }
-    } catch (fallbackError) {
-      console.error('Double failure in fallback:', fallbackError);
-    }
-
     return NextResponse.json({ 
       success: false, 
       error: error.message 
