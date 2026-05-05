@@ -113,9 +113,7 @@ const countryCodes = [
 ];
 
 export default function JoinCommunityPage() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [getGuide, setGetGuide] = useState(true);
   const [getNewsletter, setGetNewsletter] = useState(true);
   const [formData, setFormData] = useState({
@@ -136,8 +134,6 @@ export default function JoinCommunityPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, getGuide, getNewsletter })
       });
-      const data = await res.json();
-      
       if (res.ok) {
         if (getGuide) {
           const link = document.createElement('a');
@@ -149,6 +145,7 @@ export default function JoinCommunityPage() {
         }
         window.location.href = "https://chat.whatsapp.com/your-link-here";
       } else {
+        const data = await res.json();
         alert(data.message || 'Something went wrong');
       }
     } catch (err) {
@@ -161,17 +158,50 @@ export default function JoinCommunityPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-4 md:pt-0">
       
-      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 flex flex-col items-center">
+      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-32">
         
-        {/* 1. TOP: The WhatsApp Tag */}
-        <div className="mt-8 mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-[10px] font-bold tracking-[0.2em] uppercase border border-feature-bg/10">
+        {/* DESKTOP LEFT / MOBILE BOTTOM: The Content */}
+        <div className="w-full flex flex-col space-y-8 text-left order-2 lg:order-1 pb-12 lg:pb-0">
+          <div className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-[10px] font-bold tracking-[0.2em] uppercase border border-feature-bg/10 w-fit">
             <MessageCircle className="w-3.5 h-3.5 fill-feature-bg/20" /> WhatsApp Community
+          </div>
+
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] font-bold tracking-tight">
+              The Inner <br className="hidden lg:block" /> <span className="italic">Circle</span>
+            </h1>
+            <p className="text-lg md:text-xl text-foreground/70 leading-relaxed max-w-lg">
+              A private community for those committed to building resilience, clarity, and deeper connections.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:gap-6 pt-4 max-w-lg w-full">
+             {[
+               { icon: <Zap className="w-5 h-5 text-[#F9A826]" />, title: "Weekly Insights", desc: "Actionable strategies on life and mindset. No fluff, just results." },
+               { icon: <Users className="w-5 h-5 text-blue-500" />, title: "Networking Hub", desc: "Connect with like-minded individuals on the same journey." },
+               { icon: <MessageCircle className="w-5 h-5 text-emerald-500" />, title: "Community Q&A", desc: "Get your pressing questions answered by the community and myself." }
+             ].map((item, i) => (
+               <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-border bg-white shadow-sm text-left group hover:shadow-md transition-all">
+                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">{item.icon}</div>
+                  <div>
+                    <h4 className="font-bold text-foreground text-sm md:text-base">{item.title}</h4>
+                    <p className="text-xs text-foreground/60 leading-relaxed">{item.desc}</p>
+                  </div>
+               </div>
+             ))}
           </div>
         </div>
 
-        {/* 2. MIDDLE: The Signup Form */}
-        <div className="w-full max-w-[500px] mb-12">
+        {/* DESKTOP RIGHT / MOBILE TOP: The Form Card */}
+        <div className="w-full order-1 lg:order-2 lg:sticky lg:top-32">
+          
+          {/* Mobile Only Tag */}
+          <div className="lg:hidden flex justify-center mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-[10px] font-bold tracking-[0.2em] uppercase border border-feature-bg/10">
+              <MessageCircle className="w-3.5 h-3.5 fill-feature-bg/20" /> WhatsApp Community
+            </div>
+          </div>
+
           <div className="bg-white rounded-3xl md:rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-6 md:p-12 text-left">
             <div className="mb-6 md:mb-10 text-left">
               <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">Join the Community</h3>
@@ -304,34 +334,6 @@ export default function JoinCommunityPage() {
                  {isLoading ? "Joining..." : "Join WhatsApp Community"} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                </button>
             </form>
-          </div>
-        </div>
-
-        {/* 3. BOTTOM: The Inner Circle Insights */}
-        <div className="w-full flex flex-col space-y-8 text-center pb-12">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl font-serif text-foreground leading-[1.1] font-bold tracking-tight">
-              The Inner <span className="italic">Circle</span>
-            </h1>
-            <p className="text-lg text-foreground/70 leading-relaxed max-w-lg mx-auto">
-              A private community for those committed to building resilience, clarity, and deeper connections.
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:gap-6 pt-4 max-w-lg mx-auto w-full">
-             {[
-               { icon: <Zap className="w-5 h-5 text-[#F9A826]" />, title: "Weekly Insights", desc: "Actionable strategies on life and mindset. No fluff, just results." },
-               { icon: <Users className="w-5 h-5 text-blue-500" />, title: "Networking Hub", desc: "Connect with like-minded individuals on the same journey." },
-               { icon: <MessageCircle className="w-5 h-5 text-emerald-500" />, title: "Community Q&A", desc: "Get your pressing questions answered by the community and myself." }
-             ].map((item, i) => (
-               <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-border bg-white shadow-sm text-left">
-                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">{item.icon}</div>
-                  <div>
-                    <h4 className="font-bold text-foreground text-sm md:text-base">{item.title}</h4>
-                    <p className="text-xs text-foreground/60 leading-relaxed">{item.desc}</p>
-                  </div>
-               </div>
-             ))}
           </div>
         </div>
       </main>
