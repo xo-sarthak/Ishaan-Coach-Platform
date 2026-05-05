@@ -131,11 +131,12 @@ export default function CoursesPage() {
                          <span className="text-sm font-bold text-[#2A3B5C]">Ishaan Singh</span>
                       </div>
                       <div className="flex flex-col items-end">
-                        {course.pricing?.[0]?.originalPrice && (
+                        {/* Temporarily hiding original price per user request */}
+                        {/* {course.pricing?.[0]?.originalPrice && (
                           <span className="text-xs font-bold text-foreground/60 line-through mb-0.5">
                             {course.pricing[0].originalPrice}
                           </span>
-                        )}
+                        )} */}
                         <div className="text-lg font-bold text-[#2A3B5C]">{price}</div>
                       </div>
                     </div>

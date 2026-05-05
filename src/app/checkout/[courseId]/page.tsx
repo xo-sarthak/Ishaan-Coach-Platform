@@ -178,11 +178,11 @@ export default function CheckoutPage({ params: paramsPromise }: { params: Promis
               <h1 className="text-xl font-bold font-serif">{item.title}</h1>
             </div>
             <div className="text-right flex flex-col items-end">
-              {('pricing' in item ? item.pricing[0].originalPrice : item.originalPrice) && (
+              {/* {('pricing' in item ? item.pricing[0].originalPrice : item.originalPrice) && (
                 <span className="text-sm text-slate-400 line-through font-bold mb-1">
                   {'pricing' in item ? item.pricing[0].originalPrice : item.originalPrice}
                 </span>
-              )}
+              )} */}
               <p className="text-primary font-black text-2xl">{priceDisplay}</p>
             </div>
           </div>

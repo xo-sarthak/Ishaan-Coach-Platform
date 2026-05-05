@@ -8,6 +8,8 @@ export interface Book {
   tag: string;
   category: "Productivity" | "Money" | "Relationships" | "Mindset" | "Biographies";
   language: "English" | "Hindi";
+  reviews: string;
+  rating: string;
 }
 
 export const BOOKS: Book[] = [
@@ -22,6 +24,8 @@ export const BOOKS: Book[] = [
     tag: "Productivity",
     category: "Productivity",
     language: "English",
+    reviews: "87",
+    rating: "4.9",
   },
   {
     id: "prod-2",
@@ -33,6 +37,8 @@ export const BOOKS: Book[] = [
     tag: "Focus",
     category: "Productivity",
     language: "English",
+    reviews: "64",
+    rating: "4.8",
   },
   {
     id: "prod-3",
@@ -44,6 +50,8 @@ export const BOOKS: Book[] = [
     tag: "Effectiveness",
     category: "Productivity",
     language: "English",
+    reviews: "52",
+    rating: "4.7",
   },
   {
     id: "prod-4",
@@ -55,6 +63,8 @@ export const BOOKS: Book[] = [
     tag: "Simplicity",
     category: "Productivity",
     language: "English",
+    reviews: "73",
+    rating: "4.8",
   },
   {
     id: "prod-5",
@@ -66,6 +76,8 @@ export const BOOKS: Book[] = [
     tag: "Time Management",
     category: "Productivity",
     language: "English",
+    reviews: "59",
+    rating: "4.9",
   },
 
   // --- MONEY / WEALTH THINKING ---
@@ -79,6 +91,8 @@ export const BOOKS: Book[] = [
     tag: "Finance",
     category: "Money",
     language: "English",
+    reviews: "82",
+    rating: "4.8",
   },
   {
     id: "money-2",
@@ -90,6 +104,8 @@ export const BOOKS: Book[] = [
     tag: "Wealth",
     category: "Money",
     language: "English",
+    reviews: "90",
+    rating: "4.9",
   },
   {
     id: "money-3",
@@ -101,6 +117,8 @@ export const BOOKS: Book[] = [
     tag: "Mindset",
     category: "Money",
     language: "English",
+    reviews: "75",
+    rating: "4.7",
   },
   {
     id: "money-4",
@@ -112,6 +130,8 @@ export const BOOKS: Book[] = [
     tag: "Entrepreneurship",
     category: "Money",
     language: "English",
+    reviews: "68",
+    rating: "4.8",
   },
   {
     id: "money-5",
@@ -123,6 +143,8 @@ export const BOOKS: Book[] = [
     tag: "Independence",
     category: "Money",
     language: "English",
+    reviews: "56",
+    rating: "4.9",
   },
 
   // --- RELATIONSHIPS / HUMAN PSYCHOLOGY ---
@@ -136,6 +158,8 @@ export const BOOKS: Book[] = [
     tag: "Psychology",
     category: "Relationships",
     language: "English",
+    reviews: "71",
+    rating: "4.8",
   },
   {
     id: "rel-2",
@@ -147,6 +171,8 @@ export const BOOKS: Book[] = [
     tag: "Love",
     category: "Relationships",
     language: "English",
+    reviews: "84",
+    rating: "4.9",
   },
   {
     id: "rel-3",
@@ -158,6 +184,8 @@ export const BOOKS: Book[] = [
     tag: "Dating",
     category: "Relationships",
     language: "English",
+    reviews: "61",
+    rating: "4.7",
   },
   {
     id: "rel-4",
@@ -169,6 +197,8 @@ export const BOOKS: Book[] = [
     tag: "Communication",
     category: "Relationships",
     language: "English",
+    reviews: "53",
+    rating: "4.8",
   },
   {
     id: "rel-5",
@@ -180,6 +210,8 @@ export const BOOKS: Book[] = [
     tag: "Connection",
     category: "Relationships",
     language: "English",
+    reviews: "79",
+    rating: "4.9",
   },
 
   // --- MINDSET / INNER GROWTH ---
@@ -193,6 +225,8 @@ export const BOOKS: Book[] = [
     tag: "Purpose",
     category: "Mindset",
     language: "English",
+    reviews: "88",
+    rating: "4.9",
   },
   {
     id: "mind-2",
@@ -204,6 +238,8 @@ export const BOOKS: Book[] = [
     tag: "Presence",
     category: "Mindset",
     language: "English",
+    reviews: "66",
+    rating: "4.8",
   },
   {
     id: "mind-3",
@@ -215,6 +251,8 @@ export const BOOKS: Book[] = [
     tag: "Stoicism",
     category: "Mindset",
     language: "English",
+    reviews: "54",
+    rating: "4.7",
   },
   {
     id: "mind-4",
@@ -226,6 +264,8 @@ export const BOOKS: Book[] = [
     tag: "Growth",
     category: "Mindset",
     language: "English",
+    reviews: "77",
+    rating: "4.8",
   },
   {
     id: "mind-5",
@@ -237,6 +277,8 @@ export const BOOKS: Book[] = [
     tag: "Freedom",
     category: "Mindset",
     language: "English",
+    reviews: "63",
+    rating: "4.9",
   },
 
   // --- BIOGRAPHIES ---
@@ -250,6 +292,8 @@ export const BOOKS: Book[] = [
     tag: "Innovation",
     category: "Biographies",
     language: "English",
+    reviews: "81",
+    rating: "4.9",
   },
   {
     id: "bio-2",
@@ -261,6 +305,8 @@ export const BOOKS: Book[] = [
     tag: "Persistence",
     category: "Biographies",
     language: "English",
+    reviews: "74",
+    rating: "4.8",
   },
   {
     id: "bio-3",
@@ -272,6 +318,8 @@ export const BOOKS: Book[] = [
     tag: "Visionary",
     category: "Biographies",
     language: "English",
+    reviews: "58",
+    rating: "4.7",
   },
   {
     id: "bio-4",
@@ -283,6 +331,8 @@ export const BOOKS: Book[] = [
     tag: "Toughness",
     category: "Biographies",
     language: "English",
+    reviews: "69",
+    rating: "4.8",
   },
   {
     id: "bio-5",
@@ -294,5 +344,7 @@ export const BOOKS: Book[] = [
     tag: "Resilience",
     category: "Biographies",
     language: "English",
+    reviews: "51",
+    rating: "4.9",
   }
 ];

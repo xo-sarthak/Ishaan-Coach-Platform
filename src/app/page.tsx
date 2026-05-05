@@ -194,8 +194,8 @@ export default function Home() {
                 <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Coaching Sessions</div>
               </div>
               <div className="border-t sm:border-t-0 sm:border-l border-border pt-4 sm:pt-0 sm:pl-4">
-                <div className="text-3xl font-bold text-foreground mb-1">200K+</div>
-                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Lives Transformed</div>
+                <div className="text-3xl font-bold text-foreground mb-1">1.3L+</div>
+                <div className="text-[10px] text-foreground/60 uppercase tracking-widest font-bold">Instagram Community</div>
               </div>
             </div>
 

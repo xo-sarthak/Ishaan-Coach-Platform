@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { Star, Loader2, CheckCircle2, Info } from "lucide-react";
+import { Avatar } from "./Avatar";
+
 
 export function HeroNewsletter() {
   const [email, setEmail] = useState("");
@@ -112,9 +114,9 @@ export function HeroNewsletter() {
       {/* Social Proof */}
       <div className="flex items-center gap-3 text-xs text-[#2A3B5C]/80 font-medium mt-6">
         <div className="flex -space-x-3">
-          <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=1" alt="Reader" className="w-full h-full object-cover" /></div>
-          <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=5" alt="Reader" className="w-full h-full object-cover" /></div>
-          <div className="w-8 h-8 rounded-full bg-slate-400 border-2 border-white overflow-hidden shadow-sm ring-1 ring-black/5"><img src="https://i.pravatar.cc/100?img=9" alt="Reader" className="w-full h-full object-cover" /></div>
+          <Avatar initials="IS" index={0} />
+          <Avatar initials="AS" index={1} />
+          <Avatar initials="MK" index={2} />
         </div>
         <div className="flex flex-col justify-center">
           <div className="flex items-center gap-0.5">

@@ -165,7 +165,7 @@ export default async function CohortFunnelPage({ params }: { params: Promise<{ c
                   <>
                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-2">Total Investment</p>
                     <div className="text-5xl font-black mb-2 flex items-baseline gap-3">
-                      {cohort.price} <span className="text-xl text-muted-foreground line-through font-normal">{cohort.originalPrice}</span>
+                      {cohort.price} {/* <span className="text-xl text-muted-foreground line-through font-normal">{cohort.originalPrice}</span> */}
                     </div>
                     <Link 
                       href={`/checkout/${cohort.id}`} 

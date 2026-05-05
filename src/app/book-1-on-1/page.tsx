@@ -17,6 +17,7 @@ import {
   Flame
 } from "lucide-react";
 import Link from "next/link";
+import { Avatar } from "@/components/Avatar";
 
 export default function BookOneOnOnePage() {
   const stats = [
@@ -83,11 +84,9 @@ export default function BookOneOnOnePage() {
               </a>
               <div className="flex items-center gap-3 px-6 py-4">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-slate-200">
-                      <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="user" />
-                    </div>
-                  ))}
+                  <Avatar initials="JD" index={0} className="w-10 h-10" />
+                  <Avatar initials="AS" index={1} className="w-10 h-10" />
+                  <Avatar initials="MK" index={2} className="w-10 h-10" />
                 </div>
                 <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
                   Joined by 200K+ others

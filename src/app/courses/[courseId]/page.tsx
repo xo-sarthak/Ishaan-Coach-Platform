@@ -60,6 +60,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
                 vimeoId={course.trailerId}
                 thumbnail={course.image}
                 title={course.title}
+                autoPlay={true}
               />
             </div>
           ) : (
@@ -179,7 +180,8 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
                   <p className="text-muted-foreground font-medium mb-6">{plan.subtitle}</p>
                   <div className="flex items-baseline gap-3 mb-8">
                     <span className="text-4xl font-black">{plan.price}</span>
-                    {plan.originalPrice && (
+                    {/* Temporarily hiding original price per user request */}
+                    {/* {plan.originalPrice && (
                       <span className="text-xl text-muted-foreground/50 line-through font-bold">
                         {plan.originalPrice}
                       </span>
@@ -188,7 +190,7 @@ export default async function CourseFunnelPage({ params }: { params: Promise<{ c
                       <span className="ml-2 bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md border border-primary/20">
                         Limited Offer
                       </span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className="space-y-4 mb-10 flex-grow">

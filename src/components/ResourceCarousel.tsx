@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight, Star, Clock, Calendar, User } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
+import { Avatar } from "./Avatar";
+
 
 export interface CarouselItem {
   id: string;
@@ -173,15 +175,20 @@ export function ResourceCarousel({
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                       <img src={item.authorImage || 'https://i.pravatar.cc/100?img=11'} alt={item.authorName || 'Instructor'} className="w-8 h-8 rounded-full border border-border object-cover" />
+                       {item.authorImage && !item.authorImage.includes('pravatar.cc') ? (
+                         <img src={item.authorImage} alt={item.authorName || 'Instructor'} className="w-8 h-8 rounded-full border border-border object-cover" />
+                       ) : (
+                         <Avatar initials={item.authorName || 'IS'} index={0} className="w-8 h-8" />
+                       )}
                        <span className="text-sm font-bold text-[#2A3B5C]">{item.authorName || 'Ishaan Singh'}</span>
                     </div>
                     <div className="flex flex-col items-end">
-                      {item.originalPrice && (
+                      {/* Temporarily hiding original price per user request */}
+                      {/* {item.originalPrice && (
                         <span className="text-xs font-bold text-foreground/60 line-through mb-0.5">
                           {item.originalPrice}
                         </span>
-                      )}
+                      )} */}
                       <div className="text-lg font-bold text-[#2A3B5C]">{item.price || 'Get'}</div>
                     </div>
                   </div>

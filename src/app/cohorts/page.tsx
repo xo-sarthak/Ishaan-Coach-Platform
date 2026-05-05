@@ -50,7 +50,7 @@ export default function CohortsPage() {
               <div className="mt-auto flex items-center justify-between border-t border-border pt-6">
                  <div>
                     <span className="text-2xl font-bold">{cohort.price}</span> 
-                    <span className="text-sm text-muted-foreground line-through ml-2">{cohort.originalPrice}</span>
+                    {/* <span className="text-sm text-muted-foreground line-through ml-2">{cohort.originalPrice}</span> */}
                  </div>
                   <div className="flex items-center text-sm font-bold text-foreground group-hover:text-primary transition-colors bg-muted px-4 py-2 rounded-full group-hover:bg-primary/10">
                    {cohort.status === "Waitlist" ? "Join Waitlist" : "Enroll Now"} <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />

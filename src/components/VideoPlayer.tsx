@@ -8,10 +8,11 @@ interface VideoPlayerProps {
   vimeoId?: string;
   thumbnail: string;
   title: string;
+  autoPlay?: boolean;
 }
 
-export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title }: VideoPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
+export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title, autoPlay = false }: VideoPlayerProps) {
+  const [isPlaying, setIsPlaying] = useState(autoPlay);
 
   // Clean the YouTube URL to ensure it's in embed format and has autoplay
   const getEmbedUrl = (url: string) => {
@@ -22,12 +23,12 @@ export function VideoPlayer({ videoUrl, vimeoId, thumbnail, title }: VideoPlayer
          cleanUrl = `https://www.youtube.com/embed/${id}`;
       }
     }
-    return `${cleanUrl}${cleanUrl.includes("?") ? "&" : "?"}autoplay=1&rel=0&modestbranding=1&showinfo=0`;
+    return `${cleanUrl}${cleanUrl.includes("?") ? "&" : "?"}autoplay=1&mute=${autoPlay ? '1' : '0'}&rel=0&modestbranding=1&showinfo=0`;
   };
 
   if (isPlaying) {
     const [id, hash] = (vimeoId || "").split("/");
-    const vimeoSrc = `https://player.vimeo.com/video/${id}?autoplay=1&muted=0&title=0&byline=0&portrait=0&dnt=1${hash ? `&h=${hash}` : ""}`;
+    const vimeoSrc = `https://player.vimeo.com/video/${id}?autoplay=1&muted=${autoPlay ? '1' : '0'}&title=0&byline=0&portrait=0&dnt=1${hash ? `&h=${hash}` : ""}`;
 
     return (
       <div className="w-full aspect-video rounded-[2rem] overflow-hidden bg-black shadow-2xl border border-border animate-in fade-in zoom-in duration-500">
