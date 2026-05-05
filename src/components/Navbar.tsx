@@ -56,7 +56,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-4 z-50 w-full max-w-6xl mx-auto backdrop-blur-xl bg-white/90 rounded-full border border-border/60 drop-shadow-sm px-2">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-6xl backdrop-blur-xl bg-white/90 rounded-full border border-border/60 drop-shadow-sm px-2">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link
           href="/"

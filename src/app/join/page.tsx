@@ -139,7 +139,6 @@ export default function JoinCommunityPage() {
       const data = await res.json();
       
       if (res.ok) {
-        // 1. Trigger Auto-Download if guide is checked
         if (getGuide) {
           const link = document.createElement('a');
           link.href = "https://drive.google.com/uc?export=download&id=1TwvuexouTIwMH-mdWFBkf4dhMQGTS0sh";
@@ -148,8 +147,6 @@ export default function JoinCommunityPage() {
           link.click();
           document.body.removeChild(link);
         }
-
-        // 2. Instant Redirect to WhatsApp
         window.location.href = "https://chat.whatsapp.com/your-link-here";
       } else {
         alert(data.message || 'Something went wrong');
@@ -161,85 +158,20 @@ export default function JoinCommunityPage() {
     }
   };
 
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center selection:bg-primary/20 p-6 md:p-12">
-        <div className="w-full max-w-lg bg-white rounded-[2.5rem] md:rounded-[3rem] border border-border shadow-2xl p-8 md:p-12 text-center space-y-8 animate-in fade-in zoom-in duration-500">
-           <div className="w-16 h-16 md:w-20 md:h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto">
-             <PartyPopper className="w-8 h-8 md:w-10 md:h-10 text-emerald-600" />
-           </div>
-           
-           <div className="space-y-4">
-             <h1 className="text-3xl md:text-4xl font-serif font-bold text-foreground leading-tight">Welcome to the Circle!</h1>
-             <p className="text-foreground/70 leading-relaxed text-base md:text-lg">
-               {alreadySubscribed 
-                 ? "Hey! We see you're already subscribed to our newsletter! Here is your WhatsApp link." 
-                 : `We've received your application. ${getNewsletter ? "You're also subscribed to our weekly insights." : "You're now part of the 2,400+ members building better lives."}`}
-             </p>
-           </div>
-
-           <div className="grid gap-4 pt-4">
-             <a 
-               href="https://chat.whatsapp.com/your-link-here" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="w-full h-14 md:h-16 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-base md:text-lg rounded-2xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-emerald-200"
-             >
-               <MessageCircle className="w-5 h-5 md:w-6 md:h-6 fill-white" /> Join WhatsApp Group
-             </a>
-           </div>
-
-           <button 
-            onClick={() => setIsSubmitted(false)}
-            className="text-[10px] font-bold text-foreground/30 uppercase tracking-widest hover:text-foreground/60 transition-colors"
-           >
-             Back to Page
-           </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-12 md:pt-0">
+    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-4 md:pt-0">
       
-      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-24">
+      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 flex flex-col items-center">
         
-        {/* LEFT (TOP ON MOBILE): Content Section */}
-        <div className="flex flex-col space-y-8 text-left order-1 lg:order-1 pb-12 lg:pb-0">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-xs font-bold tracking-widest uppercase w-fit">
-            <MessageCircle className="w-4 h-4 fill-feature-bg/20" /> WhatsApp Community
-          </div>
-
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] font-bold tracking-tight">
-            The Inner <br /> <span className="italic">Circle</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed max-w-lg">
-            A private community for those committed to building resilience, clarity, and deeper connections.
-          </p>
-
-          <div className="grid gap-4 md:gap-6 pt-4">
-             {[
-               { icon: <Zap className="w-5 h-5 text-[#F9A826]" />, title: "Weekly Insights", desc: "Actionable strategies on life and mindset. No fluff, just results." },
-               { icon: <Users className="w-5 h-5 text-blue-500" />, title: "Networking Hub", desc: "Connect with like-minded individuals on the same journey." },
-               { icon: <MessageCircle className="w-5 h-5 text-emerald-500" />, title: "Community Q&A", desc: "Get your pressing questions answered by the community and myself." }
-             ].map((item, i) => (
-               <div key={i} className="flex items-start gap-4 p-4 md:p-5 rounded-2xl border border-border bg-white shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-foreground text-sm md:text-base">{item.title}</h4>
-                    <p className="text-xs md:text-sm text-foreground/60 leading-relaxed">{item.desc}</p>
-                  </div>
-               </div>
-             ))}
+        {/* 1. TOP: The WhatsApp Tag */}
+        <div className="mt-8 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-[10px] font-bold tracking-[0.2em] uppercase border border-feature-bg/10">
+            <MessageCircle className="w-3.5 h-3.5 fill-feature-bg/20" /> WhatsApp Community
           </div>
         </div>
 
-        {/* RIGHT (BOTTOM ON MOBILE): The Form */}
-        <div className="w-full order-2 lg:order-2 lg:sticky lg:top-24">
+        {/* 2. MIDDLE: The Signup Form */}
+        <div className="w-full max-w-[500px] mb-12">
           <div className="bg-white rounded-3xl md:rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-6 md:p-12 text-left">
             <div className="mb-6 md:mb-10 text-left">
               <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">Join the Community</h3>
@@ -339,15 +271,9 @@ export default function JoinCommunityPage() {
                </div>
 
                <div className="pt-2 space-y-2">
-                 {/* Lead Magnet */}
                  <label className="flex items-center gap-3 p-4 rounded-2xl border border-border bg-muted/10 cursor-pointer group transition-all hover:bg-muted/20">
                    <div className="relative flex items-center justify-center">
-                     <input 
-                        type="checkbox" 
-                        className="peer sr-only" 
-                        checked={getGuide} 
-                        onChange={() => setGetGuide(!getGuide)}
-                      />
+                     <input type="checkbox" className="peer sr-only" checked={getGuide} onChange={() => setGetGuide(!getGuide)} />
                      <div className="relative flex items-center justify-center w-5 h-5">
                         <Check className={`w-5 h-5 transition-all ${getGuide ? 'text-foreground opacity-100' : 'text-foreground/20'}`} strokeWidth={4} />
                      </div>
@@ -358,15 +284,9 @@ export default function JoinCommunityPage() {
                    </div>
                  </label>
 
-                 {/* Newsletter */}
                  <label className="flex items-center gap-3 p-4 rounded-2xl border border-border bg-muted/10 cursor-pointer group transition-all hover:bg-muted/20">
                    <div className="relative flex items-center justify-center">
-                     <input 
-                        type="checkbox" 
-                        className="peer sr-only" 
-                        checked={getNewsletter} 
-                        onChange={() => setGetNewsletter(!getNewsletter)}
-                      />
+                     <input type="checkbox" className="peer sr-only" checked={getNewsletter} onChange={() => setGetNewsletter(!getNewsletter)} />
                      <div className="relative flex items-center justify-center w-5 h-5">
                         <Check className={`w-5 h-5 transition-all ${getNewsletter ? 'text-foreground opacity-100' : 'text-foreground/20'}`} strokeWidth={4} />
                      </div>
@@ -378,24 +298,45 @@ export default function JoinCommunityPage() {
                  </label>
                </div>
 
-               <button 
-                 type="submit"
-                 disabled={isLoading}
+               <button type="submit" disabled={isLoading}
                  className="w-full h-14 md:h-16 bg-[#2A3B5C] hover:bg-[#1E2A41] text-white font-bold text-base md:text-lg rounded-2xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-foreground/10 group mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                >
                  {isLoading ? "Joining..." : "Join WhatsApp Community"} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                </button>
-               
-               <div className="flex items-center justify-center gap-2 pt-2 md:pt-4 text-center">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                  <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Secured & Private</span>
-               </div>
             </form>
+          </div>
+        </div>
+
+        {/* 3. BOTTOM: The Inner Circle Insights */}
+        <div className="w-full flex flex-col space-y-8 text-center pb-12">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl font-serif text-foreground leading-[1.1] font-bold tracking-tight">
+              The Inner <span className="italic">Circle</span>
+            </h1>
+            <p className="text-lg text-foreground/70 leading-relaxed max-w-lg mx-auto">
+              A private community for those committed to building resilience, clarity, and deeper connections.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:gap-6 pt-4 max-w-lg mx-auto w-full">
+             {[
+               { icon: <Zap className="w-5 h-5 text-[#F9A826]" />, title: "Weekly Insights", desc: "Actionable strategies on life and mindset. No fluff, just results." },
+               { icon: <Users className="w-5 h-5 text-blue-500" />, title: "Networking Hub", desc: "Connect with like-minded individuals on the same journey." },
+               { icon: <MessageCircle className="w-5 h-5 text-emerald-500" />, title: "Community Q&A", desc: "Get your pressing questions answered by the community and myself." }
+             ].map((item, i) => (
+               <div key={i} className="flex items-start gap-4 p-5 rounded-2xl border border-border bg-white shadow-sm text-left">
+                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">{item.icon}</div>
+                  <div>
+                    <h4 className="font-bold text-foreground text-sm md:text-base">{item.title}</h4>
+                    <p className="text-xs text-foreground/60 leading-relaxed">{item.desc}</p>
+                  </div>
+               </div>
+             ))}
           </div>
         </div>
       </main>
 
-      <footer className="mt-12 md:mt-24 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/30 px-8 text-center">
+      <footer className="mt-12 text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/30 px-8 text-center">
         Ishaan Singh &copy; {new Date().getFullYear()} • Privacy First
       </footer>
 
