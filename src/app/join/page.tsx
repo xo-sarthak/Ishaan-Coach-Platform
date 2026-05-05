@@ -29,8 +29,18 @@ export default function JoinCommunityPage() {
       const data = await res.json();
       
       if (res.ok) {
-        setAlreadySubscribed(data.alreadyInNewsletter);
-        setIsSubmitted(true);
+        // 1. Trigger Auto-Download if guide is checked
+        if (getGuide) {
+          const link = document.createElement('a');
+          link.href = "https://drive.google.com/uc?export=download&id=1TwvuexouTIwMH-mdWFBkf4dhMQGTS0sh";
+          link.download = "Hard Earned Lessons.pdf";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+
+        // 2. Instant Redirect to WhatsApp
+        window.location.href = "https://chat.whatsapp.com/your-link-here";
       } else {
         alert(data.message || 'Something went wrong');
       }
@@ -252,7 +262,7 @@ export default function JoinCommunityPage() {
                  disabled={isLoading}
                  className="w-full h-14 md:h-16 bg-[#2A3B5C] hover:bg-[#1E2A41] text-white font-bold text-base md:text-lg rounded-2xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-foreground/10 group mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                >
-                 {isLoading ? "Joining..." : "Join Inner Circle"} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                 {isLoading ? "Joining..." : "Join WhatsApp Community"} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                </button>
                
                <div className="flex items-center justify-center gap-2 pt-2 md:pt-4 text-center">
