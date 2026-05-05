@@ -205,8 +205,41 @@ export default function JoinCommunityPage() {
       
       <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-24">
         
-        {/* RIGHT (TOP ON MOBILE): The Form */}
-        <div className="w-full order-1 lg:order-2 lg:sticky lg:top-24">
+        {/* LEFT (TOP ON MOBILE): Content Section */}
+        <div className="flex flex-col space-y-8 text-left order-1 lg:order-1 pb-12 lg:pb-0">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-xs font-bold tracking-widest uppercase w-fit">
+            <MessageCircle className="w-4 h-4 fill-feature-bg/20" /> WhatsApp Community
+          </div>
+
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] font-bold tracking-tight">
+            The Inner <br /> <span className="italic">Circle</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed max-w-lg">
+            A private community for those committed to building resilience, clarity, and deeper connections.
+          </p>
+
+          <div className="grid gap-4 md:gap-6 pt-4">
+             {[
+               { icon: <Zap className="w-5 h-5 text-[#F9A826]" />, title: "Weekly Insights", desc: "Actionable strategies on life and mindset. No fluff, just results." },
+               { icon: <Users className="w-5 h-5 text-blue-500" />, title: "Networking Hub", desc: "Connect with like-minded individuals on the same journey." },
+               { icon: <MessageCircle className="w-5 h-5 text-emerald-500" />, title: "Community Q&A", desc: "Get your pressing questions answered by the community and myself." }
+             ].map((item, i) => (
+               <div key={i} className="flex items-start gap-4 p-4 md:p-5 rounded-2xl border border-border bg-white shadow-sm hover:shadow-md transition-shadow">
+                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-foreground text-sm md:text-base">{item.title}</h4>
+                    <p className="text-xs md:text-sm text-foreground/60 leading-relaxed">{item.desc}</p>
+                  </div>
+               </div>
+             ))}
+          </div>
+        </div>
+
+        {/* RIGHT (BOTTOM ON MOBILE): The Form */}
+        <div className="w-full order-2 lg:order-2 lg:sticky lg:top-24">
           <div className="bg-white rounded-3xl md:rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-6 md:p-12 text-left">
             <div className="mb-6 md:mb-10 text-left">
               <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">Join the Community</h3>
@@ -244,7 +277,7 @@ export default function JoinCommunityPage() {
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
                      <div className="flex gap-2">
-                       <div className="relative shrink-0">
+                       <div className="relative shrink-0 w-[95px]">
                          <select 
                            value={formData.countryCode}
                            onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
@@ -261,7 +294,7 @@ export default function JoinCommunityPage() {
                         placeholder="Number" 
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="flex-1 bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground placeholder:text-foreground/20"
+                        className="flex-1 bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground placeholder:text-foreground/20 min-w-0"
                         required
                       />
                     </div>
@@ -358,39 +391,6 @@ export default function JoinCommunityPage() {
                   <span className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest">Secured & Private</span>
                </div>
             </form>
-          </div>
-        </div>
-
-        {/* LEFT (BOTTOM ON MOBILE): Content Section */}
-        <div className="flex flex-col space-y-8 text-left order-2 lg:order-1 pb-12 lg:pb-0">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 text-feature-bg text-sm font-bold tracking-wide w-fit">
-            <MessageCircle className="w-4 h-4 fill-feature-bg/20" /> WhatsApp Inner Circle
-          </div>
-
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.1] font-bold tracking-tight">
-            The Inner <br /> <span className="italic">Circle</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-foreground/70 leading-relaxed max-w-lg">
-            A private community for those committed to building resilience, clarity, and deeper connections.
-          </p>
-
-          <div className="grid gap-4 md:gap-6 pt-4">
-             {[
-               { icon: <Zap className="w-5 h-5 text-[#F9A826]" />, title: "Weekly Insights", desc: "Actionable strategies on life and mindset. No fluff, just results." },
-               { icon: <Users className="w-5 h-5 text-blue-500" />, title: "Networking Hub", desc: "Connect with 2,400+ like-minded individuals on the same journey." },
-               { icon: <MessageCircle className="w-5 h-5 text-emerald-500" />, title: "Community Q&A", desc: "Get your pressing questions answered by the community and myself." }
-             ].map((item, i) => (
-               <div key={i} className="flex items-start gap-4 p-4 md:p-5 rounded-2xl border border-border bg-white shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-foreground text-sm md:text-base">{item.title}</h4>
-                    <p className="text-xs md:text-sm text-foreground/60 leading-relaxed">{item.desc}</p>
-                  </div>
-               </div>
-             ))}
           </div>
         </div>
       </main>
