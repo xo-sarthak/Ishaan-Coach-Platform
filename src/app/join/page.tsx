@@ -1,7 +1,116 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, ShieldCheck, Zap, BookOpen, Users, Check, ArrowRight, Download, PartyPopper, Mail } from "lucide-react";
+import { MessageCircle, ShieldCheck, Zap, BookOpen, Users, Check, ArrowRight, Download, PartyPopper, Mail, ChevronDown } from "lucide-react";
+
+const countryCodes = [
+  { code: "🇮🇳 +91", name: "India" },
+  { code: "🇦🇫 +93", name: "Afghanistan" },
+  { code: "🇦🇱 +355", name: "Albania" },
+  { code: "🇩🇿 +213", name: "Algeria" },
+  { code: "🇦🇩 +376", name: "Andorra" },
+  { code: "🇦🇴 +244", name: "Angola" },
+  { code: "🇦🇷 +54", name: "Argentina" },
+  { code: "🇦🇲 +374", name: "Armenia" },
+  { code: "🇦🇺 +61", name: "Australia" },
+  { code: "🇦🇹 +43", name: "Austria" },
+  { code: "🇦🇿 +994", name: "Azerbaijan" },
+  { code: "🇧🇭 +973", name: "Bahrain" },
+  { code: "🇧🇩 +880", name: "Bangladesh" },
+  { code: "🇧🇪 +32", name: "Belgium" },
+  { code: "🇧🇹 +975", name: "Bhutan" },
+  { code: "🇧🇴 +591", name: "Bolivia" },
+  { code: "🇧🇦 +387", name: "Bosnia" },
+  { code: "🇧🇷 +55", name: "Brazil" },
+  { code: "🇧🇳 +673", name: "Brunei" },
+  { code: "🇧🇬 +359", name: "Bulgaria" },
+  { code: "🇰🇭 +855", name: "Cambodia" },
+  { code: "🇨🇦 +1", name: "Canada" },
+  { code: "🇨🇱 +56", name: "Chile" },
+  { code: "🇨🇳 +86", name: "China" },
+  { code: "🇨🇴 +57", name: "Colombia" },
+  { code: "🇭🇷 +385", name: "Croatia" },
+  { code: "🇨🇾 +357", name: "Cyprus" },
+  { code: "🇨🇿 +420", name: "Czechia" },
+  { code: "🇩🇰 +45", name: "Denmark" },
+  { code: "🇪🇬 +20", name: "Egypt" },
+  { code: "🇪🇪 +372", name: "Estonia" },
+  { code: "🇪🇹 +251", name: "Ethiopia" },
+  { code: "🇫🇯 +679", name: "Fiji" },
+  { code: "🇫🇮 +358", name: "Finland" },
+  { code: "🇫🇷 +33", name: "France" },
+  { code: "🇬🇪 +995", name: "Georgia" },
+  { code: "🇩🇪 +49", name: "Germany" },
+  { code: "🇬🇷 +30", name: "Greece" },
+  { code: "🇭🇰 +852", name: "Hong Kong" },
+  { code: "🇭🇺 +36", name: "Hungary" },
+  { code: "🇮🇸 +354", name: "Iceland" },
+  { code: "🇮🇩 +62", name: "Indonesia" },
+  { code: "🇮🇷 +98", name: "Iran" },
+  { code: "🇮🇶 +964", name: "Iraq" },
+  { code: "🇮🇪 +353", name: "Ireland" },
+  { code: "🇮🇱 +972", name: "Israel" },
+  { code: "🇮🇹 +39", name: "Italy" },
+  { code: "🇯🇵 +81", name: "Japan" },
+  { code: "🇯🇴 +962", name: "Jordan" },
+  { code: "🇰🇿 +7", name: "Kazakhstan" },
+  { code: "🇰🇪 +254", name: "Kenya" },
+  { code: "🇰🇼 +965", name: "Kuwait" },
+  { code: "🇱🇦 +856", name: "Laos" },
+  { code: "🇱🇻 +371", name: "Latvia" },
+  { code: "🇱🇧 +961", name: "Lebanon" },
+  { code: "🇱🇾 +218", name: "Libya" },
+  { code: "🇱🇹 +370", name: "Lithuania" },
+  { code: "🇱🇺 +352", name: "Luxembourg" },
+  { code: "🇲🇴 +853", name: "Macau" },
+  { code: "🇲🇾 +60", name: "Malaysia" },
+  { code: "🇲🇻 +960", name: "Maldives" },
+  { code: "🇲🇹 +356", name: "Malta" },
+  { code: "🇲🇺 +230", name: "Mauritius" },
+  { code: "🇲🇽 +52", name: "Mexico" },
+  { code: "🇲🇨 +377", name: "Monaco" },
+  { code: "🇲🇳 +976", name: "Mongolia" },
+  { code: "🇲🇪 +382", name: "Montenegro" },
+  { code: "🇲🇦 +212", name: "Morocco" },
+  { code: "🇲🇲 +95", name: "Myanmar" },
+  { code: "🇳🇵 +977", name: "Nepal" },
+  { code: "🇳🇱 +31", name: "Netherlands" },
+  { code: "🇳🇿 +64", name: "New Zealand" },
+  { code: "🇳🇬 +234", name: "Nigeria" },
+  { code: "🇳🇴 +47", name: "Norway" },
+  { code: "🇴🇲 +968", name: "Oman" },
+  { code: "🇵🇰 +92", name: "Pakistan" },
+  { code: "🇵🇸 +970", name: "Palestine" },
+  { code: "🇵🇦 +507", name: "Panama" },
+  { code: "🇵🇾 +595", name: "Paraguay" },
+  { code: "🇵🇪 +51", name: "Peru" },
+  { code: "🇵🇭 +63", name: "Philippines" },
+  { code: "🇵🇱 +48", name: "Poland" },
+  { code: "🇵🇹 +351", name: "Portugal" },
+  { code: "🇶🇦 +974", name: "Qatar" },
+  { code: "🇷🇴 +40", name: "Romania" },
+  { code: "🇷🇺 +7", name: "Russia" },
+  { code: "🇸🇦 +966", name: "Saudi Arabia" },
+  { code: "🇸🇬 +65", name: "Singapore" },
+  { code: "🇸🇰 +421", name: "Slovakia" },
+  { code: "🇸🇮 +386", name: "Slovenia" },
+  { code: "🇿🇦 +27", name: "South Africa" },
+  { code: "🇰🇷 +82", name: "South Korea" },
+  { code: "🇪🇸 +34", name: "Spain" },
+  { code: "🇱🇰 +94", name: "Sri Lanka" },
+  { code: "🇸🇪 +46", name: "Sweden" },
+  { code: "🇨🇭 +41", name: "Switzerland" },
+  { code: "🇹🇼 +886", name: "Taiwan" },
+  { code: "🇹🇭 +66", name: "Thailand" },
+  { code: "🇹🇷 +90", name: "Turkey" },
+  { code: "🇺🇦 +380", name: "Ukraine" },
+  { code: "🇦🇪 +971", name: "UAE" },
+  { code: "🇬🇧 +44", name: "UK" },
+  { code: "🇺🇸 +1", name: "USA" },
+  { code: "🇺🇾 +598", name: "Uruguay" },
+  { code: "🇺🇿 +998", name: "Uzbekistan" },
+  { code: "🇻🇳 +84", name: "Vietnam" }
+];
 
 export default function JoinCommunityPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -13,6 +122,7 @@ export default function JoinCommunityPage() {
     name: "",
     email: "",
     phone: "",
+    countryCode: "🇮🇳 +91",
     role: "",
     interest: ""
   });
@@ -69,26 +179,6 @@ export default function JoinCommunityPage() {
            </div>
 
            <div className="grid gap-4 pt-4">
-             {getGuide && (
-               <a 
-                href="https://drive.google.com/uc?export=download&id=1TwvuexouTIwMH-mdWFBkf4dhMQGTS0sh" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-5 md:p-6 bg-muted/50 border border-border rounded-2xl hover:bg-muted transition-colors group"
-               >
-                 <div className="flex items-center gap-4 text-left">
-                    <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm">
-                      <Download className="w-5 h-5 text-foreground" />
-                    </div>
-                    <div>
-                       <p className="font-bold text-foreground text-sm md:text-base">Your Free Guide</p>
-                       <p className="text-[10px] md:text-xs text-foreground/50">Hard Earned Lessons.pdf</p>
-                    </div>
-                 </div>
-                 <ArrowRight className="w-5 h-5 text-foreground/30 group-hover:translate-x-1 transition-transform" />
-               </a>
-             )}
-
              <a 
                href="https://chat.whatsapp.com/your-link-here" 
                target="_blank" 
@@ -113,12 +203,12 @@ export default function JoinCommunityPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-12 md:pt-0">
       
-      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-24 items-start md:mt-24">
+      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-24">
         
         {/* RIGHT (TOP ON MOBILE): The Form */}
         <div className="w-full order-1 lg:order-2 lg:sticky lg:top-24">
-          <div className="bg-white rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-8 md:p-12 text-left">
-            <div className="mb-8 md:mb-10 text-left">
+          <div className="bg-white rounded-3xl md:rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-6 md:p-12 text-left">
+            <div className="mb-6 md:mb-10 text-left">
               <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">Join the Community</h3>
               <p className="text-foreground/60 text-sm leading-relaxed">
                 Enter your details to receive instant access to the community and our latest guides.
@@ -153,22 +243,19 @@ export default function JoinCommunityPage() {
 
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
-                    <div className="flex gap-2">
-                       <select className="bg-muted/30 border border-border rounded-2xl px-3 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none text-foreground appearance-none min-w-[80px]">
-                         <option>🇮🇳 +91</option>
-                         <option>🇵🇰 +92</option>
-                         <option>🇧🇩 +880</option>
-                         <option>🇳🇵 +977</option>
-                         <option>🇱🇰 +94</option>
-                         <option>🇧🇹 +975</option>
-                         <option>🇲🇻 +960</option>
-                         <option>🇺🇸 +1</option>
-                         <option>🇬🇧 +44</option>
-                         <option>🇦🇺 +61</option>
-                         <option>🇨🇦 +1</option>
-                         <option>🇦🇪 +971</option>
-                         <option>🇸🇬 +65</option>
-                       </select>
+                     <div className="flex gap-2">
+                       <div className="relative shrink-0">
+                         <select 
+                           value={formData.countryCode}
+                           onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                           className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none text-foreground appearance-none w-full h-full cursor-pointer"
+                         >
+                           {countryCodes.map((c) => (
+                             <option key={c.code} value={c.code}>{c.code}</option>
+                           ))}
+                         </select>
+                         <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
+                       </div>
                        <input 
                         type="tel" 
                         placeholder="Number" 
@@ -180,34 +267,40 @@ export default function JoinCommunityPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Current Role</label>
-                      <select 
-                        required
-                        value={formData.role}
-                        onChange={(e) => setFormData({...formData, role: e.target.value})}
-                        className="w-full bg-muted/30 border border-border rounded-2xl px-4 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-foreground"
-                      >
-                        <option value="" disabled>Select Role</option>
-                        <option>Student</option>
-                        <option>Professional</option>
-                        <option>Entrepreneur</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          required
+                          value={formData.role}
+                          onChange={(e) => setFormData({...formData, role: e.target.value})}
+                          className="w-full bg-muted/30 border border-border rounded-2xl pl-4 pr-10 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-foreground cursor-pointer"
+                        >
+                          <option value="" disabled>Select Role</option>
+                          <option>Student</option>
+                          <option>Professional</option>
+                          <option>Entrepreneur</option>
+                        </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
+                      </div>
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Main Interest</label>
-                      <select 
-                        required
-                        value={formData.interest}
-                        onChange={(e) => setFormData({...formData, interest: e.target.value})}
-                        className="w-full bg-muted/30 border border-border rounded-2xl px-4 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-foreground"
-                      >
-                        <option value="" disabled>Select Interest</option>
-                        <option>Relationships</option>
-                        <option>Career</option>
-                        <option>Mindset</option>
-                      </select>
+                      <div className="relative">
+                        <select 
+                          required
+                          value={formData.interest}
+                          onChange={(e) => setFormData({...formData, interest: e.target.value})}
+                          className="w-full bg-muted/30 border border-border rounded-2xl pl-4 pr-10 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-foreground cursor-pointer"
+                        >
+                          <option value="" disabled>Select Interest</option>
+                          <option>Relationships</option>
+                          <option>Career</option>
+                          <option>Mindset</option>
+                        </select>
+                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
+                      </div>
                     </div>
                   </div>
                </div>
