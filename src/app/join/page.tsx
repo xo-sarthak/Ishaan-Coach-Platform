@@ -104,11 +104,8 @@ export default function JoinCommunityPage() {
     <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24">
       
       {/* Header */}
-      <header className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 py-8 md:py-12 flex items-center justify-between">
+      <header className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 py-8 md:py-12 flex items-center justify-center">
         <div className="w-24 hidden lg:block" />
-        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted text-foreground/70 text-[10px] md:text-xs font-bold uppercase tracking-widest border border-border mx-auto lg:mx-0">
-          <Users className="w-3 h-3 md:w-3.5 md:h-3.5" /> 2,400+ Joined
-        </div>
       </header>
 
       <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
