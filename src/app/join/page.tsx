@@ -111,14 +111,9 @@ export default function JoinCommunityPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24">
+    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-12 md:pt-0">
       
-      {/* Header */}
-      <header className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 py-8 md:py-12 flex items-center justify-center">
-        <div className="w-24 hidden lg:block" />
-      </header>
-
-      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-8 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-24 items-start md:mt-24">
         
         {/* RIGHT (TOP ON MOBILE): The Form */}
         <div className="w-full order-1 lg:order-2 lg:sticky lg:top-24">
