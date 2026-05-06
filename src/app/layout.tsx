@@ -30,7 +30,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans overflow-x-hidden w-full max-w-full">
         <ExitIntentPopup />
         <Navbar />
         <main className="flex-1 flex flex-col">{children}</main>

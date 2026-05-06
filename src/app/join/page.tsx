@@ -156,9 +156,9 @@ export default function JoinCommunityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-4 md:pt-0">
+    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-4 md:pt-0 w-full max-w-full overflow-x-hidden">
       
-      <main className="w-full max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-32">
+      <main className="w-full max-w-full md:max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-32">
         
         {/* DESKTOP LEFT / MOBILE BOTTOM: The Content */}
         <div className="w-full flex flex-col space-y-8 text-left order-2 lg:order-1 pb-12 lg:pb-0">
@@ -202,7 +202,7 @@ export default function JoinCommunityPage() {
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl md:rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-6 md:p-12 text-left">
+          <div className="bg-white rounded-3xl md:rounded-[2.5rem] border border-border shadow-xl shadow-foreground/5 p-5 sm:p-6 md:p-12 text-left">
             <div className="mb-6 md:mb-10 text-left">
               <h3 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-3">Join the Community</h3>
               <p className="text-foreground/60 text-sm leading-relaxed">
