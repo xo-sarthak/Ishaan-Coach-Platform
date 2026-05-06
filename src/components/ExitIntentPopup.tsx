@@ -187,7 +187,7 @@ export function ExitIntentPopup() {
         }
 
         // 2. Instant Redirect to WhatsApp
-        window.location.href = "https://chat.whatsapp.com/your-link-here";
+        window.location.href = "https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B";
       } else {
         alert(data.message || 'Something went wrong');
       }
@@ -222,7 +222,7 @@ export function ExitIntentPopup() {
                  : "Welcome to the Inner Circle. Your journey starts now."}
              </p>
              <a 
-               href="https://chat.whatsapp.com/your-link-here" 
+               href="https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B" 
                target="_blank" 
                rel="noopener noreferrer"
                className="w-full max-w-xs h-14 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg"

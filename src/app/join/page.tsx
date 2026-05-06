@@ -143,7 +143,7 @@ export default function JoinCommunityPage() {
           link.click();
           document.body.removeChild(link);
         }
-        window.location.href = "https://chat.whatsapp.com/your-link-here";
+        window.location.href = "https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B";
       } else {
         const data = await res.json();
         alert(data.message || 'Something went wrong');
