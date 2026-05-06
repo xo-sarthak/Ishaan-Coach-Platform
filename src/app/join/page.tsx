@@ -144,7 +144,10 @@ export default function JoinCommunityPage() {
             document.body.removeChild(iframe);
           }, 3000);
         }
-        window.location.href = "https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B";
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        window.location.href = isMobile 
+          ? "whatsapp://channel/0029VbCdMZNDeON0bXzKBy0B" 
+          : "https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B";
       } else {
         const data = await res.json();
         alert(data.message || 'Something went wrong');

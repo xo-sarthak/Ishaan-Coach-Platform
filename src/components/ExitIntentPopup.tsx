@@ -119,6 +119,7 @@ export function ExitIntentPopup() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [getGuide, setGetGuide] = useState(true);
+  const [whatsappUrl, setWhatsappUrl] = useState("https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B");
   const [getNewsletter, setGetNewsletter] = useState(true);
   
   const [formData, setFormData] = useState({
@@ -139,6 +140,11 @@ export function ExitIntentPopup() {
   }, [isOpen, isSubmitted]);
 
   useEffect(() => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      setWhatsappUrl("whatsapp://channel/0029VbCdMZNDeON0bXzKBy0B");
+    }
+
     const mouseOutHandler = (e: MouseEvent) => {
       if (!e.relatedTarget && e.clientY < 50) triggerPopup();
     };
@@ -188,7 +194,7 @@ export function ExitIntentPopup() {
         }
 
         // 2. Instant Redirect to WhatsApp
-        window.location.href = "https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B";
+        window.location.href = whatsappUrl;
       } else {
         alert(data.message || 'Something went wrong');
       }
@@ -223,7 +229,7 @@ export function ExitIntentPopup() {
                  : "Welcome to the Inner Circle. Your journey starts now."}
              </p>
              <a 
-               href="https://whatsapp.com/channel/0029VbCdMZNDeON0bXzKBy0B" 
+               href={whatsappUrl} 
                target="_blank" 
                rel="noopener noreferrer"
                className="w-full max-w-xs h-14 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg"
