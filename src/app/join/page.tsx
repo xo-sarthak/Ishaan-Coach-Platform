@@ -158,7 +158,7 @@ export default function JoinCommunityPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center selection:bg-primary/20 pb-24 pt-4 md:pt-0 w-full max-w-full overflow-x-hidden">
       
-      <main className="w-full max-w-full md:max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start md:mt-32">
+      <main className="w-full max-w-full md:max-w-[500px] lg:max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start mt-24 md:mt-32">
         
         {/* DESKTOP LEFT / MOBILE BOTTOM: The Content */}
         <div className="w-full flex flex-col space-y-8 text-left order-2 lg:order-1 pb-12 lg:pb-0">
