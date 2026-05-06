@@ -243,7 +243,7 @@ export default function JoinCommunityPage() {
                          <select 
                            value={formData.countryCode}
                            onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
-                           className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none text-foreground appearance-none w-full h-full cursor-pointer"
+                           className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
                          >
                            {countryCodes.map((c) => (
                              <option key={c.code} value={c.code}>{c.code}</option>
@@ -270,7 +270,7 @@ export default function JoinCommunityPage() {
                           required
                           value={formData.role}
                           onChange={(e) => setFormData({...formData, role: e.target.value})}
-                          className="w-full bg-muted/30 border border-border rounded-2xl pl-4 pr-10 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-foreground cursor-pointer"
+                          className="w-full bg-muted/30 border border-border rounded-2xl pl-4 pr-10 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none text-foreground cursor-pointer"
                         >
                           <option value="" disabled>Select Role</option>
                           <option>Student</option>
@@ -287,7 +287,7 @@ export default function JoinCommunityPage() {
                           required
                           value={formData.interest}
                           onChange={(e) => setFormData({...formData, interest: e.target.value})}
-                          className="w-full bg-muted/30 border border-border rounded-2xl pl-4 pr-10 py-3.5 md:py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none appearance-none text-foreground cursor-pointer"
+                          className="w-full bg-muted/30 border border-border rounded-2xl pl-4 pr-10 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none text-foreground cursor-pointer"
                         >
                           <option value="" disabled>Select Interest</option>
                           <option>Relationships</option>
