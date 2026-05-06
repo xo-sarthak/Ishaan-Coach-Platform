@@ -178,12 +178,13 @@ export function ExitIntentPopup() {
       if (res.ok) {
         // 1. Trigger Auto-Download if guide is checked
         if (getGuide) {
-          const link = document.createElement('a');
-          link.href = "https://drive.google.com/uc?export=download&id=1TwvuexouTIwMH-mdWFBkf4dhMQGTS0sh";
-          link.download = "Hard Earned Lessons.pdf";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = "https://drive.google.com/uc?export=download&id=1TwvuexouTIwMH-mdWFBkf4dhMQGTS0sh";
+          document.body.appendChild(iframe);
+          setTimeout(() => {
+            document.body.removeChild(iframe);
+          }, 3000);
         }
 
         // 2. Instant Redirect to WhatsApp
