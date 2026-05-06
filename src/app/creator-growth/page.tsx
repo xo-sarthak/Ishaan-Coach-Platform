@@ -79,28 +79,66 @@ export default function CreatorGrowthPage() {
           </button>
         </section>
 
-        {/* STATS SECTION */}
-        <section className="py-12 md:py-16 px-4 md:px-6">
-          <div className="max-w-5xl mx-auto bg-white rounded-[2rem] border border-border shadow-sm p-8 md:p-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-border/50">
-              
-              <div className="flex flex-col space-y-2 md:pr-8">
-                <span className="text-4xl md:text-5xl font-bold font-serif text-foreground">130K+</span>
-                <span className="text-xs md:text-sm text-foreground/40 uppercase tracking-widest font-bold">Followers</span>
+        {/* THE MENTOR / RELATABILITY SECTION */}
+        <section className="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto border-t border-border/50">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            <div className="order-2 md:order-1 relative">
+              <div className="aspect-[4/5] md:aspect-[3/4] bg-muted/50 rounded-[2.5rem] overflow-hidden relative border border-border shadow-lg group">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-foreground/40 gap-4">
+                  <div className="w-16 h-16 rounded-full border border-dashed border-foreground/20 flex items-center justify-center">
+                    <CheckCircle2 className="w-6 h-6 text-foreground/30" />
+                  </div>
+                  <span className="font-bold tracking-widest uppercase text-[10px]">Add Image Here</span>
+                </div>
+                {/* Standard image tag placeholder */}
+                <img 
+                  src="/ishaan-creator.jpg" 
+                  alt="Ishaan Singh"
+                  className="absolute inset-0 w-full h-full object-cover object-[35%_center]" 
+                />
               </div>
               
-              <div className="flex flex-col space-y-2 pt-8 md:pt-0 md:px-8">
-                <span className="text-4xl md:text-5xl font-bold font-serif text-foreground">20M+</span>
-                <span className="text-xs md:text-sm text-foreground/40 uppercase tracking-widest font-bold">Monthly Views</span>
+              <div className="absolute -bottom-6 -right-6 md:-right-10 bg-white p-6 md:p-8 rounded-[2rem] shadow-xl shadow-foreground/5 border border-border hidden sm:block">
+                <div className="text-4xl font-sans font-extrabold tracking-tight text-foreground">20M+</div>
+                <div className="text-[10px] font-bold text-feature-bg uppercase tracking-[0.2em] mt-2">Monthly Views</div>
               </div>
+            </div>
+
+            <div className="order-1 md:order-2 space-y-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 border border-feature-bg/10 text-feature-bg text-[10px] font-bold tracking-[0.2em] uppercase mb-2">
+                Who is Ishaan Singh?
+              </div>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight text-foreground">
+                I know exactly what it's like to juggle <span className="italic text-feature-bg">everything.</span>
+              </h2>
               
-              <div className="flex flex-col pt-8 md:pt-0 md:pl-8 justify-center">
-                <p className="text-sm md:text-base text-foreground/70 italic leading-relaxed">
-                  "My audience doesn’t just consume content; they actively apply it. High trust always beats high numbers."
+              <div className="space-y-6 text-foreground/70 leading-relaxed text-sm md:text-base">
+                <p>
+                  Most "Instagram Gurus" have all day to record videos. I don't. And neither do you. 
+                </p>
+                <p>
+                  I built my 130K+ following while balancing the exact same responsibilities you have. I didn't rely on luck or trending dances—I built high-leverage systems to scale my brand alongside my life.
                 </p>
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                {[
+                  "IIT Kanpur MBA",
+                  "Built a ₹50 Crore+ Business",
+                  "Husband & Father",
+                  "130K+ Followers"
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-border shadow-sm">
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-feature-bg" />
+                    </div>
+                    <span className="text-sm font-bold text-foreground">{stat}</span>
+                  </div>
+                ))}
+              </div>
             </div>
+
           </div>
         </section>
 
