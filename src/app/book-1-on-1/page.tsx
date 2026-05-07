@@ -89,7 +89,7 @@ export default function BookOneOnOnePage() {
                   <Avatar initials="MK" index={2} className="w-10 h-10" />
                 </div>
                 <div className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                  Joined by 200K+ others
+                  Joined by 10K+ others
                 </div>
               </div>
             </div>
