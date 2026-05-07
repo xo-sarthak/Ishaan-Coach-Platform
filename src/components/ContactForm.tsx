@@ -98,27 +98,24 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-          {/* Phone Field */}
-          <div className="space-y-3">
-            <label className="text-sm font-bold text-muted-foreground flex items-center gap-2">
-              <Phone size={14} className="text-primary" /> Phone Number
-            </label>
-            <div className="flex items-center gap-3 border-b border-border py-2 focus-within:border-primary transition-colors">
-              <div className="flex items-center gap-2 px-1 border-r border-border">
-                <span className="text-lg">🇮🇳</span>
-                <span className="text-muted-foreground font-medium">+91</span>
-              </div>
-              <input
-                type="tel"
-                placeholder="Enter your phone number"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-lg"
-              />
+        {/* Phone Field */}
+        <div className="space-y-3">
+          <label className="text-sm font-bold text-muted-foreground flex items-center gap-2">
+            <Phone size={14} className="text-primary" /> Phone Number
+          </label>
+          <div className="flex items-center gap-3 border-b border-border py-2 focus-within:border-primary transition-colors">
+            <div className="flex items-center gap-2 px-1 border-r border-border">
+              <span className="text-lg">🇮🇳</span>
+              <span className="text-muted-foreground font-medium">+91</span>
             </div>
+            <input
+              type="tel"
+              placeholder="Enter your phone number"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="w-full bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-lg"
+            />
           </div>
-
         </div>
 
         {/* Service Selection */}
