@@ -1,7 +1,52 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, CheckCircle2, Target, TrendingUp, Users, Shield, ArrowDown } from "lucide-react";
+import { ArrowRight, CheckCircle2, Target, TrendingUp, Users, Shield, ArrowDown, ChevronDown } from "lucide-react";
+
+const countryCodes = [
+  { code: "🇮🇳 +91", name: "India" },
+  { code: "🇺🇸 +1", name: "USA" },
+  { code: "🇬🇧 +44", name: "UK" },
+  { code: "🇦🇪 +971", name: "UAE" },
+  { code: "🇨🇦 +1", name: "Canada" },
+  { code: "🇦🇺 +61", name: "Australia" },
+  { code: "🇩🇪 +49", name: "Germany" },
+  { code: "🇸🇬 +65", name: "Singapore" },
+  { code: "🇳🇵 +977", name: "Nepal" },
+  { code: "🇱🇰 +94", name: "Sri Lanka" },
+  { code: "🇧🇩 +880", name: "Bangladesh" }
+];
+
+const getPhoneValidationError = (countryCodeStr: string, localPhone: string): string => {
+  const digits = localPhone.replace(/\D/g, "");
+  if (!digits) return "Phone number is required.";
+
+  const codeMatch = countryCodeStr.match(/\+(\d+)/);
+  const prefix = codeMatch ? codeMatch[1] : "";
+
+  if (prefix === "91") {
+    if (digits.length !== 10) {
+      return "Indian WhatsApp number must be exactly 10 digits.";
+    }
+  } else if (prefix === "1") {
+    if (digits.length !== 10) {
+      return "USA/Canada phone number must be exactly 10 digits.";
+    }
+  } else if (prefix === "44") {
+    if (digits.length !== 10 && digits.length !== 11) {
+      return "UK phone number must be 10 or 11 digits.";
+    }
+  } else if (prefix === "971") {
+    if (digits.length !== 9) {
+      return "UAE phone number must be exactly 9 digits.";
+    }
+  } else {
+    if (digits.length < 7 || digits.length > 15) {
+      return "International phone number must be between 7 and 15 digits.";
+    }
+  }
+  return "";
+};
 
 export default function CreatorGrowthPage() {
   const [formData, setFormData] = useState({
@@ -14,19 +59,46 @@ export default function CreatorGrowthPage() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const [countryCode, setCountryCode] = useState("🇮🇳 +91");
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Strict validations
+    const pErr = getPhoneValidationError(countryCode, formData.phone);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isEmailValid = emailRegex.test(formData.email);
+
+    if (pErr) {
+      setPhoneError(pErr);
+      return;
+    }
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address (e.g. name@domain.com).");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const res = await fetch("/api/creator-growth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          phone: `${countryCode} ${formData.phone}`
+        }),
       });
 
       if (res.ok) {
         setIsSubmitted(true);
+        setPhoneError("");
+        setEmailError("");
+        setTimeout(() => {
+          document.getElementById("apply-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
       } else {
         const data = await res.json();
         alert(data.error || "Something went wrong. Please try again.");
@@ -281,9 +353,9 @@ export default function CreatorGrowthPage() {
               }
             ].map((phase, i) => (
               <div key={i} className="bg-white border border-border rounded-[2rem] p-8 md:p-10 shadow-sm hover:shadow-md transition-all group hover:-translate-y-1 duration-300">
-                <div className="flex justify-between items-start mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6">
                   <span className="text-3xl font-extrabold text-feature-bg/20 font-sans tracking-tight group-hover:text-feature-bg/30 transition-colors">{phase.week}</span>
-                  <div className="px-3 py-1 bg-feature-bg/5 border border-feature-bg/10 rounded-full text-[10px] font-bold text-feature-bg tracking-wider uppercase">{phase.day}</div>
+                  <div className="px-3 py-1 bg-feature-bg/5 border border-feature-bg/10 rounded-full text-[9px] md:text-[10px] font-bold text-feature-bg tracking-wider uppercase whitespace-nowrap shrink-0">{phase.day}</div>
                 </div>
                 <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-4 group-hover:text-feature-bg transition-colors">{phase.title}</h3>
                 <p className="text-sm text-foreground/60 leading-relaxed mb-6">{phase.desc}</p>
@@ -399,24 +471,58 @@ export default function CreatorGrowthPage() {
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground placeholder:text-foreground/20"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setFormData({ ...formData, email: val });
+                        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)) {
+                          setEmailError("Please enter a valid email address.");
+                        } else {
+                          setEmailError("");
+                        }
+                      }}
+                      className={`w-full bg-muted/30 border ${emailError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:bg-white transition-all text-foreground placeholder:text-foreground/20`}
                       placeholder="name@email.com"
                     />
+                    {emailError && <p className="text-red-500 text-xs font-semibold mt-1 ml-1">{emailError}</p>}
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground placeholder:text-foreground/20"
-                      placeholder="Number"
-                    />
+                    <div className="flex gap-2">
+                      <div className="relative shrink-0 w-[95px]">
+                        <select
+                          value={countryCode}
+                          onChange={(e) => {
+                            const code = e.target.value;
+                            setCountryCode(code);
+                            const err = getPhoneValidationError(code, formData.phone);
+                            setPhoneError(err);
+                          }}
+                          className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
+                        >
+                          {countryCodes.map((c) => (
+                            <option key={c.code} value={c.code}>{c.code}</option>
+                          ))}
+                        </select>
+                        <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
+                      </div>
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => {
+                          const digitsOnly = e.target.value.replace(/\D/g, "");
+                          setFormData({ ...formData, phone: digitsOnly });
+                          const err = getPhoneValidationError(countryCode, digitsOnly);
+                          setPhoneError(err);
+                        }}
+                        className={`flex-1 bg-muted/30 border ${phoneError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:bg-white transition-all text-foreground placeholder:text-foreground/20 min-w-0`}
+                        placeholder="Number"
+                      />
+                    </div>
+                    {phoneError && <p className="text-red-500 text-xs font-semibold mt-1 ml-1">{phoneError}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Current Follower Count</label>

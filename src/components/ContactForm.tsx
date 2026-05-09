@@ -13,20 +13,51 @@ export default function ContactForm() {
     message: "",
   });
 
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Strict validations
+    const digits = formData.phone.replace(/\D/g, "");
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isEmailValid = emailRegex.test(formData.email);
+
+    let hasError = false;
+    if (digits.length !== 10) {
+      setPhoneError("Indian phone number must be exactly 10 digits.");
+      hasError = true;
+    } else {
+      setPhoneError("");
+    }
+
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.");
+      hasError = true;
+    } else {
+      setEmailError("");
+    }
+
+    if (hasError) return;
+
     setStatus("loading");
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          phone: `+91 ${digits}`
+        }),
       });
 
       if (res.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", phone: "", service: "Resources", message: "" });
+        setPhoneError("");
+        setEmailError("");
       } else {
         setStatus("error");
       }
@@ -92,9 +123,18 @@ export default function ContactForm() {
               type="email"
               placeholder="Enter your email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full bg-transparent border-b border-border py-2 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors text-lg"
+              onChange={(e) => {
+                const val = e.target.value;
+                setFormData({ ...formData, email: val });
+                if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)) {
+                  setEmailError("Please enter a valid email address.");
+                } else {
+                  setEmailError("");
+                }
+              }}
+              className={`w-full bg-transparent border-b ${emailError ? "border-red-500/50" : "border-border focus:border-primary"} py-2 text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-colors text-lg`}
             />
+            {emailError && <p className="text-red-500 text-xs font-semibold mt-1">{emailError}</p>}
           </div>
         </div>
 
@@ -103,7 +143,7 @@ export default function ContactForm() {
           <label className="text-sm font-bold text-muted-foreground flex items-center gap-2">
             <Phone size={14} className="text-primary" /> Phone Number
           </label>
-          <div className="flex items-center gap-3 border-b border-border py-2 focus-within:border-primary transition-colors">
+          <div className={`flex items-center gap-3 border-b ${phoneError ? "border-red-500/50" : "border-border focus-within:border-primary"} py-2 transition-colors`}>
             <div className="flex items-center gap-2 px-1 border-r border-border">
               <span className="text-lg">🇮🇳</span>
               <span className="text-muted-foreground font-medium">+91</span>
@@ -112,10 +152,19 @@ export default function ContactForm() {
               type="tel"
               placeholder="Enter your phone number"
               value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onChange={(e) => {
+                const digitsOnly = e.target.value.replace(/\D/g, "");
+                setFormData({ ...formData, phone: digitsOnly });
+                if (digitsOnly.length !== 10) {
+                  setPhoneError("Indian phone number must be exactly 10 digits.");
+                } else {
+                  setPhoneError("");
+                }
+              }}
               className="w-full bg-transparent text-foreground placeholder:text-muted-foreground/50 focus:outline-none text-lg"
             />
           </div>
+          {phoneError && <p className="text-red-500 text-xs font-semibold mt-1">{phoneError}</p>}
         </div>
 
         {/* Service Selection */}

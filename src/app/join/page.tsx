@@ -112,6 +112,37 @@ const countryCodes = [
   { code: "🇻🇳 +84", name: "Vietnam" }
 ];
 
+const getPhoneValidationError = (countryCodeStr: string, localPhone: string): string => {
+  const digits = localPhone.replace(/\D/g, "");
+  if (!digits) return "Phone number is required.";
+
+  const codeMatch = countryCodeStr.match(/\+(\d+)/);
+  const prefix = codeMatch ? codeMatch[1] : "";
+
+  if (prefix === "91") {
+    if (digits.length !== 10) {
+      return "Indian WhatsApp number must be exactly 10 digits.";
+    }
+  } else if (prefix === "1") {
+    if (digits.length !== 10) {
+      return "USA/Canada phone number must be exactly 10 digits.";
+    }
+  } else if (prefix === "44") {
+    if (digits.length !== 10 && digits.length !== 11) {
+      return "UK phone number must be 10 or 11 digits.";
+    }
+  } else if (prefix === "971") {
+    if (digits.length !== 9) {
+      return "UAE phone number must be exactly 9 digits.";
+    }
+  } else {
+    if (digits.length < 7 || digits.length > 15) {
+      return "International phone number must be between 7 and 15 digits.";
+    }
+  }
+  return "";
+};
+
 export default function JoinCommunityPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [getGuide, setGetGuide] = useState(true);
@@ -124,9 +155,27 @@ export default function JoinCommunityPage() {
     role: "",
     interest: ""
   });
+  
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Strict validations
+    const pErr = getPhoneValidationError(formData.countryCode, formData.phone);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isEmailValid = emailRegex.test(formData.email);
+
+    if (pErr) {
+      setPhoneError(pErr);
+      return;
+    }
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const res = await fetch('/api/join-community', {
@@ -234,10 +283,19 @@ export default function JoinCommunityPage() {
                     type="email"
                     placeholder="name@email.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground placeholder:text-foreground/20"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setFormData({ ...formData, email: val });
+                      if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)) {
+                        setEmailError("Please enter a valid email address.");
+                      } else {
+                        setEmailError("");
+                      }
+                    }}
+                    className={`w-full bg-muted/30 border ${emailError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:bg-white transition-all text-foreground placeholder:text-foreground/20`}
                     required
                   />
+                  {emailError && <p className="text-red-500 text-xs font-semibold mt-1 ml-1">{emailError}</p>}
                 </div>
 
                 <div className="space-y-1.5">
@@ -246,7 +304,12 @@ export default function JoinCommunityPage() {
                     <div className="relative shrink-0 w-[95px]">
                       <select
                         value={formData.countryCode}
-                        onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
+                        onChange={(e) => {
+                          const code = e.target.value;
+                          setFormData({ ...formData, countryCode: code });
+                          const err = getPhoneValidationError(code, formData.phone);
+                          setPhoneError(err);
+                        }}
                         className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
                       >
                         {countryCodes.map((c) => (
@@ -259,11 +322,17 @@ export default function JoinCommunityPage() {
                       type="tel"
                       placeholder="Number"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="flex-1 bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground placeholder:text-foreground/20 min-w-0"
+                      onChange={(e) => {
+                        const digitsOnly = e.target.value.replace(/\D/g, "");
+                        setFormData({ ...formData, phone: digitsOnly });
+                        const err = getPhoneValidationError(formData.countryCode, digitsOnly);
+                        setPhoneError(err);
+                      }}
+                      className={`flex-1 bg-muted/30 border ${phoneError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:bg-white transition-all text-foreground placeholder:text-foreground/20 min-w-0`}
                       required
                     />
                   </div>
+                  {phoneError && <p className="text-red-500 text-xs font-semibold mt-1 ml-1">{phoneError}</p>}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -113,6 +113,37 @@ const countryCodes = [
   { code: "🇻🇳 +84", name: "Vietnam" }
 ];
 
+const getPhoneValidationError = (countryCodeStr: string, localPhone: string): string => {
+  const digits = localPhone.replace(/\D/g, "");
+  if (!digits) return "Phone number is required.";
+
+  const codeMatch = countryCodeStr.match(/\+(\d+)/);
+  const prefix = codeMatch ? codeMatch[1] : "";
+
+  if (prefix === "91") {
+    if (digits.length !== 10) {
+      return "Indian WhatsApp number must be exactly 10 digits.";
+    }
+  } else if (prefix === "1") {
+    if (digits.length !== 10) {
+      return "USA/Canada phone number must be exactly 10 digits.";
+    }
+  } else if (prefix === "44") {
+    if (digits.length !== 10 && digits.length !== 11) {
+      return "UK phone number must be 10 or 11 digits.";
+    }
+  } else if (prefix === "971") {
+    if (digits.length !== 9) {
+      return "UAE phone number must be exactly 9 digits.";
+    }
+  } else {
+    if (digits.length < 7 || digits.length > 15) {
+      return "International phone number must be between 7 and 15 digits.";
+    }
+  }
+  return "";
+};
+
 export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -128,6 +159,9 @@ export function ExitIntentPopup() {
     phone: "",
     countryCode: "🇮🇳 +91"
   });
+
+  const [phoneError, setPhoneError] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const pathname = usePathname();
 
@@ -165,6 +199,21 @@ export function ExitIntentPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Strict validations
+    const pErr = getPhoneValidationError(formData.countryCode, formData.phone);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isEmailValid = emailRegex.test(formData.email);
+
+    if (pErr) {
+      setPhoneError(pErr);
+      return;
+    }
+    if (!isEmailValid) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const res = await fetch('/api/join-community', {
@@ -277,22 +326,49 @@ export function ExitIntentPopup() {
                   <div className="space-y-4">
                     <input type="text" placeholder="Your name" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})}
                       className="w-full bg-muted/30 border border-border rounded-xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none" />
-                    <input type="email" placeholder="Email address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-muted/30 border border-border rounded-xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none" />
+                    <div className="space-y-1">
+                      <input type="email" placeholder="Email address" required value={formData.email}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setFormData({ ...formData, email: val });
+                          if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(val)) {
+                            setEmailError("Please enter a valid email address.");
+                          } else {
+                            setEmailError("");
+                          }
+                        }}
+                        className={`w-full bg-muted/30 border ${emailError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-xl px-5 py-4 text-sm outline-none transition-all`} />
+                      {emailError && <p className="text-red-500 text-[10px] font-semibold mt-1 ml-1">{emailError}</p>}
+                    </div>
                     
                     {/* Fixed Country Code/Phone Row for S20 Ultra */}
-                    <div className="flex gap-2 w-full">
-                       <div className="relative shrink-0">
-                         <select value={formData.countryCode} onChange={e => setFormData({...formData, countryCode: e.target.value})}
-                           className="bg-muted/30 border border-border rounded-xl pl-3 pr-8 py-4 text-xs focus:ring-2 focus:ring-primary/50 outline-none appearance-none h-full cursor-pointer">
-                           {countryCodes.map((c) => (
-                             <option key={c.code} value={c.code}>{c.code}</option>
-                           ))}
-                         </select>
-                         <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
-                       </div>
-                       <input type="tel" placeholder="WhatsApp Number" required value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})}
-                         className="flex-1 bg-muted/30 border border-border rounded-xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary/50 outline-none min-w-0" />
+                    <div className="space-y-1">
+                      <div className="flex gap-2 w-full">
+                         <div className="relative shrink-0">
+                           <select value={formData.countryCode} 
+                             onChange={(e) => {
+                               const code = e.target.value;
+                               setFormData({ ...formData, countryCode: code });
+                               const err = getPhoneValidationError(code, formData.phone);
+                               setPhoneError(err);
+                             }}
+                             className="bg-muted/30 border border-border rounded-xl pl-3 pr-8 py-4 text-xs focus:ring-2 focus:ring-primary/50 outline-none appearance-none h-full cursor-pointer">
+                             {countryCodes.map((c) => (
+                               <option key={c.code} value={c.code}>{c.code}</option>
+                             ))}
+                           </select>
+                           <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
+                         </div>
+                         <input type="tel" placeholder="WhatsApp Number" required value={formData.phone}
+                           onChange={(e) => {
+                             const digitsOnly = e.target.value.replace(/\D/g, "");
+                             setFormData({ ...formData, phone: digitsOnly });
+                             const err = getPhoneValidationError(formData.countryCode, digitsOnly);
+                             setPhoneError(err);
+                           }}
+                           className={`flex-1 bg-muted/30 border ${phoneError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-xl px-5 py-4 text-sm outline-none min-w-0 transition-all`} />
+                      </div>
+                      {phoneError && <p className="text-red-500 text-[10px] font-semibold mt-1 ml-1">{phoneError}</p>}
                     </div>
                   </div>
 
