@@ -313,7 +313,9 @@ export default function JoinCommunityPage() {
                         className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
                       >
                         {countryCodes.map((c) => (
-                          <option key={c.code} value={c.code}>{c.code}</option>
+                          <option key={c.code} value={c.code}>
+                            {c.code} — {c.name}
+                          </option>
                         ))}
                       </select>
                       <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />

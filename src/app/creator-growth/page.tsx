@@ -5,16 +5,111 @@ import { ArrowRight, CheckCircle2, Target, TrendingUp, Users, Shield, ArrowDown,
 
 const countryCodes = [
   { code: "🇮🇳 +91", name: "India" },
-  { code: "🇺🇸 +1", name: "USA" },
-  { code: "🇬🇧 +44", name: "UK" },
-  { code: "🇦🇪 +971", name: "UAE" },
-  { code: "🇨🇦 +1", name: "Canada" },
+  { code: "🇦🇫 +93", name: "Afghanistan" },
+  { code: "🇦🇱 +355", name: "Albania" },
+  { code: "🇩🇿 +213", name: "Algeria" },
+  { code: "🇦🇩 +376", name: "Andorra" },
+  { code: "🇦🇴 +244", name: "Angola" },
+  { code: "🇦🇷 +54", name: "Argentina" },
+  { code: "🇦🇲 +374", name: "Armenia" },
   { code: "🇦🇺 +61", name: "Australia" },
+  { code: "🇦🇹 +43", name: "Austria" },
+  { code: "🇦🇿 +994", name: "Azerbaijan" },
+  { code: "🇧🇭 +973", name: "Bahrain" },
+  { code: "🇧🇩 +880", name: "Bangladesh" },
+  { code: "🇧🇪 +32", name: "Belgium" },
+  { code: "🇧🇹 +975", name: "Bhutan" },
+  { code: "🇧🇴 +591", name: "Bolivia" },
+  { code: "🇧🇦 +387", name: "Bosnia" },
+  { code: "🇧🇷 +55", name: "Brazil" },
+  { code: "🇧🇳 +673", name: "Brunei" },
+  { code: "🇧🇬 +359", name: "Bulgaria" },
+  { code: "🇰🇭 +855", name: "Cambodia" },
+  { code: "🇨🇦 +1", name: "Canada" },
+  { code: "🇨🇱 +56", name: "Chile" },
+  { code: "🇨🇳 +86", name: "China" },
+  { code: "🇨🇴 +57", name: "Colombia" },
+  { code: "🇭🇷 +385", name: "Croatia" },
+  { code: "🇨🇾 +357", name: "Cyprus" },
+  { code: "🇨🇿 +420", name: "Czechia" },
+  { code: "🇩🇰 +45", name: "Denmark" },
+  { code: "🇪🇬 +20", name: "Egypt" },
+  { code: "🇪🇪 +372", name: "Estonia" },
+  { code: "🇪🇹 +251", name: "Ethiopia" },
+  { code: "🇫🇯 +679", name: "Fiji" },
+  { code: "🇫🇮 +358", name: "Finland" },
+  { code: "🇫🇷 +33", name: "France" },
+  { code: "🇬🇪 +995", name: "Georgia" },
   { code: "🇩🇪 +49", name: "Germany" },
-  { code: "🇸🇬 +65", name: "Singapore" },
+  { code: "🇬🇷 +30", name: "Greece" },
+  { code: "🇭🇰 +852", name: "Hong Kong" },
+  { code: "🇭🇺 +36", name: "Hungary" },
+  { code: "🇮🇸 +354", name: "Iceland" },
+  { code: "🇮🇩 +62", name: "Indonesia" },
+  { code: "🇮🇷 +98", name: "Iran" },
+  { code: "🇮🇶 +964", name: "Iraq" },
+  { code: "🇮🇪 +353", name: "Ireland" },
+  { code: "🇮🇱 +972", name: "Israel" },
+  { code: "🇮🇹 +39", name: "Italy" },
+  { code: "🇯🇵 +81", name: "Japan" },
+  { code: "🇯🇴 +962", name: "Jordan" },
+  { code: "🇰🇿 +7", name: "Kazakhstan" },
+  { code: "🇰🇪 +254", name: "Kenya" },
+  { code: "🇰🇼 +965", name: "Kuwait" },
+  { code: "🇱🇦 +856", name: "Laos" },
+  { code: "🇱🇻 +371", name: "Latvia" },
+  { code: "🇱🇧 +961", name: "Lebanon" },
+  { code: "🇱🇾 +218", name: "Libya" },
+  { code: "🇱🇹 +370", name: "Lithuania" },
+  { code: "🇱🇺 +352", name: "Luxembourg" },
+  { code: "🇲🇴 +853", name: "Macau" },
+  { code: "🇲🇾 +60", name: "Malaysia" },
+  { code: "🇲🇻 +960", name: "Maldives" },
+  { code: "🇲🇹 +356", name: "Malta" },
+  { code: "🇲🇺 +230", name: "Mauritius" },
+  { code: "🇲🇽 +52", name: "Mexico" },
+  { code: "🇲🇨 +377", name: "Monaco" },
+  { code: "🇲🇳 +976", name: "Mongolia" },
+  { code: "🇲🇪 +382", name: "Montenegro" },
+  { code: "🇲🇦 +212", name: "Morocco" },
+  { code: "🇲🇲 +95", name: "Myanmar" },
   { code: "🇳🇵 +977", name: "Nepal" },
+  { code: "🇳🇱 +31", name: "Netherlands" },
+  { code: "🇳🇿 +64", name: "New Zealand" },
+  { code: "🇳🇬 +234", name: "Nigeria" },
+  { code: "🇳🇴 +47", name: "Norway" },
+  { code: "🇴🇲 +968", name: "Oman" },
+  { code: "🇵🇰 +92", name: "Pakistan" },
+  { code: "🇵🇸 +970", name: "Palestine" },
+  { code: "🇵🇦 +507", name: "Panama" },
+  { code: "🇵🇾 +595", name: "Paraguay" },
+  { code: "🇵🇪 +51", name: "Peru" },
+  { code: "🇵🇭 +63", name: "Philippines" },
+  { code: "🇵🇱 +48", name: "Poland" },
+  { code: "🇵🇹 +351", name: "Portugal" },
+  { code: "🇶🇦 +974", name: "Qatar" },
+  { code: "🇷🇴 +40", name: "Romania" },
+  { code: "🇷🇺 +7", name: "Russia" },
+  { code: "🇸🇦 +966", name: "Saudi Arabia" },
+  { code: "🇸🇬 +65", name: "Singapore" },
+  { code: "🇸🇰 +421", name: "Slovakia" },
+  { code: "🇸🇮 +386", name: "Slovenia" },
+  { code: "🇿🇦 +27", name: "South Africa" },
+  { code: "🇰🇷 +82", name: "South Korea" },
+  { code: "🇪🇸 +34", name: "Spain" },
   { code: "🇱🇰 +94", name: "Sri Lanka" },
-  { code: "🇧🇩 +880", name: "Bangladesh" }
+  { code: "🇸🇪 +46", name: "Sweden" },
+  { code: "🇨🇭 +41", name: "Switzerland" },
+  { code: "🇹🇼 +886", name: "Taiwan" },
+  { code: "🇹🇭 +66", name: "Thailand" },
+  { code: "🇹🇷 +90", name: "Turkey" },
+  { code: "🇺🇦 +380", name: "Ukraine" },
+  { code: "🇦🇪 +971", name: "UAE" },
+  { code: "🇬🇧 +44", name: "UK" },
+  { code: "🇺🇸 +1", name: "USA" },
+  { code: "🇺🇾 +598", name: "Uruguay" },
+  { code: "🇺🇿 +998", name: "Uzbekistan" },
+  { code: "🇻🇳 +84", name: "Vietnam" }
 ];
 
 const getPhoneValidationError = (countryCodeStr: string, localPhone: string): string => {
@@ -453,7 +548,7 @@ export default function CreatorGrowthPage() {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Full Name</label>
                     <input
@@ -487,11 +582,11 @@ export default function CreatorGrowthPage() {
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
                     <div className="flex gap-2 w-full">
-                      <div className="relative shrink-0 w-[95px]">
+                      <div className="relative shrink-0 w-[82px] md:w-[95px]">
                         <select
                           value={countryCode}
                           onChange={(e) => {
@@ -500,10 +595,12 @@ export default function CreatorGrowthPage() {
                             const err = getPhoneValidationError(code, formData.phone);
                             setPhoneError(err);
                           }}
-                          className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
+                          className="bg-muted/30 border border-border rounded-2xl pl-2.5 pr-7 py-3.5 md:py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
                         >
                           {countryCodes.map((c) => (
-                            <option key={c.code} value={c.code}>{c.code}</option>
+                            <option key={c.code} value={c.code}>
+                              {c.code} — {c.name}
+                            </option>
                           ))}
                         </select>
                         <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
@@ -518,7 +615,7 @@ export default function CreatorGrowthPage() {
                           const err = getPhoneValidationError(countryCode, digitsOnly);
                           setPhoneError(err);
                         }}
-                        className={`flex-1 bg-muted/30 border ${phoneError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:bg-white transition-all text-foreground placeholder:text-foreground/20 min-w-0`}
+                        className={`flex-1 bg-muted/30 border ${phoneError ? "border-red-500/50 focus:ring-red-500/20" : "border-border focus:ring-primary/50"} rounded-2xl px-4 md:px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:bg-white transition-all text-foreground placeholder:text-foreground/20 min-w-0`}
                         placeholder="Number"
                       />
                     </div>
