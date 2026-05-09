@@ -280,6 +280,7 @@ export default function JoinCommunityPage() {
                         <option>Student</option>
                         <option>Professional</option>
                         <option>Entrepreneur</option>
+                        <option>Other</option>
                       </select>
                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
                     </div>
@@ -297,6 +298,7 @@ export default function JoinCommunityPage() {
                         <option>Relationships</option>
                         <option>Career</option>
                         <option>Mindset</option>
+                        <option>Other</option>
                       </select>
                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
                     </div>
