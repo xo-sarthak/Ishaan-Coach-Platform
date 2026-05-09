@@ -427,7 +427,7 @@ export default function CreatorGrowthPage() {
 
         {/* FORM SECTION */}
         <section id="apply-form" className="py-16 md:py-24 px-4 md:px-6 max-w-4xl mx-auto">
-          <div className="bg-white rounded-[2.5rem] md:rounded-[3rem] border border-border shadow-xl shadow-foreground/5 p-8 sm:p-10 md:p-16">
+          <div className="bg-white rounded-[2.5rem] md:rounded-[3rem] border border-border shadow-xl shadow-foreground/5 p-5 sm:p-10 md:p-16">
 
             <div className="text-center mb-10 md:mb-12">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-600 text-[11px] font-bold uppercase tracking-wider mb-4">
@@ -490,7 +490,7 @@ export default function CreatorGrowthPage() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 w-full">
                       <div className="relative shrink-0 w-[95px]">
                         <select
                           value={countryCode}
@@ -526,18 +526,21 @@ export default function CreatorGrowthPage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">Current Follower Count</label>
-                    <select
-                      required
-                      value={formData.followerCount}
-                      onChange={(e) => setFormData({ ...formData, followerCount: e.target.value })}
-                      className="w-full bg-muted/30 border border-border rounded-2xl px-5 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground appearance-none cursor-pointer"
-                    >
-                      <option value="" disabled>Select range</option>
-                      <option value="0-5K">0 – 5K</option>
-                      <option value="5K-10K">5K – 10K</option>
-                      <option value="10K-20K">10K – 20K</option>
-                      <option value="20K+">Over 20K</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        required
+                        value={formData.followerCount}
+                        onChange={(e) => setFormData({ ...formData, followerCount: e.target.value })}
+                        className="w-full bg-muted/30 border border-border rounded-2xl pl-5 pr-10 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-foreground appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled>Select range</option>
+                        <option value="0-5K">0 – 5K</option>
+                        <option value="5K-10K">5K – 10K</option>
+                        <option value="10K-20K">10K – 20K</option>
+                        <option value="20K+">Over 20K</option>
+                      </select>
+                      <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40 pointer-events-none" />
+                    </div>
                   </div>
                 </div>
 
