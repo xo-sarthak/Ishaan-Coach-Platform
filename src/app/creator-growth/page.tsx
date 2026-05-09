@@ -88,14 +88,17 @@ export default function CreatorGrowthPage() {
         {/* COHORT HIGHLIGHTS BAR */}
         <section className="max-w-6xl mx-auto px-4 md:px-6 mb-16 relative z-10">
           <div className="bg-white rounded-[2rem] border border-border p-6 md:p-8 shadow-sm">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-border">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
               {[
                 { label: "COHORT DURATION", val: "4 Weeks Intensive" },
                 { label: "LEARNING COMMITMENT", val: "2 Hours / Week" },
                 { label: "SESSION FORMAT", val: "Live Mentorship & Q&A" },
                 { label: "TARGET AUDIENCE", val: "Under 20K Followers" }
               ].map((item, i) => (
-                <div key={i} className={`text-center ${i > 0 ? 'pt-6 md:pt-0 md:pl-4' : ''}`}>
+                <div 
+                  key={i} 
+                  className="text-center flex flex-col justify-center items-center border-b border-border/40 last:border-b-0 pb-6 last:pb-0 md:border-b-0 md:pb-0 md:border-l md:border-border/40 md:pl-4 first:md:border-l-0 first:md:pl-0"
+                >
                   <span className="text-[10px] font-black text-foreground/40 uppercase tracking-[0.2em] block mb-2">{item.label}</span>
                   <span className="text-base md:text-lg font-sans font-semibold tracking-tight text-foreground">{item.val}</span>
                 </div>
@@ -124,9 +127,9 @@ export default function CreatorGrowthPage() {
                 />
               </div>
 
-              <div className="absolute -bottom-6 -right-6 md:-right-10 bg-white p-6 md:p-8 rounded-[2rem] shadow-xl shadow-foreground/5 border border-border hidden sm:block">
-                <div className="text-4xl font-sans font-extrabold tracking-tight text-foreground">20M+</div>
-                <div className="text-[10px] font-bold text-feature-bg uppercase tracking-[0.2em] mt-2">Monthly Views</div>
+              <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-10 bg-white p-4 md:p-8 rounded-2xl md:rounded-[2rem] shadow-xl shadow-foreground/5 border border-border">
+                <div className="text-2xl md:text-4xl font-sans font-extrabold tracking-tight text-foreground">20M+</div>
+                <div className="text-[9px] md:text-[10px] font-bold text-feature-bg uppercase tracking-[0.2em] mt-1 md:mt-2">Monthly Views</div>
               </div>
             </div>
 
@@ -371,7 +374,7 @@ export default function CreatorGrowthPage() {
                       <option value="" disabled>Select range</option>
                       <option value="0-5K">0 – 5K</option>
                       <option value="5K-10K">5K – 10K</option>
-                      <option value="10K-20K">10K – 20K (Primary Target)</option>
+                      <option value="10K-20K">10K – 20K</option>
                       <option value="20K+">Over 20K</option>
                     </select>
                   </div>

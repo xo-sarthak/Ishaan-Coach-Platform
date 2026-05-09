@@ -124,13 +124,13 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden w-full bg-card border-b border-border/40 pb-4 shadow-lg animate-in slide-in-from-top-2">
-          <div className="flex flex-col px-6 divide-y divide-border/40">
+        <div className="absolute top-[4.75rem] left-0 right-0 lg:hidden w-full bg-white/95 backdrop-blur-xl border border-border/70 rounded-[2rem] p-6 shadow-xl animate-in fade-in-0 slide-in-from-top-4 duration-300 z-50">
+          <div className="flex flex-col divide-y divide-border/40">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="py-4 text-base font-medium text-foreground hover:text-primary transition-colors"
+                className="py-3.5 text-base font-medium text-foreground hover:text-primary transition-colors px-1"
               >
                 {link.name}
               </Link>
@@ -138,16 +138,16 @@ export default function Navbar() {
             {mounted && user && (
               <Link
                 href="/my-purchases"
-                className="py-4 text-base font-bold text-primary hover:text-primary/80 transition-colors"
+                className="py-3.5 text-base font-bold text-primary hover:text-primary/80 transition-colors px-1"
               >
                 My Purchases
               </Link>
             )}
 
-            <div className="py-4 sm:hidden flex flex-col gap-3">
+            <div className="pt-4 sm:hidden flex flex-col gap-3">
               <Link
                 href="/contact"
-                className="w-full h-10 inline-flex items-center justify-center rounded-md border border-primary text-primary px-4 py-2 text-sm font-bold transition-all hover:bg-primary/5 active:scale-95"
+                className="w-full h-11 inline-flex items-center justify-center rounded-xl border border-foreground/15 text-foreground px-4 py-2 text-sm font-bold transition-all hover:bg-muted/50 active:scale-95"
               >
                 Contact Us
               </Link>
@@ -155,14 +155,14 @@ export default function Navbar() {
                 user ? (
                   <button
                     onClick={handleLogout}
-                    className="w-full h-10 inline-flex items-center justify-center rounded-md border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted hover:text-red-600"
+                    className="w-full h-11 inline-flex items-center justify-center rounded-xl border border-red-200 bg-red-500/5 px-4 py-2 text-sm font-semibold text-red-600 transition-colors hover:bg-red-50"
                   >
                     Log out
                   </button>
                 ) : (
                   <Link
                     href="/auth"
-                    className="w-full h-10 inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/90"
+                    className="w-full h-11 inline-flex items-center justify-center rounded-xl bg-foreground hover:bg-foreground/90 text-white px-4 py-2 text-sm font-bold transition-colors"
                   >
                     Log In
                   </Link>
