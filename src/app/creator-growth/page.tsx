@@ -74,7 +74,7 @@ export default function CreatorGrowthPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed mb-10">
-            For creators with <strong className="text-foreground">less than 20,000 followers</strong> who are tired of the content treadmill. Learn the exact systems I used to scale a high-trust brand while balancing a career and family.
+            For creators with <strong className="text-foreground">less than 20,000 followers</strong> who are tired of the content treadmill while managing a full-time job. Learn the exact systems I used to scale a high-trust brand while balancing a career and family.
           </p>
 
           <button
@@ -90,13 +90,13 @@ export default function CreatorGrowthPage() {
           <div className="bg-white rounded-[2rem] border border-border p-6 md:p-8 shadow-sm">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
               {[
-                { label: "COHORT DURATION", val: "4 Weeks Intensive" },
-                { label: "LEARNING COMMITMENT", val: "2 Hours / Week" },
-                { label: "SESSION FORMAT", val: "Live Mentorship & Q&A" },
+                { label: "PROGRAM FORMAT", val: "2-Day Live Bootcamp" },
+                { label: "TIME COMMITMENT", val: "8 Hours Live (4 Hrs/Day)" },
+                { label: "ADDITIONAL SUPPORT", val: "Live Q&A & Recordings" },
                 { label: "TARGET AUDIENCE", val: "Under 20K Followers" }
               ].map((item, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="text-center flex flex-col justify-center items-center border-b border-border/40 last:border-b-0 pb-6 last:pb-0 md:border-b-0 md:pb-0 md:border-l md:border-border/40 md:pl-4 first:md:border-l-0 first:md:pl-0"
                 >
                   <span className="text-[10px] font-black text-foreground/40 uppercase tracking-[0.2em] block mb-2">{item.label}</span>
@@ -138,7 +138,7 @@ export default function CreatorGrowthPage() {
                 Who is Ishaan Singh?
               </div>
               <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight text-foreground">
-                An IIT Graduate, Startup Founder, and Father Who Conquered the Struggle.
+                An IIT Graduate, Startup Founder, and Father Who Conquered the Instagram Game!
               </h2>
 
               <div className="space-y-6 text-foreground/70 leading-relaxed text-sm md:text-base">
@@ -239,38 +239,42 @@ export default function CreatorGrowthPage() {
         <section className="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto border-t border-border/50 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-feature-bg/5 border border-feature-bg/10 text-feature-bg text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
-              Cohort Curriculum
+              Bootcamp Curriculum
             </div>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
-              The 4-Week <span className="italic text-feature-bg">Smarter Growth</span> Blueprint
+              The 2-Day <span className="italic text-feature-bg">Smarter Growth</span> Bootcamp
             </h2>
             <p className="text-foreground/60 mt-4 text-sm md:text-base leading-relaxed">
-              No fluff, no empty hacks. Just a step-by-step execution plan designed specifically for busy professionals to launch, build, and monetize a high-trust Instagram presence from scratch.
+              No fluff, no empty hacks. Just a high-leverage 2-day live curriculum designed specifically for busy professionals to launch, build, and monetize a high-trust Instagram presence.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {[
               {
-                week: "Week 01",
+                week: "Module 01",
+                day: "Saturday — Morning",
                 title: "Foundation & The 2-Hour Strategy",
                 desc: "Discover your unique positioning and niche from absolute scratch. We map out your exact weekly 2-hour calendar, configure your content assets, and break through the mental barriers of getting started.",
                 topics: ["Niche & Positioning Audit", "The 2-Hour Weekly Workflow", "Setting Up Production Assets"]
               },
               {
-                week: "Week 02",
+                week: "Module 02",
+                day: "Saturday — Afternoon",
                 title: "The High-Trust Content Engine",
                 desc: "Learn how to script and record high-value reels that command respect. Master visual aesthetics, smart framing, and efficient recording tips that save you hours of unnecessary editing.",
                 topics: ["High-Conversion Scripting", "Premium Visual Aesthetics", "Minimalist Recording Secrets"]
               },
               {
-                week: "Week 03",
+                week: "Module 03",
+                day: "Sunday — Morning",
                 title: "Smart Work vs. Algorithm Guesswork",
                 desc: "Stop chasing random music trends. Learn the real mechanics of social algorithms, how to read your Instagram analytics, and the systems needed to scale both reach and high-trust community engagement.",
                 topics: ["Decoding the Real Algorithm", "High-Leverage Distribution", "Metrics that Actually Matter"]
               },
               {
-                week: "Week 04",
+                week: "Module 04",
+                day: "Sunday — Afternoon",
                 title: "Authority Positioning & Monetization",
                 desc: "Turn your small, growing presence into active business interest and income. Discover how to create highly-vetted leads, build recognition, and convert casual viewers into premium high-trust clients.",
                 topics: ["Monetizing a Small Audience", "Lead-Generation Systems", "Long-Term Authority Branding"]
@@ -279,7 +283,7 @@ export default function CreatorGrowthPage() {
               <div key={i} className="bg-white border border-border rounded-[2rem] p-8 md:p-10 shadow-sm hover:shadow-md transition-all group hover:-translate-y-1 duration-300">
                 <div className="flex justify-between items-start mb-6">
                   <span className="text-3xl font-extrabold text-feature-bg/20 font-sans tracking-tight group-hover:text-feature-bg/30 transition-colors">{phase.week}</span>
-                  <div className="px-3 py-1 bg-muted/60 border border-border rounded-full text-[10px] font-bold text-foreground/50 tracking-wider uppercase">Live Cohort</div>
+                  <div className="px-3 py-1 bg-feature-bg/5 border border-feature-bg/10 rounded-full text-[10px] font-bold text-feature-bg tracking-wider uppercase">{phase.day}</div>
                 </div>
                 <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground mb-4 group-hover:text-feature-bg transition-colors">{phase.title}</h3>
                 <p className="text-sm text-foreground/60 leading-relaxed mb-6">{phase.desc}</p>
@@ -292,6 +296,57 @@ export default function CreatorGrowthPage() {
                       </span>
                     ))}
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* EXCLUSIVE BOOTCAMP RESOURCES */}
+        <section className="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto border-t border-border/50 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/5 border border-emerald-500/10 text-emerald-600 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+              Included Resources
+            </div>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
+              The Bootcamp <span className="italic text-emerald-600">Growth Toolkit</span>
+            </h2>
+            <p className="text-foreground/60 mt-4 text-sm md:text-base leading-relaxed">
+              To support your journey during and after our live weekend together, you will receive access to a curated package of actionable systems, materials, and reference tools.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {[
+              {
+                title: "Interactive Companion Workbook",
+                desc: "A structured, downloadable workbook designed to help you organize content concepts, map out your workflow systems, and systematically implement the bootcamp methodology throughout your growth journey.",
+                feature: "Content Systemizer"
+              },
+              {
+                title: "Digitized Whiteboard Notes (PDF)",
+                desc: "Access clean, fully-digitized PDF copies of all the notes, frameworks, and visual content models sketched out live during our weekend workshops. Stay focused on learning rather than writing.",
+                feature: "Whiteboard PDFs"
+              },
+              {
+                title: "HD Recordings & Extended Q&As",
+                desc: "Enjoy lifetime access to the high-definition recordings of both 4-hour modules. Each live session ends with dedicated, open-mic Q&As to ensure none of your personal growth challenges go unanswered.",
+                feature: "Lifetime Access"
+              }
+            ].map((resource, i) => (
+              <div key={i} className="bg-white border border-border rounded-[2rem] p-8 md:p-10 shadow-sm hover:shadow-md transition-all group hover:-translate-y-1 duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="w-10 h-10 rounded-full bg-emerald-500/5 border border-emerald-500/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
+                    </div>
+                    <span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-500/5 border border-emerald-500/10 px-2.5 py-1 rounded-full">{resource.feature}</span>
+                  </div>
+                  <h3 className="text-lg md:text-xl font-serif font-bold text-foreground mb-4 group-hover:text-emerald-600 transition-colors">{resource.title}</h3>
+                  <p className="text-xs md:text-sm text-foreground/60 leading-relaxed mb-6">{resource.desc}</p>
+                </div>
+                <div className="border-t border-border/40 pt-4 text-[10px] font-bold text-foreground/40 uppercase tracking-wider">
+                  Fully Included
                 </div>
               </div>
             ))}
