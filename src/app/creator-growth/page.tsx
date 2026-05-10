@@ -586,7 +586,10 @@ export default function CreatorGrowthPage() {
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
                     <div className="flex gap-2 w-full">
-                      <div className="relative shrink-0 w-[82px] md:w-[95px]">
+                      <div className="relative shrink-0 w-[82px] md:w-[95px] group">
+                        <div className="bg-muted/30 border border-border rounded-2xl pl-2.5 pr-7 py-3.5 md:py-4 text-sm md:text-base text-foreground w-full h-full flex items-center pointer-events-none group-focus-within:ring-2 group-focus-within:ring-primary/50 group-focus-within:bg-white transition-all">
+                          {countryCode}
+                        </div>
                         <select
                           value={countryCode}
                           onChange={(e) => {
@@ -595,7 +598,7 @@ export default function CreatorGrowthPage() {
                             const err = getPhoneValidationError(code, formData.phone);
                             setPhoneError(err);
                           }}
-                          className="bg-muted/30 border border-border rounded-2xl pl-2.5 pr-7 py-3.5 md:py-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
+                          className="absolute inset-0 opacity-0 w-full h-full cursor-pointer text-sm md:text-base"
                         >
                           {countryCodes.map((c) => (
                             <option key={c.code} value={c.code}>

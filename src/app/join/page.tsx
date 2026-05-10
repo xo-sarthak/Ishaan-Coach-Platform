@@ -301,7 +301,10 @@ export default function JoinCommunityPage() {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest ml-1">WhatsApp Number</label>
                   <div className="flex gap-2">
-                    <div className="relative shrink-0 w-[95px]">
+                    <div className="relative shrink-0 w-[95px] group">
+                      <div className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-base text-foreground w-full h-full flex items-center pointer-events-none group-focus-within:ring-2 group-focus-within:ring-primary/50 group-focus-within:bg-white transition-all">
+                        {formData.countryCode}
+                      </div>
                       <select
                         value={formData.countryCode}
                         onChange={(e) => {
@@ -310,7 +313,7 @@ export default function JoinCommunityPage() {
                           const err = getPhoneValidationError(code, formData.phone);
                           setPhoneError(err);
                         }}
-                        className="bg-muted/30 border border-border rounded-2xl pl-3 pr-8 py-3.5 md:py-4 text-base focus:outline-none focus:ring-2 focus:ring-primary/50 text-foreground appearance-none w-full h-full cursor-pointer"
+                        className="absolute inset-0 opacity-0 w-full h-full cursor-pointer text-base"
                       >
                         {countryCodes.map((c) => (
                           <option key={c.code} value={c.code}>
