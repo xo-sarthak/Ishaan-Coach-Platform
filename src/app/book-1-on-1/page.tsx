@@ -284,7 +284,7 @@ export default function BookOneOnOnePage() {
                   <div className="flex flex-col items-center mb-10">
                     <div className="flex items-baseline gap-3 mb-2">
                       <span className="text-4xl md:text-6xl font-black text-[#2A3B5C]">₹4,710</span>
-                      <span className="text-xl md:text-2xl text-[#2A3B5C]/60 line-through font-bold">₹4,000</span>
+                      <span className="text-xl md:text-2xl text-[#2A3B5C]/60 line-through font-bold">₹6,550</span>
                     </div>
                     <span className="bg-primary/10 text-primary text-[10px] md:text-xs font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-lg border border-primary/20">
                       Limited Time Offer
